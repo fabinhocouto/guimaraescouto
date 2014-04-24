@@ -21,7 +21,7 @@ public class ClienteDAO extends GenericDAO {
      public int adicionarCliente(Cliente cliente) throws SQLException{
         String query = "INSERT INTO public.cliente (nome,endereco,telefone) values (?,?,?)";
         Integer id = executeCommand(query,cliente.getNome(),cliente.getEndereco(),cliente.getTelefone());
-        return id; 
+        return id;
     }
     
     public void removerCliente(int idCliente) throws SQLException{

@@ -74,4 +74,13 @@ public class ProdutoDAO extends GenericDAO{
         return retorno;
     }
     
+    public List<Produto> retornarProdutosPorDescricao(String descricao) throws SQLException {
+        List<Produto> retorno = new LinkedList<Produto>();
+        ResultSet rs = executeQuery("Select * from public.produto where descricao like ?","%"+descricao+"%");
+        while(rs.next()){
+            retorno.add(popularProdutoInfo(rs));
+        }
+        return retorno;
+    }
+    
 }
