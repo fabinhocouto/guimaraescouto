@@ -25,7 +25,7 @@ public class ItemVenda implements java.io.Serializable{
     @SwingColumn(description="Quantidade",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private int quantidade;
     private Venda venda;
-    @SwingColumn(description="Preço Unitário",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="Valor Unitário",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal precoUnitario;
     @SwingColumn(description="Total",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal total;
