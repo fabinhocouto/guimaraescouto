@@ -1,3 +1,5 @@
+Teste
+
 -- Table: cliente
 
 DROP TABLE cliente;

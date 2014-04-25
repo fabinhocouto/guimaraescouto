@@ -17,7 +17,7 @@ import java.util.List;
  * @author Fábio
  */
 public class ProdutoDAO extends GenericDAO{
-    
+    //Teste
     public int adicionarProduto(Produto produto) throws SQLException{
         String query = "INSERT INTO public.produto (descricao,preco,codigo_barras,secao) values (?,?,?,?)";
         Integer id = executeCommand(query, produto.getDescricao(),produto.getPreco(),produto.getCodigoBarras(),produto.getSecao());
