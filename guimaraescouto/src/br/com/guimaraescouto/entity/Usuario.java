@@ -16,11 +16,10 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Usuario implements java.io.Serializable {
     
-    @SwingColumn(description = "ID",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
     @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String nome;
-    @SwingColumn(description = "USUARIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "USUÁRIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String usuario;
     private String senha;
 

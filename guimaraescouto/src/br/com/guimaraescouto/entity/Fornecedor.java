@@ -16,7 +16,6 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Fornecedor implements java.io.Serializable{
     
-    @SwingColumn(description = "ID",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
     @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String nome;

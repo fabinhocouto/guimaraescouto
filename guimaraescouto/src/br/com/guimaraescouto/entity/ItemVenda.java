@@ -18,16 +18,16 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class ItemVenda implements java.io.Serializable{
     
     private Integer id;
-    @SwingColumn(description="Item",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="ITEM",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer ordem;
-    @SwingColumn(description="Produto",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="PRODUTO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Produto produto;
-    @SwingColumn(description="Quantidade",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="QUANTIDADE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private int quantidade;
     private Venda venda;
-    @SwingColumn(description="Valor Unitário",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="VALOR UNITÁRIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal precoUnitario;
-    @SwingColumn(description="Total",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="TOTAL",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal total;
     
     public ItemVenda(){
