@@ -19,15 +19,14 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Produto implements java.io.Serializable{
     
-    @SwingColumn(description = "ID",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
-    @SwingColumn(description = "DESCRICAO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
-    private String descricao;
-    @SwingColumn(description = "PRECO",renderer = MyCurrencyCellRenderer.class, colorOfBackgound = "")
-    private BigDecimal preco;
-    @SwingColumn(description = "CODIGO_BARRAS",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "CÓDIGO BARRAS",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String codigoBarras;
-    @SwingColumn(description = "SECAO",renderer = MyBooleanCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "DESCRIÇÃO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    private String descricao;
+    @SwingColumn(description = "PREÇO",renderer = MyCurrencyCellRenderer.class, colorOfBackgound = "")
+    private BigDecimal preco;
+    @SwingColumn(description = "SEÇÃO",renderer = MyBooleanCellRenderer.class, colorOfBackgound = "")
     private Boolean secao;
     
     public Produto(){

@@ -16,11 +16,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Cliente implements java.io.Serializable{
     
-    @SwingColumn(description = "ID",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "CÓDIGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
     @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String nome;
-    @SwingColumn(description = "ENDERECO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "ENDEREÇO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String endereco;
     @SwingColumn(description = "TELEFONE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String telefone;

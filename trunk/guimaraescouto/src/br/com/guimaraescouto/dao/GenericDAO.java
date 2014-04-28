@@ -43,7 +43,11 @@ public abstract class GenericDAO {
     public ResultSet executeQuery(String query, Object... params) throws SQLException{
         PreparedStatement ps = getStatement(query);
         for(int i = 0; i < params.length; i++ ){
-            ps.setObject(i+1, params[i]);
+            if(params[i] instanceof String){
+                ps.setObject(i+1, params[i].toString().toUpperCase());
+            }else{
+                ps.setObject(i+1, params[i]);
+            }
         }
         return ps.executeQuery();
     }
@@ -51,7 +55,11 @@ public abstract class GenericDAO {
     public int executeCommand(String query, Object... params) throws SQLException{
         PreparedStatement ps = getStatement(query);
         for(int i = 0; i < params.length; i++ ){
-            ps.setObject(i+1, params[i]);
+            if(params[i] instanceof String){
+                ps.setObject(i+1, params[i].toString().toUpperCase());
+            }else{
+                ps.setObject(i+1, params[i]);
+            }
         }
         int result = ps.executeUpdate();
         ps.close();

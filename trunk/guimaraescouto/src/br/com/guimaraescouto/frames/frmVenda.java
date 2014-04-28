@@ -14,6 +14,7 @@ import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.entity.Venda;
 import br.com.guimaraescouto.util.MyCurrencyCellRenderer;
+import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import java.awt.AWTKeyStroke;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -34,6 +35,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.SwingConstants.CENTER;
 import sun.text.resources.FormatData;
 
 /**
@@ -261,7 +263,7 @@ public class frmVenda extends javax.swing.JDialog{
                 {null, null, null, null, null}
             },
             new String [] {
-                "Item", "Produto", "Quantidade", "Valor Unitário", "Total"
+                "ITEM", "PRODUTO", "QUANTIDADE", "VALOR UNITÁRIO", "TOTAL"
             }
         ));
         tblItensVenda.setFocusable(false);
@@ -280,6 +282,7 @@ public class frmVenda extends javax.swing.JDialog{
 
         txtValorTotalVenda.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtValorTotalVenda.setBorder(null);
+        txtValorTotalVenda.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         txtValorTotalVenda.setEnabled(false);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
@@ -300,6 +303,9 @@ public class frmVenda extends javax.swing.JDialog{
         txtValorPago.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
         txtTroco.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtTroco.setBorder(null);
+        txtTroco.setDisabledTextColor(new java.awt.Color(51, 51, 255));
+        txtTroco.setEnabled(false);
         txtTroco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTrocoActionPerformed(evt);
@@ -307,6 +313,11 @@ public class frmVenda extends javax.swing.JDialog{
         });
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Excluir Item");
         jButton5.setFocusable(false);
@@ -552,17 +563,11 @@ public class frmVenda extends javax.swing.JDialog{
     private void txtValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorUnitarioFocusLost
         if(txtValorUnitario.getText() != null
                 && !"".equals(txtValorUnitario.getText())){
-            try {
-                 // TODO add your handling code here:
-                 Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodBarras.getText());
-                 produto.setPreco(new BigDecimal(txtValorUnitario.getText()));
-                 insereItemVenda(produto);
-                 txtCodBarras.setText(null);
-                 txtValorUnitario.setText(null);
-                 txtCodBarras.requestFocus();
-             } catch (SQLException ex) {
-                 Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
-             }    
+           produto.setPreco(new BigDecimal(txtValorUnitario.getText()));
+           insereItemVenda(produto);
+           txtCodBarras.setText(null);
+           txtValorUnitario.setText(null);
+           txtCodBarras.requestFocus();    
         }     
         
     }//GEN-LAST:event_txtValorUnitarioFocusLost
@@ -602,6 +607,11 @@ public class frmVenda extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTrocoActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     private void insereItemVenda(Produto produto){
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setOrdem(contador++);
@@ -611,7 +621,7 @@ public class frmVenda extends javax.swing.JDialog{
         itemVenda.setTotal(itemVenda.getTotal());
         itensVenda.add(itemVenda);
         tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
-        tblItensVenda.setDefaultRenderer(Object.class, new MyCurrencyCellRenderer());
+        tblItensVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
         DecimalFormat df = new DecimalFormat( "#,##0.00" );
         txtValorTotalVenda.setText(df.format(calcularTotalVenda(itensVenda)));
     }
