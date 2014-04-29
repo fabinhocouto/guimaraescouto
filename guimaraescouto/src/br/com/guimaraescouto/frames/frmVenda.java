@@ -26,6 +26,7 @@ import java.awt.event.KeyListener;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,6 +53,7 @@ public class frmVenda extends javax.swing.JDialog{
      private List<ItemVenda> itensVenda = new ArrayList<ItemVenda>();
      private int contador = 1;
      private Integer quantidade;
+     private final DecimalFormat df = new DecimalFormat( "#,##0.00" );
 
     /**
      * Creates new form frmVenda
@@ -247,14 +249,15 @@ public class frmVenda extends javax.swing.JDialog{
         });
 
         txtValorUnitario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtValorUnitario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorUnitarioActionPerformed(evt);
-            }
-        });
+        txtValorUnitario.setFocusable(false);
         txtValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorUnitarioFocusLost(evt);
+            }
+        });
+        txtValorUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorUnitarioActionPerformed(evt);
             }
         });
 
@@ -301,6 +304,12 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel4.setText("Troco:");
 
         txtValorPago.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtValorPago.setFocusable(false);
+        txtValorPago.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorPagoFocusLost(evt);
+            }
+        });
 
         txtTroco.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtTroco.setBorder(null);
@@ -321,6 +330,11 @@ public class frmVenda extends javax.swing.JDialog{
 
         jButton5.setText("Excluir Item");
         jButton5.setFocusable(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -568,7 +582,11 @@ public class frmVenda extends javax.swing.JDialog{
            txtCodBarras.setText(null);
            txtValorUnitario.setText(null);
            txtCodBarras.requestFocus();    
-        }     
+        }else{
+            JOptionPane.showMessageDialog(this, "Favor adicionar o valor unitário.");
+            txtValorUnitario.requestFocus();
+            return;
+        }
         
     }//GEN-LAST:event_txtValorUnitarioFocusLost
 
@@ -578,6 +596,18 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if ("".equals(txtCodCliente.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Favor adicionar o cliente");
+            txtCodCliente.requestFocus();
+            return;
+        }
+        if (itensVenda == null
+                || itensVenda.size() < 1) {
+            JOptionPane.showMessageDialog(this, "Favor adicionar pelo menos um item.");
+            txtCodBarras.requestFocus();
+            return;
+        }
+        
         Venda venda = new Venda();
         venda.setId(new Integer(txtNumVenda.getText()));
         venda.setDataVenda(new java.sql.Date(new java.util.Date().getTime()));
@@ -612,6 +642,26 @@ public class frmVenda extends javax.swing.JDialog{
         setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void txtValorPagoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorPagoFocusLost
+        // TODO add your handling code here:
+        String valorPago = txtValorPago.getText().replace(".", "");
+        valorPago = valorPago.replace(",", ".");
+        String valorTotalVenda = txtValorTotalVenda.getText().replace(".", "");
+        valorTotalVenda = valorTotalVenda.replace(",", ".");
+        txtTroco.setText(df.format((new BigDecimal(valorPago).subtract(new BigDecimal(valorTotalVenda)))));
+    }//GEN-LAST:event_txtValorPagoFocusLost
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if(tblItensVenda.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Selecione o item a ser removido.");
+            return;
+        }
+        itensVenda.remove(tblItensVenda.getSelectedRow());
+        tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
+        txtValorTotalVenda.setText(df.format(calcularTotalVenda(itensVenda)));
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     private void insereItemVenda(Produto produto){
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setOrdem(contador++);
@@ -622,7 +672,6 @@ public class frmVenda extends javax.swing.JDialog{
         itensVenda.add(itemVenda);
         tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
         tblItensVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
-        DecimalFormat df = new DecimalFormat( "#,##0.00" );
         txtValorTotalVenda.setText(df.format(calcularTotalVenda(itensVenda)));
     }
     
