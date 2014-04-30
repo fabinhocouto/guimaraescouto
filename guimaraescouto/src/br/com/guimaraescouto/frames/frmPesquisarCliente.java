@@ -29,9 +29,10 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarCliente(java.awt.Frame parent, boolean modal,Cliente cliente) {
+    public frmPesquisarCliente(java.awt.Frame parent, boolean modal,Cliente cliente, frmVenda vendaForm) {
         super(parent, modal);
         this.cliente = cliente;
+        this.vendaForm = vendaForm;
         initComponents();
         loadInitialData();
     }
@@ -153,7 +154,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-         if(tblCliente.getSelectedRow() == -1){
+        if(tblCliente.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Selecione o cliente");
             return;
         }
@@ -162,6 +163,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         cliente.setNome(clienteSelecionado.getNome());
         cliente.setEndereco(clienteSelecionado.getEndereco());
         cliente.setTelefone(clienteSelecionado.getTelefone());
+        vendaForm.refreshCliente();
         setVisible(false);
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
@@ -211,7 +213,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null);
+                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true,null, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -235,8 +237,6 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void loadInitialData() {
-
-        //clientes = clienteDAO.retornarTodosClientes();
         MyTableModel tableModel = new MyTableModel(Cliente.class, new ArrayList(), tblCliente );
         tblCliente.setModel(tableModel);
     }
