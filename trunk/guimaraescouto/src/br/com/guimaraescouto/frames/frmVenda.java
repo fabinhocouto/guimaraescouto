@@ -249,7 +249,7 @@ public class frmVenda extends javax.swing.JDialog{
         });
 
         txtValorUnitario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtValorUnitario.setFocusable(false);
+        txtValorUnitario.setRequestFocusEnabled(false);
         txtValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorUnitarioFocusLost(evt);
@@ -304,7 +304,6 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel4.setText("Troco:");
 
         txtValorPago.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        txtValorPago.setFocusable(false);
         txtValorPago.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorPagoFocusLost(evt);
@@ -329,7 +328,6 @@ public class frmVenda extends javax.swing.JDialog{
         });
 
         jButton5.setText("Excluir Item");
-        jButton5.setFocusable(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -462,12 +460,16 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente);
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente,this);
         dialog.setVisible(true);
-        txtCodCliente.setText(cliente.getId().toString());
-        txtNomeCliente.setText(cliente.getNome());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void refreshCliente() {
+        txtCodCliente.setText(cliente.getId().toString());
+        txtNomeCliente.setText(cliente.getNome());
+        txtCodBarras.requestFocus();
+    }
+    
     private void txtCodClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodClienteFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodClienteFocusGained
