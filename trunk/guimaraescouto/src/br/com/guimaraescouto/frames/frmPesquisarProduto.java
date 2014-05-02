@@ -30,9 +30,10 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarProduto(java.awt.Frame parent, boolean modal,Produto produto) {
+    public frmPesquisarProduto(java.awt.Frame parent, boolean modal,Produto produto, frmVenda vendaForm) {
         super(parent, modal);
         this.produto = produto;
+        this.vendaForm = vendaForm;
         initComponents();
         loadInitialData();
     }
@@ -164,6 +165,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
         produto.setPreco(produtoSelecionado.getPreco());
         produto.setCodigoBarras(produtoSelecionado.getCodigoBarras());
         produto.setSecao(produtoSelecionado.getSecao());
+        vendaForm.refreshProduto();
         setVisible(false);
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
@@ -213,7 +215,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, null);
+                frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
