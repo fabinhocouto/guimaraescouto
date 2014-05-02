@@ -20,6 +20,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -35,7 +36,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import static javax.swing.SwingConstants.CENTER;
 import sun.text.resources.FormatData;
 
@@ -54,7 +58,7 @@ public class frmVenda extends javax.swing.JDialog{
      private int contador = 1;
      private Integer quantidade;
      private final DecimalFormat df = new DecimalFormat( "#,##0.00" );
-
+     
     /**
      * Creates new form frmVenda
      */
@@ -78,7 +82,7 @@ public class frmVenda extends javax.swing.JDialog{
         txtCodCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtNomeCliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisarCliente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -91,16 +95,16 @@ public class frmVenda extends javax.swing.JDialog{
         txtValorUnitario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItensVenda = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtValorTotalVenda = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        btnPesquisarProduto = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtValorPago = new javax.swing.JTextField();
         txtTroco = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnExcluirItem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
@@ -119,17 +123,22 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel1.setText("Cód Cliente:");
 
         txtCodCliente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodClienteActionPerformed(evt);
-            }
-        });
         txtCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtCodClienteFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCodClienteFocusLost(evt);
+            }
+        });
+        txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodClienteActionPerformed(evt);
+            }
+        });
+        txtCodCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodClienteKeyPressed(evt);
             }
         });
 
@@ -142,11 +151,11 @@ public class frmVenda extends javax.swing.JDialog{
         txtNomeCliente.setBorder(null);
         txtNomeCliente.setEnabled(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
-        jButton1.setAlignmentX(0.5F);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
+        btnPesquisarCliente.setAlignmentX(0.5F);
+        btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisarClienteActionPerformed(evt);
             }
         });
 
@@ -160,7 +169,7 @@ public class frmVenda extends javax.swing.JDialog{
                 .addGap(20, 20, 20)
                 .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(145, 145, 145)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -174,7 +183,7 @@ public class frmVenda extends javax.swing.JDialog{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
@@ -247,6 +256,11 @@ public class frmVenda extends javax.swing.JDialog{
                 txtCodBarrasFocusLost(evt);
             }
         });
+        txtCodBarras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodBarrasKeyPressed(evt);
+            }
+        });
 
         txtValorUnitario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtValorUnitario.setRequestFocusEnabled(false);
@@ -272,10 +286,10 @@ public class frmVenda extends javax.swing.JDialog{
         tblItensVenda.setFocusable(false);
         jScrollPane1.setViewportView(tblItensVenda);
 
-        jButton2.setText("Salvar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -288,10 +302,10 @@ public class frmVenda extends javax.swing.JDialog{
         txtValorTotalVenda.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         txtValorTotalVenda.setEnabled(false);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
+        btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnPesquisarProdutoActionPerformed(evt);
             }
         });
 
@@ -320,17 +334,17 @@ public class frmVenda extends javax.swing.JDialog{
             }
         });
 
-        jButton4.setText("Cancelar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Excluir Item");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluirItem.setText("Excluir Item");
+        btnExcluirItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnExcluirItemActionPerformed(evt);
             }
         });
 
@@ -346,7 +360,7 @@ public class frmVenda extends javax.swing.JDialog{
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(jLabel8)))
@@ -357,14 +371,14 @@ public class frmVenda extends javax.swing.JDialog{
                                 .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)))
                         .addGap(203, 203, 203)
-                        .addComponent(jButton5))
+                        .addComponent(btnExcluirItem))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btnSalvar)
                                 .addGap(4, 4, 4)
-                                .addComponent(jButton4))
+                                .addComponent(btnCancelar))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
@@ -390,14 +404,14 @@ public class frmVenda extends javax.swing.JDialog{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(btnExcluirItem)
                         .addGap(5, 5, 5)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -414,8 +428,8 @@ public class frmVenda extends javax.swing.JDialog{
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
@@ -458,15 +472,20 @@ public class frmVenda extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorUnitarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // TODO add your handling code here:
         frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente,this);
         dialog.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     public void refreshCliente() {
         txtCodCliente.setText(cliente.getId().toString());
         txtNomeCliente.setText(cliente.getNome());
+        txtCodBarras.requestFocus();
+    }
+    
+    public void refreshProduto() {
+        txtCodBarras.setText(txtCodBarras.getText() + produto.getCodigoBarras());
         txtCodBarras.requestFocus();
     }
     
@@ -596,9 +615,10 @@ public class frmVenda extends javax.swing.JDialog{
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        if ("".equals(txtCodCliente.getText().trim())) {
+        if (cliente == null
+                || cliente.getId() == null) {
             JOptionPane.showMessageDialog(this, "Favor adicionar o cliente");
             txtCodCliente.requestFocus();
             return;
@@ -625,24 +645,22 @@ public class frmVenda extends javax.swing.JDialog{
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
         // TODO add your handling code here:
-        frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, produto);
+        frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, produto, this);
         dialog.setVisible(true);
-        txtCodBarras.setText(txtCodBarras.getText() + produto.getCodigoBarras());
-        txtCodBarras.requestFocus();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
 
     private void txtTrocoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrocoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTrocoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtValorPagoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorPagoFocusLost
         // TODO add your handling code here:
@@ -653,7 +671,7 @@ public class frmVenda extends javax.swing.JDialog{
         txtTroco.setText(df.format((new BigDecimal(valorPago).subtract(new BigDecimal(valorTotalVenda)))));
     }//GEN-LAST:event_txtValorPagoFocusLost
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnExcluirItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirItemActionPerformed
         // TODO add your handling code here:
         if(tblItensVenda.getSelectedRow() == -1){
             JOptionPane.showMessageDialog(this, "Selecione o item a ser removido.");
@@ -662,7 +680,27 @@ public class frmVenda extends javax.swing.JDialog{
         itensVenda.remove(tblItensVenda.getSelectedRow());
         tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
         txtValorTotalVenda.setText(df.format(calcularTotalVenda(itensVenda)));
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnExcluirItemActionPerformed
+
+    private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_F1){
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente, this);
+            dialog.setVisible(true);
+        }else if(evt.getKeyCode() == KeyEvent.VK_F3){
+            btnSalvarActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtCodClienteKeyPressed
+
+    private void txtCodBarrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarrasKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_F2){
+            frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, produto, this);
+            dialog.setVisible(true);
+        }else if(evt.getKeyCode() == KeyEvent.VK_F3){
+             btnSalvarActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtCodBarrasKeyPressed
 
     private void insereItemVenda(Produto produto){
         ItemVenda itemVenda = new ItemVenda();
@@ -727,11 +765,11 @@ public class frmVenda extends javax.swing.JDialog{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnExcluirItem;
+    private javax.swing.JButton btnPesquisarCliente;
+    private javax.swing.JButton btnPesquisarProduto;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -759,7 +797,6 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void loadInitialData() {
          try {
-             //redimensionarFrameTotal();
              txtNumVenda.setText(vendaDAO.retornaCodigoVenda().toString());
              txtValorTotalVenda.setText("0,00");
              txtValorPago.setText("0,00");
@@ -770,11 +807,12 @@ public class frmVenda extends javax.swing.JDialog{
              considerarEnterComoTab(txtValorUnitario);
              considerarEnterComoTab(txtValorPago);
              considerarEnterComoTab(txtTroco);
+             
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
-    
+
     public static void considerarEnterComoTab(Component comp) {  
         Set<AWTKeyStroke> newKeystrokes;  
         newKeystrokes = new HashSet<AWTKeyStroke>(comp.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));  
@@ -794,4 +832,5 @@ public class frmVenda extends javax.swing.JDialog{
             (int) Toolkit.getDefaultToolkit ().getScreenSize ().getWidth (),  
             (int) Toolkit.getDefaultToolkit ().getScreenSize ().getHeight ()));  
     } 
+
 }
