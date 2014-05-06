@@ -525,6 +525,8 @@ public class frmVenda extends javax.swing.JDialog{
                          if(result == 0){
                              frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this);
                              dialog.setVisible(true);
+                             txtCodBarras.requestFocus();
+                             return;
                          }else{
                              txtCodBarras.setText(null);
                              txtCodBarras.requestFocus();
@@ -592,6 +594,8 @@ public class frmVenda extends javax.swing.JDialog{
                 txtCodBarras.requestFocus();
                 return;
              }
+        }else{
+            txtCodBarras.requestFocus();
         }
     }//GEN-LAST:event_txtCodBarrasFocusLost
 
