@@ -8,7 +8,15 @@ package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.entity.Cliente;
+import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
+import java.awt.AWTKeyStroke;
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -31,6 +39,7 @@ public class frmAdicionarCliente extends javax.swing.JDialog {
         this.clienteDAO = clienteDAO;
         this.control = control;
         initComponents();
+        loadInitialData();
     }
 
     /**
@@ -70,7 +79,7 @@ public class frmAdicionarCliente extends javax.swing.JDialog {
 
         jLabel3.setText("Telefone");
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -248,4 +257,10 @@ public class frmAdicionarCliente extends javax.swing.JDialog {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void loadInitialData() {
+        considerarEnterComoTab(txtNome);
+        considerarEnterComoTab(txtEndereco);
+        considerarEnterComoTab(txtTelefone);
+    }
 }

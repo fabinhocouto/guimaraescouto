@@ -6,7 +6,7 @@
 
 package br.com.guimaraescouto.entity;
 
-import br.com.guimaraescouto.frames.SwingColumn;
+import br.com.guimaraescouto.util.SwingColumn;
 import br.com.guimaraescouto.util.MyBooleanCellRenderer;
 import br.com.guimaraescouto.util.MyCurrencyCellRenderer;
 import java.math.BigDecimal;

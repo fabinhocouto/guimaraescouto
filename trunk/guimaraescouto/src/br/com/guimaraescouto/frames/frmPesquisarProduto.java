@@ -6,9 +6,11 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.Produto;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,22 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
 
         jLabel1.setText("Descrição:");
 
+        txtDescricaoProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescricaoProdutoFocusLost(evt);
+            }
+        });
+        txtDescricaoProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescricaoProdutoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescricaoProdutoKeyReleased(evt);
+            }
+        });
+
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setFocusable(false);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -185,6 +202,27 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    private void txtDescricaoProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescricaoProdutoKeyPressed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_txtDescricaoProdutoKeyPressed
+
+    private void txtDescricaoProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescricaoProdutoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoProdutoKeyReleased
+
+    private void txtDescricaoProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescricaoProdutoFocusLost
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            produtos = produtoDAO.retornarProdutosPorDescricao(txtDescricaoProduto.getText());
+            MyTableModel tableModel = new MyTableModel(Produto.class, produtos, tblProduto );
+            tblProduto.setModel(tableModel);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPesquisarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtDescricaoProdutoFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -239,9 +277,8 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void loadInitialData() {
-
-        //clientes = clienteDAO.retornarTodosClientes();
         MyTableModel tableModel = new MyTableModel(Produto.class, new ArrayList(), tblProduto );
         tblProduto.setModel(tableModel);
+        ConsideraEnterTab.considerarEnterComoTab(txtDescricaoProduto);
     }
 }

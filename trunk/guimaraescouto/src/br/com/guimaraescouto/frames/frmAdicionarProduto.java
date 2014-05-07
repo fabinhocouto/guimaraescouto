@@ -6,8 +6,10 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.RandomValidator;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import br.com.guimaraescouto.util.Mascara;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -39,6 +41,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         initComponents();
         ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));  
         ((AbstractDocument) txtPreco.getDocument()).setDocumentFilter(new RandomValidator(8, true, false, false, false, ',','.'));  
+        loadInitMyComponents();
     }
 
     /**
@@ -74,7 +77,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
 
         jLabel3.setText("Preço R$");
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -334,4 +337,13 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
+
+    public void loadInitMyComponents(){
+        ConsideraEnterTab.considerarEnterComoTab(txtCodigoBarras);
+        ConsideraEnterTab.considerarEnterComoTab(txtDescricao);
+        ConsideraEnterTab.considerarEnterComoTab(txtPreco);
+        ConsideraEnterTab.considerarEnterComoTab(checkSecao);
+        
+    }
+
 }

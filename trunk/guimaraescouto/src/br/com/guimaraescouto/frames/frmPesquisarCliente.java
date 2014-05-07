@@ -6,8 +6,10 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.entity.Cliente;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +65,19 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
 
         jLabel1.setText("Nome:");
 
+        txtNomeCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomeClienteFocusLost(evt);
+            }
+        });
+        txtNomeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeClienteKeyPressed(evt);
+            }
+        });
+
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setFocusable(false);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -173,15 +187,23 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+       // TODO add your handling code here:
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void txtNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeClienteKeyPressed
+
+    private void txtNomeClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeClienteFocusLost
+        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
             clientes = clienteDAO.retornarClientesPorNome(txtNomeCliente.getText());
             MyTableModel tableModel = new MyTableModel(Cliente.class, clientes, tblCliente );
             tblCliente.setModel(tableModel);
         } catch (SQLException ex) {
             Logger.getLogger(frmPesquisarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnPesquisarActionPerformed
+    }//GEN-LAST:event_txtNomeClienteFocusLost
 
     /**
      * @param args the command line arguments
@@ -239,5 +261,6 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     public void loadInitialData() {
         MyTableModel tableModel = new MyTableModel(Cliente.class, new ArrayList(), tblCliente );
         tblCliente.setModel(tableModel);
+        ConsideraEnterTab.considerarEnterComoTab(txtNomeCliente);
     }
 }

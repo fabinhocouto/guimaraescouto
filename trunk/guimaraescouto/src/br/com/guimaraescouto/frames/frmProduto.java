@@ -6,6 +6,7 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.MyBooleanCellRenderer;

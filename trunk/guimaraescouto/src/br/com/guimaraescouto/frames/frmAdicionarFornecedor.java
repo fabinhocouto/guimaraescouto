@@ -8,6 +8,7 @@ package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.FornecedorDAO;
 import br.com.guimaraescouto.entity.Fornecedor;
+import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,7 +67,7 @@ public class frmAdicionarFornecedor extends javax.swing.JDialog {
 
         jLabel3.setText("Telefone");
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -104,7 +105,7 @@ public class frmAdicionarFornecedor extends javax.swing.JDialog {
                         .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(251, Short.MAX_VALUE)
+                .addContainerGap(235, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -229,4 +230,9 @@ public class frmAdicionarFornecedor extends javax.swing.JDialog {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    public void loadInitialData(){
+        considerarEnterComoTab(txtNome);
+        considerarEnterComoTab(txtTelefone);
+    }
 }
