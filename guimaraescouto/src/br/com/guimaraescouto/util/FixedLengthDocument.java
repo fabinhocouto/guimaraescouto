@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package br.com.guimaraescouto.frames;
+package br.com.guimaraescouto.util;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

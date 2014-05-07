@@ -8,6 +8,7 @@ package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.entity.Cliente;
+import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,7 +73,7 @@ public class frmAlterarCliente extends javax.swing.JDialog {
 
         jLabel3.setText("Telefone");
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -244,5 +245,8 @@ public class frmAlterarCliente extends javax.swing.JDialog {
         txtEndereco.setText(clienteEmAlteracao.getEndereco());
         txtTelefone.setText(clienteEmAlteracao.getTelefone());
         txtNome.setRequestFocusEnabled(true);
+        considerarEnterComoTab(txtNome);
+        considerarEnterComoTab(txtEndereco);
+        considerarEnterComoTab(txtTelefone);
     }
 }

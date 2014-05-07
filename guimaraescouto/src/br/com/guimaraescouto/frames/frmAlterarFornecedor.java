@@ -8,6 +8,7 @@ package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.FornecedorDAO;
 import br.com.guimaraescouto.entity.Fornecedor;
+import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ public class frmAlterarFornecedor extends javax.swing.JDialog {
 
         jLabel3.setText("Telefone");
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -87,7 +88,7 @@ public class frmAlterarFornecedor extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
+                .addContainerGap(239, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
@@ -229,5 +230,7 @@ public class frmAlterarFornecedor extends javax.swing.JDialog {
         txtNome.setText(fornecedorEmAlteracao.getNome());
         txtTelefone.setText(fornecedorEmAlteracao.getTelefone());
         txtNome.setRequestFocusEnabled(true);
+        considerarEnterComoTab(txtNome);
+        considerarEnterComoTab(txtTelefone);
     }
 }

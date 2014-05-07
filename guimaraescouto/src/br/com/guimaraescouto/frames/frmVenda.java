@@ -6,6 +6,7 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.dao.VendaDAO;
@@ -13,6 +14,7 @@ import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.entity.Venda;
+import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
 import br.com.guimaraescouto.util.MyCurrencyCellRenderer;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import java.awt.AWTKeyStroke;
@@ -816,20 +818,6 @@ public class frmVenda extends javax.swing.JDialog{
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
-
-    public static void considerarEnterComoTab(Component comp) {  
-        Set<AWTKeyStroke> newKeystrokes;  
-        newKeystrokes = new HashSet<AWTKeyStroke>(comp.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));  
-        newKeystrokes.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));  
-        newKeystrokes.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_DOWN, 0));  
-        newKeystrokes.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_KP_DOWN, 0));  
-        comp.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,newKeystrokes);  
-        newKeystrokes = new HashSet<AWTKeyStroke>(comp.getFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS));  
-        newKeystrokes.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER,InputEvent.SHIFT_DOWN_MASK));  
-        newKeystrokes.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_UP, 0));  
-        newKeystrokes.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_KP_UP, 0));  
-        comp.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, newKeystrokes);  
-    }  
     public Dimension redimensionarFrameTotal (){  
      return (  
         new Dimension (  

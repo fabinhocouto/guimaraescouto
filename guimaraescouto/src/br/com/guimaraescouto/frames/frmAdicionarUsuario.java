@@ -8,6 +8,7 @@ package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.UsuarioDAO;
 import br.com.guimaraescouto.entity.Usuario;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
         this.usuarioDAO = usuarioDAO;
         this.control=control;
         initComponents();
+        initMyComponents();
     }
 
     /**
@@ -73,7 +75,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -267,4 +269,10 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtSenhaConfirmacao;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+    private void initMyComponents() {
+        ConsideraEnterTab.considerarEnterComoTab(txtNome);
+        ConsideraEnterTab.considerarEnterComoTab(txtSenha);
+        ConsideraEnterTab.considerarEnterComoTab(txtSenhaConfirmacao);
+        ConsideraEnterTab.considerarEnterComoTab(txtUsuario);
+    }
 }

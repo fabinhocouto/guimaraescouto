@@ -6,7 +6,7 @@
 
 package br.com.guimaraescouto.entity;
 
-import br.com.guimaraescouto.frames.SwingColumn;
+import br.com.guimaraescouto.util.SwingColumn;
 import java.math.BigDecimal;
 import java.util.Objects;
 import javax.swing.table.DefaultTableCellRenderer;

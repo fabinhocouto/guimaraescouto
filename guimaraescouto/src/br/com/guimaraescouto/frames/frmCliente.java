@@ -6,6 +6,7 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import java.sql.SQLException;

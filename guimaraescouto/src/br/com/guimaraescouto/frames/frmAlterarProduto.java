@@ -6,8 +6,10 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.util.RandomValidator;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -72,7 +74,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
 
         jLabel3.setText("Preço R$");
 
-        jButton1.setText("OK");
+        jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -299,5 +301,9 @@ public class frmAlterarProduto extends javax.swing.JDialog {
         }
         checkSecao.setSelected(produtoEmAlteracao.getSecao());
         txtCodigoBarras.setRequestFocusEnabled(true);
+        ConsideraEnterTab.considerarEnterComoTab(txtCodigoBarras);
+        ConsideraEnterTab.considerarEnterComoTab(txtDescricao);
+        ConsideraEnterTab.considerarEnterComoTab(txtPreco);
+        ConsideraEnterTab.considerarEnterComoTab(checkSecao);
     }
 }

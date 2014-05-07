@@ -4,7 +4,7 @@
  * $Id$
  *
  */
-package br.com.guimaraescouto.frames;
+package br.com.guimaraescouto.util;
 
 import java.awt.Color;
 import java.lang.annotation.ElementType;
