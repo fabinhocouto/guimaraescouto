@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -244,6 +246,8 @@ public class frmUsuario extends javax.swing.JDialog {
             usuarios = usuarioDAO.retornarTodosUsuarios();
             MyTableModel tableModel = new MyTableModel(Usuario.class, usuarios, tblUsuario );
             tblUsuario.setModel(tableModel);
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblUsuario.setRowSorter(sorter);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Usuário");

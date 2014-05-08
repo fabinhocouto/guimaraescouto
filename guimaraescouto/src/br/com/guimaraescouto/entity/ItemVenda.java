@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Fábio
  */
-public class ItemVenda implements java.io.Serializable{
+public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     
     private Integer id;
     @SwingColumn(description="ITEM",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
@@ -124,5 +124,13 @@ public class ItemVenda implements java.io.Serializable{
         return true;
     }
     
+    public int compareTo(ItemVenda itemVenda){
+        if(this.ordem > itemVenda.getOrdem()){
+            return -1;
+        }else if(this.ordem < itemVenda.getOrdem()){
+            return 1;
+        }
+        return 0;
+    }
     
 }
