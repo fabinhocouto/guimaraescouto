@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -244,6 +246,8 @@ public class frmFornecedor extends javax.swing.JDialog {
             fornecedores = fornecedorDAO.retornarTodosFornecedores();
             MyTableModel tableModel = new MyTableModel(Fornecedor.class, fornecedores, tblFornecedor );
             tblFornecedor.setModel(tableModel);
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblFornecedor.setRowSorter(sorter);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Fornecedor");

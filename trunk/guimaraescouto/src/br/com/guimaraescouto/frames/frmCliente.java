@@ -6,14 +6,16 @@
 
 package br.com.guimaraescouto.frames;
 
-import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.entity.Cliente;
+import br.com.guimaraescouto.util.MyTableModel;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -180,10 +182,8 @@ public class frmCliente extends javax.swing.JDialog {
                 for (int i = 0; i < tblCliente.getSelectedRows().length; i++) {
                     clienteDAO.removerCliente(clientes.get(tblCliente.getSelectedRows()[i]).getId());  
                 }
-                //tblCliente.getSelectedRows();
-                //clienteDAO.removerCliente(clientes.get(tblCliente.getSelectedRow()).getId());
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao tentar remover o cliente","Remover Cliente",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao tentar remover o cliente. Existe venda para este cliente.","Remover Cliente",JOptionPane.ERROR_MESSAGE);
             }
         }
         loadInitialData();        
@@ -246,6 +246,8 @@ public class frmCliente extends javax.swing.JDialog {
             clientes = clienteDAO.retornarTodosClientes();
             MyTableModel tableModel = new MyTableModel(Cliente.class, clientes, tblCliente );
             tblCliente.setModel(tableModel);
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblCliente.setRowSorter(sorter);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Cliente");

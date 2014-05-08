@@ -11,6 +11,7 @@ import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +121,11 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
                 "Título 1"
             }
         ));
+        tblProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblProdutoKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProduto);
 
         btnSelecionar.setText("Selecionar");
@@ -172,18 +178,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-         if(tblProduto.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Selecione o produto");
-            return;
-        }
-        Produto produtoSelecionado = produtos.get(tblProduto.getSelectedRow());
-        produto.setId(produtoSelecionado.getId());
-        produto.setDescricao(produtoSelecionado.getDescricao());
-        produto.setPreco(produtoSelecionado.getPreco());
-        produto.setCodigoBarras(produtoSelecionado.getCodigoBarras());
-        produto.setSecao(produtoSelecionado.getSecao());
-        vendaForm.refreshProduto();
-        setVisible(false);
+        selecionarLinha();
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -223,6 +218,29 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtDescricaoProdutoFocusLost
 
+    private void tblProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProdutoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            selecionarLinha();
+        }
+    }//GEN-LAST:event_tblProdutoKeyPressed
+    
+     private void selecionarLinha(){
+        if(tblProduto.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Selecione o produto");
+            return;
+        }
+        Produto produtoSelecionado = produtos.get(tblProduto.getSelectedRow());
+        produto.setId(produtoSelecionado.getId());
+        produto.setDescricao(produtoSelecionado.getDescricao());
+        produto.setPreco(produtoSelecionado.getPreco());
+        produto.setCodigoBarras(produtoSelecionado.getCodigoBarras());
+        produto.setSecao(produtoSelecionado.getSecao());
+        vendaForm.refreshProduto();
+        setVisible(false);
+    }
+   
+    
     /**
      * @param args the command line arguments
      */

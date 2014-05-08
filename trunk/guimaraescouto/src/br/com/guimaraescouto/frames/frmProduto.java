@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -197,7 +199,7 @@ public class frmProduto extends javax.swing.JDialog {
                     produtoDAO.removerProduto(produtos.get(tblProduto.getSelectedRows()[i]).getId());  
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao tentar remover o produto","Remover Produto",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao tentar remover o produto. Existe venda com este produto.","Remover Produto",JOptionPane.ERROR_MESSAGE);
             }
         }
         loadInitialData();        
@@ -261,6 +263,8 @@ public class frmProduto extends javax.swing.JDialog {
             MyTableModel tableModel = new MyTableModel(Produto.class, produtos, tblProduto );
             tblProduto.setModel(tableModel);
             tblProduto.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblProduto.setRowSorter(sorter);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Produto");
