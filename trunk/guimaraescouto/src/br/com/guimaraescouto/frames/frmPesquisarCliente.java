@@ -10,6 +10,7 @@ import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +117,11 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
                 "Título 1"
             }
         ));
+        tblCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblClienteKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCliente);
 
         btnSelecionar.setText("Selecionar");
@@ -172,13 +178,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Selecione o cliente");
             return;
         }
-        Cliente clienteSelecionado = clientes.get(tblCliente.getSelectedRow());
-        cliente.setId(clienteSelecionado.getId());
-        cliente.setNome(clienteSelecionado.getNome());
-        cliente.setEndereco(clienteSelecionado.getEndereco());
-        cliente.setTelefone(clienteSelecionado.getTelefone());
-        vendaForm.refreshCliente();
-        setVisible(false);
+        selecionarLinha();
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -204,6 +204,13 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
             Logger.getLogger(frmPesquisarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_txtNomeClienteFocusLost
+
+    private void tblClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClienteKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            selecionarLinha();
+        }
+    }//GEN-LAST:event_tblClienteKeyPressed
 
     /**
      * @param args the command line arguments
@@ -262,5 +269,15 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         MyTableModel tableModel = new MyTableModel(Cliente.class, new ArrayList(), tblCliente );
         tblCliente.setModel(tableModel);
         ConsideraEnterTab.considerarEnterComoTab(txtNomeCliente);
+    }
+    
+    public void selecionarLinha(){
+        Cliente clienteSelecionado = clientes.get(tblCliente.getSelectedRow());
+        cliente.setId(clienteSelecionado.getId());
+        cliente.setNome(clienteSelecionado.getNome());
+        cliente.setEndereco(clienteSelecionado.getEndereco());
+        cliente.setTelefone(clienteSelecionado.getTelefone());
+        vendaForm.refreshCliente();
+        setVisible(false);
     }
 }
