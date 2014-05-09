@@ -28,14 +28,12 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
     private List<Produto> produtos;
     private frmVenda vendaForm;
-    private final Produto produto;
     
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarProduto(java.awt.Frame parent, boolean modal,Produto produto, frmVenda vendaForm) {
+    public frmPesquisarProduto(java.awt.Frame parent, boolean modal, frmVenda vendaForm) {
         super(parent, modal);
-        this.produto = produto;
         this.vendaForm = vendaForm;
         initComponents();
         loadInitialData();
@@ -231,12 +229,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
             return;
         }
         Produto produtoSelecionado = produtos.get(tblProduto.getSelectedRow());
-        produto.setId(produtoSelecionado.getId());
-        produto.setDescricao(produtoSelecionado.getDescricao());
-        produto.setPreco(produtoSelecionado.getPreco());
-        produto.setCodigoBarras(produtoSelecionado.getCodigoBarras());
-        produto.setSecao(produtoSelecionado.getSecao());
-        vendaForm.refreshProduto();
+        vendaForm.refreshProduto(produtoSelecionado.getCodigoBarras());
         setVisible(false);
     }
    
@@ -271,7 +264,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, null,null);
+                frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

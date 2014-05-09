@@ -61,6 +61,7 @@ public class frmVenda extends javax.swing.JDialog{
      private int ordemItens = 1;
      private Integer quantidade;
      private final DecimalFormat df = new DecimalFormat( "#,##0.00" );
+     private boolean flagFinalizar = false;
      
     /**
      * Creates new form frmVenda
@@ -514,8 +515,8 @@ public class frmVenda extends javax.swing.JDialog{
         txtCodBarras.requestFocus();
     }
     
-    public void refreshProduto() {
-        txtCodBarras.setText(txtCodBarras.getText() + produto.getCodigoBarras());
+    public void refreshProduto(String codigoBarras) {
+        txtCodBarras.setText(txtCodBarras.getText() + codigoBarras);
         txtCodBarras.requestFocus();
     }
     
@@ -549,6 +550,10 @@ public class frmVenda extends javax.swing.JDialog{
             try {
                  if(txtCodBarras.getText().contains("*")){
                      String[] split = txtCodBarras.getText().split("\\*");
+                     if(split.length == 1){
+                         txtCodBarras.requestFocus();
+                         return;
+                     }
                      produto = produtoDAO.retornaProdutoPorCodBarras(split[1]);
                      if(produto.getId() == null){
                          int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
@@ -556,15 +561,18 @@ public class frmVenda extends javax.swing.JDialog{
                              frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this);
                              dialog.setVisible(true);
                              txtCodBarras.requestFocus();
+                             flagFinalizar = false;
                              return;
                          }else{
                              txtCodBarras.setText(null);
                              txtCodBarras.requestFocus();
+                             flagFinalizar = false;
                              return;
                          }
                      }else{
                          if(produto.getSecao()){
                             txtValorUnitario.requestFocus();
+                            flagFinalizar = false;
                             quantidade = new Integer(split[0]);
                             return;
                          }else{
@@ -572,6 +580,7 @@ public class frmVenda extends javax.swing.JDialog{
                             insereItemVenda(produto);
                             txtCodBarras.setText(null);
                             txtCodBarras.requestFocus();
+                            flagFinalizar = false;
                             return;
                         }
                      }
@@ -586,11 +595,13 @@ public class frmVenda extends javax.swing.JDialog{
                          }else{
                              txtCodBarras.setText(null);
                              txtCodBarras.requestFocus();
+                             flagFinalizar = false;
                              return;
                          }
                      }
                      quantidade = new Integer(1);
                      txtValorUnitario.requestFocus();
+                     flagFinalizar = false;
                      return;
                  }
                  // TODO add your handling code here:
@@ -603,6 +614,7 @@ public class frmVenda extends javax.swing.JDialog{
                     }else{
                         txtCodBarras.setText(null);
                         txtCodBarras.requestFocus();
+                        flagFinalizar = false;
                         return;
                     }
                  }
@@ -610,11 +622,13 @@ public class frmVenda extends javax.swing.JDialog{
                  quantidade = new Integer(1);
                  if(produto.getSecao()){
                      txtValorUnitario.requestFocus();
+                     flagFinalizar = false;
                      return;
                  }else{
                      insereItemVenda(produto);
                      txtCodBarras.setText(null);
                      txtCodBarras.requestFocus();
+                     flagFinalizar = false;
                      return;
                  }
 
@@ -622,10 +636,13 @@ public class frmVenda extends javax.swing.JDialog{
                 JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar o item. Tente novamente.");
                 txtCodBarras.setText(null);
                 txtCodBarras.requestFocus();
+                flagFinalizar = false;
                 return;
              }
         }else{
-            txtCodBarras.requestFocus();
+            if(!flagFinalizar){
+                txtCodBarras.requestFocus();
+            }
         }
     }//GEN-LAST:event_txtCodBarrasFocusLost
 
@@ -683,7 +700,7 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
         // TODO add your handling code here:
-        frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, produto, this);
+        frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true,  this);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
 
@@ -730,6 +747,7 @@ public class frmVenda extends javax.swing.JDialog{
             frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente, this);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
+            flagFinalizar = true;
             txtValorPago.requestFocus();
         }
     }//GEN-LAST:event_txtCodClienteKeyPressed
@@ -737,9 +755,10 @@ public class frmVenda extends javax.swing.JDialog{
     private void txtCodBarrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarrasKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F2){
-            frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, produto, this);
+            frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, this);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
+            flagFinalizar = true;
              txtValorPago.requestFocus();
         }
     }//GEN-LAST:event_txtCodBarrasKeyPressed
