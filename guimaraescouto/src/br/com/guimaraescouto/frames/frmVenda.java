@@ -487,7 +487,7 @@ public class frmVenda extends javax.swing.JDialog{
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(1162, 741));
+        setSize(new java.awt.Dimension(1162, 705));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -872,7 +872,11 @@ public class frmVenda extends javax.swing.JDialog{
              considerarEnterComoTab(txtValorUnitario);
              considerarEnterComoTab(txtValorPago);
              considerarEnterComoTab(txtTroco);
-             
+             //Exibi na tela inteira
+             Toolkit tk = Toolkit.getDefaultToolkit();
+             Dimension screenSize = tk.getScreenSize();
+             setSize(screenSize);
+             setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
