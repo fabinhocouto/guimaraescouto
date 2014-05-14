@@ -6,10 +6,11 @@
 
 package br.com.guimaraescouto.frames;
 
-import br.com.guimaraescouto.util.RandomValidator;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
+import br.com.guimaraescouto.util.JMoneyFieldValor;
+import br.com.guimaraescouto.util.RandomValidator;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -37,8 +38,6 @@ public class frmAlterarProduto extends javax.swing.JDialog {
         this.control = control;
         initComponents();
         initMyComponents();
-        ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));  
-        ((AbstractDocument) txtPreco.getDocument()).setDocumentFilter(new RandomValidator(8, true, false, false, false, ',','.'));  
     }
 
     /**
@@ -58,9 +57,9 @@ public class frmAlterarProduto extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtCodigoBarras = new javax.swing.JFormattedTextField();
-        txtPreco = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         checkSecao = new javax.swing.JCheckBox();
+        txtPreco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar Produto");
@@ -101,6 +100,8 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             }
         });
 
+        txtPreco = new JMoneyFieldValor();
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -113,15 +114,15 @@ public class frmAlterarProduto extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDescricao))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodigoBarras))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(239, 239, 239)
                                 .addComponent(jButton1)
@@ -157,7 +158,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,6 +292,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void initMyComponents() {
+        ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));
         txtDescricao.setText(produtoEmAlteracao.getDescricao());
         txtCodigoBarras.setText(produtoEmAlteracao.getCodigoBarras());
         if(produtoEmAlteracao.getSecao()){

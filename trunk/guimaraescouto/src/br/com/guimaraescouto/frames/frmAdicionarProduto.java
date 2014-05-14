@@ -6,11 +6,12 @@
 
 package br.com.guimaraescouto.frames;
 
-import br.com.guimaraescouto.util.RandomValidator;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
+import br.com.guimaraescouto.util.JMoneyFieldValor;
 import br.com.guimaraescouto.util.Mascara;
+import br.com.guimaraescouto.util.RandomValidator;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -39,8 +40,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         this.controlProduto = controlProduto;
         this.controlVenda = controlVenda;
         initComponents();
-        ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));  
-        ((AbstractDocument) txtPreco.getDocument()).setDocumentFilter(new RandomValidator(8, true, false, false, false, ',','.'));  
+        ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));
         loadInitMyComponents();
     }
 
@@ -61,9 +61,9 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtCodigoBarras = new javax.swing.JTextField();
-        txtPreco = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         checkSecao = new javax.swing.JCheckBox();
+        txtPreco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Adicionar Novo Produto");
@@ -97,12 +97,6 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
             }
         });
 
-        txtPreco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecoActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("De Seção?");
 
         checkSecao.addItemListener(new java.awt.event.ItemListener() {
@@ -115,6 +109,8 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
                 checkSecaoActionPerformed(evt);
             }
         });
+
+        txtPreco = new JMoneyFieldValor();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,8 +142,8 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
                                 .addComponent(jButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,11 +161,11 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(checkSecao)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -265,10 +261,6 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoBarrasActionPerformed
 
-    private void txtPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecoActionPerformed
-
     private void checkSecaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkSecaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_checkSecaoActionPerformed
@@ -335,7 +327,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtCodigoBarras;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtPreco;
+    private javax.swing.JFormattedTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 
     public void loadInitMyComponents(){
