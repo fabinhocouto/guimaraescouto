@@ -51,6 +51,7 @@ public class ProdutoDAO extends GenericDAO{
             produto = popularProdutoInfo(rs);
         }
         rs.close();
+        closeConetion();
         return produto;
     }
 
