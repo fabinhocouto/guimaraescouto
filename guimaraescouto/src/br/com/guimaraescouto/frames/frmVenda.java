@@ -397,16 +397,20 @@ public class frmVenda extends javax.swing.JDialog{
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(7, 7, 7))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11)
-                                .addComponent(jLabel12)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(7, 7, 7))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel12)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel3)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtValorPago, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
@@ -505,13 +509,13 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // TODO add your handling code here:
-        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente,this);
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
-    public void refreshCliente() {
-        txtCodCliente.setText(cliente.getId().toString());
-        txtNomeCliente.setText(cliente.getNome());
+    public void refreshCliente(String id, String nome) {
+        txtCodCliente.setText(id);
+        txtNomeCliente.setText(nome);
         txtCodBarras.requestFocus();
     }
     
@@ -744,7 +748,7 @@ public class frmVenda extends javax.swing.JDialog{
     private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F1){
-            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, cliente, this);
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
             flagFinalizar = true;

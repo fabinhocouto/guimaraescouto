@@ -21,14 +21,22 @@ import java.util.logging.Logger;
  */
 public abstract class GenericDAO {
     
+    Connection cx;
+    
     public Connection getConnection(){
         try{
             Class.forName("org.postgresql.Driver");
-            Connection cx = DriverManager.getConnection("jdbc:postgresql://localhost:5432/guimaraescouto","postgres","binza361616");
+             cx = DriverManager.getConnection("jdbc:postgresql://localhost:5432/guimaraescouto","postgres","binza361616");
             return cx;
         }catch(Exception ex){
             Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+    public void closeConetion(){
+        try {
+            cx.close();
+        } catch (Exception e) {
         }
     }
     
@@ -49,7 +57,9 @@ public abstract class GenericDAO {
                 ps.setObject(i+1, params[i]);
             }
         }
-        return ps.executeQuery();
+        ResultSet retorno = ps.executeQuery();
+        closeConetion();
+        return retorno;
     }
     
     public int executeCommand(String query, Object... params) throws SQLException{
@@ -62,7 +72,7 @@ public abstract class GenericDAO {
             }
         }
         int result = ps.executeUpdate();
-        ps.close();
+        closeConetion();
         return result;
     }
     

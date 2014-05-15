@@ -26,9 +26,9 @@ public class VendaDAO extends GenericDAO{
         
             if(cascade != null){
                 for(ItemVenda itemVenda: venda.getItens()){
-                adicionarItemVenda(itemVenda);
-            } 
-        }
+                    adicionarItemVenda(itemVenda);
+                } 
+            }
        
         return idVenda;
     }

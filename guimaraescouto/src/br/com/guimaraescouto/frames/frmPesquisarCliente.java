@@ -27,14 +27,12 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private List<Cliente> clientes;
     private frmVenda vendaForm;
-    private final Cliente cliente;
     
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarCliente(java.awt.Frame parent, boolean modal,Cliente cliente, frmVenda vendaForm) {
+    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmVenda vendaForm) {
         super(parent, modal);
-        this.cliente = cliente;
         this.vendaForm = vendaForm;
         initComponents();
         loadInitialData();
@@ -188,6 +186,13 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
        // TODO add your handling code here:
+       try {
+           clientes = clienteDAO.retornarClientesPorNome(txtNomeCliente.getText());
+           MyTableModel tableModel = new MyTableModel(Cliente.class, clientes, tblCliente );
+           tblCliente.setModel(tableModel);
+       } catch (SQLException ex) {
+           Logger.getLogger(frmPesquisarCliente.class.getName()).log(Level.SEVERE, null, ex);
+       } 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyPressed
@@ -242,7 +247,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true,null, null);
+                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -273,11 +278,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     
     public void selecionarLinha(){
         Cliente clienteSelecionado = clientes.get(tblCliente.getSelectedRow());
-        cliente.setId(clienteSelecionado.getId());
-        cliente.setNome(clienteSelecionado.getNome());
-        cliente.setEndereco(clienteSelecionado.getEndereco());
-        cliente.setTelefone(clienteSelecionado.getTelefone());
-        vendaForm.refreshCliente();
+        vendaForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
         setVisible(false);
     }
 }
