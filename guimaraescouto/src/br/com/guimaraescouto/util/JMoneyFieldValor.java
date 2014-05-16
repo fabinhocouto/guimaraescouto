@@ -29,7 +29,7 @@ public class JMoneyFieldValor extends JFormattedTextField {
      * Creates a new instance of JMoneyField  
      */  
     public JMoneyFieldValor() {   
-        this.setHorizontalAlignment( JTextField.CENTER );   
+        this.setHorizontalAlignment( JTextField.RIGHT );   
         this.setDocument(new MoneyFieldDocument());   
         this.addFocusListener(new MoneyFieldFocusListener());   
         this.setText("0,00");   

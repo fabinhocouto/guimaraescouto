@@ -215,6 +215,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
             Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
             if(produto.getId() != null){
                 JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                txtCodigoBarras.requestFocus();
                 return;
             }
         } catch (SQLException ex) {
@@ -224,7 +225,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         }
         
                 
-        int result = JOptionPane.showConfirmDialog(this, "Deseja adicionar o produto?","Adicionar Produto",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(this, "Deseja adicionar o produto?","Adicionar Produto",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(result == 2){
             return;
         }

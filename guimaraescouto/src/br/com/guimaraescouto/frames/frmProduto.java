@@ -9,6 +9,7 @@ package br.com.guimaraescouto.frames;
 import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import br.com.guimaraescouto.util.MyBooleanCellRenderer;
 import br.com.guimaraescouto.util.MyCurrencyCellRenderer;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
@@ -55,6 +56,11 @@ public class frmProduto extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtCodigoBarras = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produtos");
@@ -136,9 +142,25 @@ public class frmProduto extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblProduto);
         if (tblProduto.getColumnModel().getColumnCount() > 0) {
-            tblProduto.getColumnModel().getColumn(2).setCellRenderer(null);
             tblProduto.getColumnModel().getColumn(3).setCellRenderer(new MyCurrencyCellRenderer());
         }
+
+        jLabel1.setText("Código de Barras:");
+
+        jLabel2.setText("Descrição");
+
+        txtCodigoBarras.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoBarrasFocusLost(evt);
+            }
+        });
+
+        jButton5.setText("Pesquisar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +170,17 @@ public class frmProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -157,7 +189,14 @@ public class frmProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -204,6 +243,25 @@ public class frmProduto extends javax.swing.JDialog {
         }
         loadInitialData();        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        try {
+            produtos = produtoDAO.retornarProdutosPorDescricaoOuCodigoBarras(txtDescricao.getText(),txtCodigoBarras.getText());
+            MyTableModel tableModel = new MyTableModel(Produto.class, produtos, tblProduto );
+            tblProduto.setModel(tableModel);
+            tblProduto.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblProduto.setRowSorter(sorter);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("Erro carregando Produto");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void txtCodigoBarrasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoBarrasFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoBarrasFocusLost
 
     /**
      * @param args the command line arguments
@@ -252,9 +310,14 @@ public class frmProduto extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProduto;
+    private javax.swing.JTextField txtCodigoBarras;
+    private javax.swing.JTextField txtDescricao;
     // End of variables declaration//GEN-END:variables
 
     public void loadInitialData() {
@@ -265,6 +328,8 @@ public class frmProduto extends javax.swing.JDialog {
             tblProduto.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
             RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
             tblProduto.setRowSorter(sorter);
+            ConsideraEnterTab.considerarEnterComoTab(txtCodigoBarras);
+            ConsideraEnterTab.considerarEnterComoTab(txtDescricao);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Produto");
