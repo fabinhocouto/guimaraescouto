@@ -6,7 +6,6 @@
 
 package br.com.guimaraescouto.frames;
 
-import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.dao.VendaDAO;
@@ -15,8 +14,10 @@ import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.entity.Venda;
 import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
+import br.com.guimaraescouto.util.JMoneyFieldValor;
 import br.com.guimaraescouto.util.MyCurrencyCellRenderer;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
+import br.com.guimaraescouto.util.MyTableModel;
 import java.awt.AWTKeyStroke;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -96,7 +97,6 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtCodBarras = new javax.swing.JTextField();
-        txtValorUnitario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItensVenda = new javax.swing.JTable();
         btnSalvar = new javax.swing.JButton();
@@ -112,10 +112,10 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txtValorUnitario = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
-        setPreferredSize(redimensionarFrameTotal());
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -177,11 +177,11 @@ public class frmVenda extends javax.swing.JDialog{
                 .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(145, 145, 145)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                .addGap(149, 149, 149)
+                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(115, 115, 115))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,12 +230,12 @@ public class frmVenda extends javax.swing.JDialog{
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(txtNumVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(txtNumVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(356, 356, 356))
+                .addGap(641, 641, 641))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,19 +269,6 @@ public class frmVenda extends javax.swing.JDialog{
             }
         });
 
-        txtValorUnitario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtValorUnitario.setRequestFocusEnabled(false);
-        txtValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtValorUnitarioFocusLost(evt);
-            }
-        });
-        txtValorUnitario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorUnitarioActionPerformed(evt);
-            }
-        });
-
         tblItensVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -306,6 +293,7 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel7.setText("Sub Total:");
 
         txtValorTotalVenda.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtValorTotalVenda.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtValorTotalVenda.setBorder(null);
         txtValorTotalVenda.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         txtValorTotalVenda.setEnabled(false);
@@ -325,6 +313,7 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Troco:");
 
+        txtValorPago = new JMoneyFieldValor();
         txtValorPago.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtValorPago.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -333,6 +322,7 @@ public class frmVenda extends javax.swing.JDialog{
         });
 
         txtTroco.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtTroco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTroco.setBorder(null);
         txtTroco.setDisabledTextColor(new java.awt.Color(51, 51, 255));
         txtTroco.setEnabled(false);
@@ -365,6 +355,14 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel12.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel12.setText("F3 - Salvar Venda");
 
+        txtValorUnitario = new JMoneyFieldValor();
+        txtValorUnitario.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorUnitarioFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -381,14 +379,16 @@ public class frmVenda extends javax.swing.JDialog{
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(jLabel8)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
+                        .addGap(171, 171, 171)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)))
-                        .addGap(203, 203, 203)
-                        .addComponent(btnExcluirItem))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnExcluirItem))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSalvar)
@@ -424,22 +424,20 @@ public class frmVenda extends javax.swing.JDialog{
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(btnExcluirItem)
-                        .addGap(5, 5, 5)))
+                        .addGap(5, 5, 5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,14 +496,6 @@ public class frmVenda extends javax.swing.JDialog{
     private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodClienteActionPerformed
-
-    private void txtNumVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumVendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumVendaActionPerformed
-
-    private void txtValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorUnitarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtValorUnitarioActionPerformed
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // TODO add your handling code here:
@@ -650,22 +640,6 @@ public class frmVenda extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_txtCodBarrasFocusLost
 
-    private void txtValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorUnitarioFocusLost
-        if(txtValorUnitario.getText() != null
-                && !"".equals(txtValorUnitario.getText())){
-           produto.setPreco(new BigDecimal(txtValorUnitario.getText()));
-           insereItemVenda(produto);
-           txtCodBarras.setText(null);
-           txtValorUnitario.setText(null);
-           txtCodBarras.requestFocus();    
-        }else{
-            JOptionPane.showMessageDialog(this, "Favor adicionar o valor unitário.");
-            txtValorUnitario.requestFocus();
-            return;
-        }
-        
-    }//GEN-LAST:event_txtValorUnitarioFocusLost
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
@@ -767,6 +741,28 @@ public class frmVenda extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_txtCodBarrasKeyPressed
 
+    private void txtNumVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumVendaActionPerformed
+
+    private void txtValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorUnitarioFocusLost
+        // TODO add your handling code here:
+        if(txtValorUnitario.getText() != null
+                && !"".equals(txtValorUnitario.getText())){
+           String preco = txtValorUnitario.getText().replace(".", "");
+           preco = preco.replace(",", ".");
+           produto.setPreco(new BigDecimal(preco));
+           insereItemVenda(produto);
+           txtCodBarras.setText(null);
+           txtValorUnitario.setText(null);
+           txtCodBarras.requestFocus();    
+        }else{
+            JOptionPane.showMessageDialog(this, "Favor adicionar o valor unitário.");
+            txtValorUnitario.requestFocus();
+            return;
+        }
+    }//GEN-LAST:event_txtValorUnitarioFocusLost
+
     private void insereItemVenda(Produto produto){
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setOrdem(ordemItens++);
@@ -861,7 +857,7 @@ public class frmVenda extends javax.swing.JDialog{
     private javax.swing.JTextField txtTroco;
     private javax.swing.JTextField txtValorPago;
     private javax.swing.JTextField txtValorTotalVenda;
-    private javax.swing.JTextField txtValorUnitario;
+    private javax.swing.JFormattedTextField txtValorUnitario;
     // End of variables declaration//GEN-END:variables
 
     private void loadInitialData() {
@@ -885,11 +881,4 @@ public class frmVenda extends javax.swing.JDialog{
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
-    public Dimension redimensionarFrameTotal (){  
-     return (  
-        new Dimension (  
-            (int) Toolkit.getDefaultToolkit ().getScreenSize ().getWidth (),  
-            (int) Toolkit.getDefaultToolkit ().getScreenSize ().getHeight ()));  
-    } 
-
 }

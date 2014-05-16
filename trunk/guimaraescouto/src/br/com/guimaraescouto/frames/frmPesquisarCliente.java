@@ -172,10 +172,6 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         // TODO add your handling code here:
-        if(tblCliente.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Selecione o cliente");
-            return;
-        }
         selecionarLinha();
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
@@ -277,6 +273,10 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     }
     
     public void selecionarLinha(){
+        if(tblCliente.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Selecione o cliente");
+            return;
+        }
         Cliente clienteSelecionado = clientes.get(tblCliente.getSelectedRow());
         vendaForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
         setVisible(false);
