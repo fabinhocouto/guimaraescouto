@@ -21,6 +21,7 @@ import br.com.guimaraescouto.util.MyTableModel;
 import java.awt.AWTKeyStroke;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -269,6 +270,7 @@ public class frmVenda extends javax.swing.JDialog{
             }
         });
 
+        tblItensVenda.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         tblItensVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -867,6 +869,7 @@ public class frmVenda extends javax.swing.JDialog{
              txtValorPago.setText("0,00");
              txtTroco.setText("0,00");
              txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+             tblItensVenda.getTableHeader().setFont(new Font("Arial", Font.BOLD,17));
              considerarEnterComoTab(txtCodCliente);
              considerarEnterComoTab(txtCodBarras);
              considerarEnterComoTab(txtValorUnitario);
