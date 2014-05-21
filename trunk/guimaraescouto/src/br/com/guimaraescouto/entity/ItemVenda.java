@@ -29,6 +29,7 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     private BigDecimal precoUnitario;
     @SwingColumn(description="TOTAL",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal total;
+    private Boolean flagPago;
     
     public ItemVenda(){
     }
@@ -101,6 +102,15 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
+
+    public Boolean getFlagPago() {
+        return flagPago;
+    }
+
+    public void setFlagPago(Boolean flagPago) {
+        this.flagPago = flagPago;
+    }
+    
 
     @Override
     public int hashCode() {
