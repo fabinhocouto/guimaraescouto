@@ -113,3 +113,18 @@ WITH (
 ALTER TABLE venda
   OWNER TO postgres;
 
+-- Table: pagamento
+
+-- DROP TABLE pagamento;
+
+CREATE TABLE pagamento
+(
+  id serial,
+  valor_pagamento numeric(10,2),
+  data_pagamento date
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE pagamento
+  OWNER TO postgres;
