@@ -19,7 +19,8 @@ public class Pagamento implements java.io.Serializable{
     private Integer id;
     private BigDecimal valorPagamento;
     private Date dataPagamento;
-
+    private Cliente cliente;
+    
     public Integer getId() {
         return id;
     }
@@ -44,6 +45,14 @@ public class Pagamento implements java.io.Serializable{
         this.dataPagamento = dataPagamento;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
