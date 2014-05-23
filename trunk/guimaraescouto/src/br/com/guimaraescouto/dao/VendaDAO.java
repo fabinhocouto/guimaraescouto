@@ -20,6 +20,9 @@ import java.util.List;
  */
 public class VendaDAO extends GenericDAO{
     
+    private final ProdutoDAO produtoDAO = new ProdutoDAO();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    
      public int adicionarVenda(Venda venda, boolean... cascade) throws SQLException{
         String query = "INSERT INTO public.venda (id,id_cliente,data_venda,total) values (?,?,?,?)";
         Integer idVenda = executeCommand(query,venda.getId(),venda.getCliente().getId(),venda.getDataVenda(),venda.getTotal());
@@ -88,7 +91,6 @@ public class VendaDAO extends GenericDAO{
     
     public Venda popularVenda(ResultSet rs, boolean popularItens) throws SQLException{
         Venda retorno = new Venda();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         retorno.setId(rs.getInt("ID"));
         retorno.setVendedor(usuarioDAO.retornaUsuario(rs.getInt("ID_USUARIO")));
         retorno.setDataVenda(rs.getDate("DATA_VENDA"));
@@ -118,7 +120,6 @@ public class VendaDAO extends GenericDAO{
 
     private ItemVenda popularItemVenda(ResultSet rs, Venda... venda) throws SQLException {
         ItemVenda retorno = new ItemVenda();
-        ProdutoDAO produtoDAO = new ProdutoDAO();
         retorno.setId(rs.getInt("ID"));
         retorno.setQuantidade(rs.getInt("QTD"));
         retorno.setProduto(produtoDAO.retornaProduto(rs.getInt("ID_PRODUTO")));
