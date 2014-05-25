@@ -8,9 +8,11 @@ package br.com.guimaraescouto.dao;
 
 import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Venda;
+import br.com.guimaraescouto.entity.VendaDTO;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -89,6 +91,16 @@ public class VendaDAO extends GenericDAO{
         return venda;
     }
     
+    public List<VendaDTO> retornarVendasDTO(int idCliente) throws SQLException{
+        ResultSet rs = executeQuery("SELECT VENDA.ID AS IDVENDA, VENDA.DATA_VENDA AS DATAVENDA, PRODUTO.DESCRICAO AS DESCRICAOPRODUTO,ITEMVENDA.PRECO_UNITARIO AS PRECOUNITARIOPRODUTO, ITEMVENDA.QTD AS QUANTIDADEPRODUTO, ITEMVENDA.QTD*ITEMVENDA.PRECO_UNITARIO AS TOTALPRODUTO  FROM PUBLIC.VENDA VENDA LEFT JOIN PUBLIC.ITENS_VENDA ITEMVENDA ON (VENDA.ID = ITEMVENDA.ID_VENDA) LEFT JOIN PUBLIC.PRODUTO PRODUTO ON(ITEMVENDA.ID_PRODUTO = PRODUTO.ID) WHERE VENDA.ID_CLIENTE = ?", idCliente);
+        List<VendaDTO> retorno = new ArrayList<VendaDTO>();
+        while(rs.next()){
+            retorno.add(popularVendaDTO(rs));
+        }     
+        rs.close();
+        return retorno;
+    }
+    
     public Venda popularVenda(ResultSet rs, boolean popularItens) throws SQLException{
         Venda retorno = new Venda();
         retorno.setId(rs.getInt("ID"));
@@ -101,6 +113,16 @@ public class VendaDAO extends GenericDAO{
         return retorno;
     }
     
+    public VendaDTO popularVendaDTO(ResultSet rs) throws SQLException{
+        VendaDTO retorno = new VendaDTO();
+        retorno.setIdVenda(rs.getInt("IDVENDA"));
+        retorno.setDataVenda(rs.getDate("DATAVENDA"));
+        retorno.setDescricaoProduto(rs.getString("DESCRICAOPRODUTO"));
+        retorno.setPrecoUnitarioProduto(rs.getBigDecimal("PRECOUNITARIOPRODUTO"));
+        retorno.setQuantidadeProduto(rs.getInt("QUANTIDADEPRODUTO"));
+        retorno.setTotalProduto(rs.getBigDecimal("TOTALPRODUTO"));
+        return retorno;
+    }
     public List<ItemVenda> retornarItemVenda(Venda venda) throws SQLException{
         List<ItemVenda> retorno = new LinkedList<ItemVenda>();
         ResultSet rs = executeQuery("SELECT * FROM PUBLIC.ITENS_VENDA WHERE ID_VENDA = ?", venda.getId());

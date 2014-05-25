@@ -7,8 +7,17 @@
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
+import br.com.guimaraescouto.dao.PagamentoDAO;
+import br.com.guimaraescouto.dao.VendaDAO;
 import br.com.guimaraescouto.entity.Cliente;
+import br.com.guimaraescouto.entity.Pagamento;
+import br.com.guimaraescouto.entity.Venda;
+import br.com.guimaraescouto.entity.VendaDTO;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
+import br.com.guimaraescouto.util.MyGenericCellRenderer;
+import br.com.guimaraescouto.util.MyTableModel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +26,11 @@ import br.com.guimaraescouto.util.ConsideraEnterTab;
 public class frmPagamento extends javax.swing.JDialog {
     
     private final ClienteDAO clienteDAO = new ClienteDAO();
+    private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
     private Cliente cliente = new Cliente();
+    private List<Pagamento> pagamentos = new ArrayList<Pagamento>();
+    private VendaDAO vendaDAO = new VendaDAO();
+    private List<VendaDTO> vendasDTO = new ArrayList<VendaDTO>();
 
     /**
      * Creates new form frmPagamento
@@ -102,9 +115,9 @@ public class frmPagamento extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,6 +278,15 @@ public class frmPagamento extends javax.swing.JDialog {
                 txtCodCliente.setText(cliente.getId().toString());
                 txtNomeCliente.setText(cliente.getNome());
                 txtValorPago.requestFocus();
+                
+                pagamentos = pagamentoDAO.retornarPagamento(cliente.getId());
+                tblPagamento.setModel(new MyTableModel(Pagamento.class, pagamentos,tblPagamento));
+                tblPagamento.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+                
+                vendasDTO = vendaDAO.retornarVendasDTO(cliente.getId());
+                tblVendas.setModel(new MyTableModel(VendaDTO.class, vendasDTO,tblVendas));
+                tblVendas.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+                
              }else{
                 txtNomeCliente.setText("Cliente não encontrado.");
                 txtCodCliente.requestFocus();

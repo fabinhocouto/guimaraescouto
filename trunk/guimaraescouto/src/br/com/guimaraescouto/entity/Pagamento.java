@@ -6,9 +6,11 @@
 
 package br.com.guimaraescouto.entity;
 
+import br.com.guimaraescouto.util.SwingColumn;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -17,9 +19,14 @@ import java.util.Objects;
 public class Pagamento implements java.io.Serializable{
     
     private Integer id;
-    private BigDecimal valorPagamento;
-    private Date dataPagamento;
+    @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Cliente cliente;
+    @SwingColumn(description = "DATA PAGAMENTO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    private Date dataPagamento;
+    @SwingColumn(description = "VALOR PAGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    private BigDecimal valorPagamento;
+   
+    
     
     public Integer getId() {
         return id;
