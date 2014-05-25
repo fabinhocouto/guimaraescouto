@@ -33,16 +33,17 @@ public class PagamentoDAO extends GenericDAO{
         executeCommand(queryPagamento, idPagamento);
     }
     
-    public Pagamento retornarPagamento(String idCliente) throws SQLException{
+    public List<Pagamento> retornarPagamento(Integer idCliente) throws SQLException{
+        List<Pagamento> retorno = new LinkedList<Pagamento>();
         ResultSet rs = executeQuery("SELECT * FROM PUBLIC.PAGAMENTO WHERE ID_CLIENTE = ?", idCliente);
         Pagamento pagamento = new Pagamento();
         if(rs.next()){
-            pagamento = popularPagamento(rs);
+            retorno.add(popularPagamento(rs));
         }     
         rs.close();
-        return pagamento;
+        return retorno;
     }
-    
+        
     public Pagamento popularPagamento(ResultSet rs) throws SQLException{
         Pagamento retorno = new Pagamento();
         retorno.setId(rs.getInt("ID"));
