@@ -86,6 +86,11 @@ public class frmPagamento extends javax.swing.JDialog {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("Nome:");
@@ -299,11 +304,23 @@ public class frmPagamento extends javax.swing.JDialog {
          }
     }//GEN-LAST:event_txtCodClienteFocusLost
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         
+    }
+    
+    public void refreshCliente(String id, String nome) {
+        txtCodCliente.setText(id);
+        txtNomeCliente.setText(nome);
+        txtValorPago.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -331,5 +348,7 @@ public class frmPagamento extends javax.swing.JDialog {
 
     private void loadInitialData(){
         ConsideraEnterTab.considerarEnterComoTab(txtCodCliente);
+        tblPagamento.setModel(new MyTableModel(Pagamento.class, pagamentos,tblPagamento));
+        tblVendas.setModel(new MyTableModel(VendaDTO.class, vendasDTO,tblVendas));
     }
 }
