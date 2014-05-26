@@ -27,13 +27,15 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private List<Cliente> clientes;
     private frmVenda vendaForm;
+    private frmPagamento pagamentoForm;
     
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmVenda vendaForm) {
+    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmVenda vendaForm, frmPagamento pagamentoForm) {
         super(parent, modal);
         this.vendaForm = vendaForm;
+        this.pagamentoForm = pagamentoForm;
         initComponents();
         loadInitialData();
     }
@@ -243,7 +245,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null);
+                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -278,7 +280,11 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
             return;
         }
         Cliente clienteSelecionado = clientes.get(tblCliente.getSelectedRow());
-        vendaForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
+        if(vendaForm != null){
+            vendaForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
+        }else if(pagamentoForm != null){
+            pagamentoForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
+        }
         setVisible(false);
     }
 }

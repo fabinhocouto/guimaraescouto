@@ -501,7 +501,7 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // TODO add your handling code here:
-        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this);
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
@@ -724,7 +724,7 @@ public class frmVenda extends javax.swing.JDialog{
     private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F1){
-            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this);
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
             flagFinalizar = true;

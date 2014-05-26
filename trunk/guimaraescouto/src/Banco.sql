@@ -121,7 +121,8 @@ CREATE TABLE pagamento
 (
   id serial,
   valor_pagamento numeric(10,2),
-  data_pagamento date
+  data_pagamento date,
+  id_cliente integer NOT NULL,
 )
 WITH (
   OIDS=FALSE
