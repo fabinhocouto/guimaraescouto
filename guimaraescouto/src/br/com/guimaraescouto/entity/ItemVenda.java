@@ -107,7 +107,11 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     }
 
     public Boolean getFlagPago() {
-        return flagPago;
+        if(pagamento != null && pagamento.getId() != null){
+            return true;
+        }else{
+            return false;
+        }      
     }
 
     public void setFlagPago(Boolean flagPago) {

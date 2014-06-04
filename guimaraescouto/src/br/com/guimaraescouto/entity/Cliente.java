@@ -7,6 +7,7 @@
 package br.com.guimaraescouto.entity;
 
 import br.com.guimaraescouto.util.SwingColumn;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -24,6 +25,7 @@ public class Cliente implements java.io.Serializable{
     private String endereco;
     @SwingColumn(description = "TELEFONE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String telefone;
+    private BigDecimal saldo;
 
     public Cliente(){
     }
@@ -32,11 +34,12 @@ public class Cliente implements java.io.Serializable{
         this.id = id;
     }
 
-    public Cliente(Integer id, String nome, String endereco, String telefone) {
+    public Cliente(Integer id, String nome, String endereco, String telefone, BigDecimal saldo) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.saldo = saldo;
     }
     
     public Integer getId() {
@@ -71,6 +74,14 @@ public class Cliente implements java.io.Serializable{
         this.telefone = telefone;
     }
 
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

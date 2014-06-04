@@ -9,11 +9,13 @@ package br.com.guimaraescouto.frames;
 import br.com.guimaraescouto.dao.ClienteDAO;
 import br.com.guimaraescouto.dao.PagamentoDAO;
 import br.com.guimaraescouto.dao.ProdutoDAO;
+import br.com.guimaraescouto.dao.UsuarioDAO;
 import br.com.guimaraescouto.dao.VendaDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Pagamento;
 import br.com.guimaraescouto.entity.Produto;
+import br.com.guimaraescouto.entity.Usuario;
 import br.com.guimaraescouto.entity.Venda;
 import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
 import br.com.guimaraescouto.util.JMoneyFieldValor;
@@ -61,8 +63,10 @@ public class frmVenda extends javax.swing.JDialog{
      private final ClienteDAO clienteDAO = new ClienteDAO();
      private final ProdutoDAO produtoDAO = new ProdutoDAO();
      private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
+     private final UsuarioDAO atendenteDAO = new UsuarioDAO();
      private Cliente cliente = new Cliente(); 
      private Produto produto = new Produto();
+     private Usuario atendente = new Usuario();
      private List<ItemVenda> itensVenda = new ArrayList<ItemVenda>();
      private int ordemItens = 1;
      private Integer quantidade;
@@ -118,6 +122,8 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtValorUnitario = new javax.swing.JFormattedTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtAtendente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas");
@@ -369,6 +375,21 @@ public class frmVenda extends javax.swing.JDialog{
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel13.setText("Atendente:");
+
+        txtAtendente.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtAtendente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAtendenteActionPerformed(evt);
+            }
+        });
+        txtAtendente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAtendenteFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -400,6 +421,7 @@ public class frmVenda extends javax.swing.JDialog{
                         .addComponent(btnSalvar)
                         .addGap(4, 4, 4)
                         .addComponent(btnCancelar))
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -416,13 +438,15 @@ public class frmVenda extends javax.swing.JDialog{
                                     .addComponent(jLabel3)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtValorPago, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(txtValorPago, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(txtValorTotalVenda)
-                            .addComponent(txtTroco)))
-                    .addComponent(jScrollPane1))
+                            .addComponent(txtTroco)
+                            .addComponent(txtAtendente))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -465,11 +489,15 @@ public class frmVenda extends javax.swing.JDialog{
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13)
+                    .addComponent(txtAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,7 +523,7 @@ public class frmVenda extends javax.swing.JDialog{
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(1162, 705));
+        setSize(new java.awt.Dimension(1252, 765));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -665,6 +693,18 @@ public class frmVenda extends javax.swing.JDialog{
             return;
         }
         
+        if (txtAtendente.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Atendente é obrigatório.");
+            txtAtendente.requestFocus();
+            return;
+        }
+        
+        if (atendente.getId() == null) {
+            JOptionPane.showMessageDialog(this, "Atendente não encontrado.");
+            txtAtendente.requestFocus();
+            return;
+        }
+        
         Venda venda = new Venda();
         venda.setId(new Integer(txtNumVenda.getText()));
         venda.setDataVenda(new java.sql.Date(new java.util.Date().getTime()));
@@ -688,6 +728,7 @@ public class frmVenda extends javax.swing.JDialog{
             pagamento.setCliente(cliente);
             pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
             pagamento.setValorPagamento(valorPago);
+            pagamento.setUsuario(atendente);
             pagamentoDAO.adicionarPagamento(pagamento);
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
@@ -781,6 +822,21 @@ public class frmVenda extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_txtValorUnitarioFocusLost
 
+    private void txtAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAtendenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAtendenteActionPerformed
+
+    private void txtAtendenteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAtendenteFocusLost
+        // TODO add your handling code here:
+        if(txtAtendente.getText() != null){
+            try {
+                atendente = atendenteDAO.retornaUsuario(new Integer(txtAtendente.getText()));
+            } catch (SQLException ex) {
+                Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txtAtendenteFocusLost
+
     private void insereItemVenda(Produto produto){
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setOrdem(ordemItens++);
@@ -854,6 +910,7 @@ public class frmVenda extends javax.swing.JDialog{
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -867,6 +924,7 @@ public class frmVenda extends javax.swing.JDialog{
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblItensVenda;
+    private javax.swing.JTextField txtAtendente;
     private javax.swing.JTextField txtCodBarras;
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtDataVenda;
@@ -891,6 +949,7 @@ public class frmVenda extends javax.swing.JDialog{
              considerarEnterComoTab(txtValorUnitario);
              considerarEnterComoTab(txtValorPago);
              considerarEnterComoTab(txtTroco);
+             considerarEnterComoTab(txtAtendente);
              //Exibi na tela inteira
              Toolkit tk = Toolkit.getDefaultToolkit();
              Dimension screenSize = tk.getScreenSize();
