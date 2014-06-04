@@ -42,6 +42,11 @@ public class MyGenericCellRenderer extends DefaultTableCellRenderer {
                 && value instanceof Boolean) {
             Boolean valor = (Boolean) value;
             super.setValue(true == valor?"Sim":"Não");
+        } else if(value != null
+                && value instanceof Date){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date valuefOfdate = (Date) value;
+            super.setValue(sdf.format(valuefOfdate));
         }
         else {
             super.setValue(value);

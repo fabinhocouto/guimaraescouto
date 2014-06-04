@@ -30,6 +30,7 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     @SwingColumn(description="TOTAL",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal total;
     private Boolean flagPago;
+    private Pagamento pagamento;
     
     public ItemVenda(){
     }
@@ -38,13 +39,15 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
         this.id = id;
     }
 
-    public ItemVenda(Integer id, Produto produto, int quantidade, Venda venda, BigDecimal total, BigDecimal precoUnitario) {
+    public ItemVenda(Integer id, Produto produto, int quantidade, Venda venda, BigDecimal precoUnitario, BigDecimal total, Boolean flagPago, Pagamento pagamento) {
         this.id = id;
         this.produto = produto;
         this.quantidade = quantidade;
         this.venda = venda;
-        this.total = total;
         this.precoUnitario = precoUnitario;
+        this.total = total;
+        this.flagPago = flagPago;
+        this.pagamento = pagamento;
     }
 
     public Integer getId() {
@@ -110,8 +113,15 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     public void setFlagPago(Boolean flagPago) {
         this.flagPago = flagPago;
     }
-    
 
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

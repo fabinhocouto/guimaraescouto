@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Cliente implements java.io.Serializable{
     
+    @SwingColumn(description = "CÓDIGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
     @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String nome;
@@ -91,5 +92,10 @@ public class Cliente implements java.io.Serializable{
         }
         return true;
     }  
+
+    @Override
+    public String toString() {
+        return nome;
+    }
     
 }

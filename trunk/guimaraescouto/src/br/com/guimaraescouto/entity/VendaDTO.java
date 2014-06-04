@@ -22,7 +22,6 @@ public class VendaDTO {
     private Integer idVenda;
     @SwingColumn(description = "DATA VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Date dataVenda;
-    @SwingColumn(description = "TOTAL VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal totalVenda;
     @SwingColumn(description = "DESCRICAO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String descricaoProduto;

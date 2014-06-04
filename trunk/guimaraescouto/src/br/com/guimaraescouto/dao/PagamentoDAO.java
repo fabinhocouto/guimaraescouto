@@ -21,10 +21,11 @@ import java.util.List;
 public class PagamentoDAO extends GenericDAO{
     
     private final ClienteDAO clienteDAO = new ClienteDAO();
+    private final VendaDAO vendaDAO = new VendaDAO();
     
-     public int adicionarPagamento(Pagamento pagamento, boolean... cascade) throws SQLException{
-        String query = "INSERT INTO public.pagamento (id,valor_pagamento,data_pagamento) values (?,?,?)";
-        Integer idPagamento = executeCommand(query,pagamento.getId(),pagamento.getValorPagamento(),pagamento.getDataPagamento());       
+     public int adicionarPagamento(Pagamento pagamento) throws SQLException{
+        String query = "INSERT INTO public.pagamento (valor_pagamento,data_pagamento,id_cliente) values (?,?,?)";
+        Integer idPagamento = executeCommand(query,pagamento.getValorPagamento(),pagamento.getDataPagamento(), pagamento.getCliente().getId());
         return idPagamento;
     }
             

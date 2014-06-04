@@ -7,10 +7,12 @@
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
+import br.com.guimaraescouto.dao.PagamentoDAO;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.dao.VendaDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.ItemVenda;
+import br.com.guimaraescouto.entity.Pagamento;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.entity.Venda;
 import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
@@ -29,6 +31,7 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -57,6 +60,7 @@ public class frmVenda extends javax.swing.JDialog{
      private final VendaDAO vendaDAO = new VendaDAO(); 
      private final ClienteDAO clienteDAO = new ClienteDAO();
      private final ProdutoDAO produtoDAO = new ProdutoDAO();
+     private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
      private Cliente cliente = new Cliente(); 
      private Produto produto = new Produto();
      private List<ItemVenda> itensVenda = new ArrayList<ItemVenda>();
@@ -673,6 +677,18 @@ public class frmVenda extends javax.swing.JDialog{
          try {
              vendaDAO.adicionarVenda(venda, true);
              setVisible(false);
+         } catch (SQLException ex) {
+             Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         try {
+            String valorPagoStr = txtValorPago.getText().replace(".", "");
+            valorPagoStr = valorPagoStr.replace(",", ".");
+            BigDecimal valorPago = new BigDecimal(valorPagoStr);
+            Pagamento pagamento = new Pagamento();
+            pagamento.setCliente(cliente);
+            pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
+            pagamento.setValorPagamento(valorPago);
+            pagamentoDAO.adicionarPagamento(pagamento);
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
