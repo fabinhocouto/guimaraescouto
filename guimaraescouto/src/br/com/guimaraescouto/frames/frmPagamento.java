@@ -11,7 +11,6 @@ import br.com.guimaraescouto.dao.PagamentoDAO;
 import br.com.guimaraescouto.dao.VendaDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.Pagamento;
-import br.com.guimaraescouto.entity.Venda;
 import br.com.guimaraescouto.entity.VendaDTO;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
@@ -28,9 +27,9 @@ public class frmPagamento extends javax.swing.JDialog {
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
     private Cliente cliente = new Cliente();
-    private List<Pagamento> pagamentos = new ArrayList<Pagamento>();
-    private VendaDAO vendaDAO = new VendaDAO();
-    private List<VendaDTO> vendasDTO = new ArrayList<VendaDTO>();
+    private List<Pagamento> pagamentos = new ArrayList<>();
+    private final VendaDAO vendaDAO = new VendaDAO();
+    private List<VendaDTO> vendasDTO = new ArrayList<>();
 
     /**
      * Creates new form frmPagamento
@@ -96,6 +95,7 @@ public class frmPagamento extends javax.swing.JDialog {
         jLabel2.setText("Nome:");
 
         txtNomeCliente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtNomeCliente.setBorder(null);
         txtNomeCliente.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -118,15 +118,14 @@ public class frmPagamento extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -349,6 +348,8 @@ public class frmPagamento extends javax.swing.JDialog {
     private void loadInitialData(){
         ConsideraEnterTab.considerarEnterComoTab(txtCodCliente);
         tblPagamento.setModel(new MyTableModel(Pagamento.class, pagamentos,tblPagamento));
+        tblPagamento.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
         tblVendas.setModel(new MyTableModel(VendaDTO.class, vendasDTO,tblVendas));
+        tblVendas.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
     }
 }
