@@ -9,6 +9,8 @@ package br.com.guimaraescouto.dao;
 import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Pagamento;
 import br.com.guimaraescouto.entity.Venda;
+import br.com.guimaraescouto.entity.VendaDTO;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -22,10 +24,18 @@ public class PagamentoDAO extends GenericDAO{
     
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private final VendaDAO vendaDAO = new VendaDAO();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     
      public int adicionarPagamento(Pagamento pagamento) throws SQLException{
-        String query = "INSERT INTO public.pagamento (valor_pagamento,data_pagamento,id_cliente) values (?,?,?)";
-        Integer idPagamento = executeCommand(query,pagamento.getValorPagamento(),pagamento.getDataPagamento(), pagamento.getCliente().getId());
+        String query = "INSERT INTO public.pagamento (valor_pagamento,data_pagamento,id_cliente, id_usuario) values (?,?,?,?)";
+        Integer idPagamento = executeCommand(query,pagamento.getValorPagamento(),pagamento.getDataPagamento(), pagamento.getCliente().getId(), pagamento.getUsuario().getId());
+        if(pagamento.getValorPagamento().compareTo(BigDecimal.ZERO) == 1){
+            List<VendaDTO> vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId());
+            BigDecimal valorPago = pagamento.getValorPagamento();
+            for (VendaDTO vendaDTO : vendas) {
+                
+            }
+        }
         return idPagamento;
     }
             
@@ -36,9 +46,8 @@ public class PagamentoDAO extends GenericDAO{
     
     public List<Pagamento> retornarPagamento(Integer idCliente) throws SQLException{
         List<Pagamento> retorno = new LinkedList<Pagamento>();
-        ResultSet rs = executeQuery("SELECT * FROM PUBLIC.PAGAMENTO WHERE ID_CLIENTE = ?", idCliente);
-        Pagamento pagamento = new Pagamento();
-        if(rs.next()){
+        ResultSet rs = executeQuery("SELECT * FROM PUBLIC.PAGAMENTO WHERE ID_CLIENTE = ? ORDER BY DATA_PAGAMENTO DESC", idCliente);
+        while(rs.next()){
             retorno.add(popularPagamento(rs));
         }     
         rs.close();
@@ -51,6 +60,7 @@ public class PagamentoDAO extends GenericDAO{
         retorno.setCliente(clienteDAO.retornaClientePorId(rs.getInt("ID_CLIENTE")));
         retorno.setDataPagamento(rs.getDate("DATA_PAGAMENTO"));
         retorno.setValorPagamento(rs.getBigDecimal("VALOR_PAGAMENTO"));
+        retorno.setUsuario(usuarioDAO.retornaUsuario(rs.getInt("ID_USUARIO")));
         return retorno;
     }
     
