@@ -13,6 +13,7 @@ import br.com.guimaraescouto.entity.VendaDTO;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,18 +28,41 @@ public class PagamentoDAO extends GenericDAO{
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     
      public int adicionarPagamento(Pagamento pagamento) throws SQLException{
-        String query = "INSERT INTO public.pagamento (valor_pagamento,data_pagamento,id_cliente, id_usuario) values (?,?,?,?)";
-        Integer idPagamento = executeCommand(query,pagamento.getValorPagamento(),pagamento.getDataPagamento(), pagamento.getCliente().getId(), pagamento.getUsuario().getId());
+        pagamento.setId(retornaCodigoPagamento());
+        String query = "INSERT INTO public.pagamento (id,valor_pagamento,data_pagamento,id_cliente, id_usuario) values (?,?,?,?,?)";
+        executeCommand(query,pagamento.getId(),pagamento.getValorPagamento(),pagamento.getDataPagamento(), pagamento.getCliente().getId(), pagamento.getUsuario().getId());
         if(pagamento.getValorPagamento().compareTo(BigDecimal.ZERO) == 1){
-            List<VendaDTO> vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId());
+            List<VendaDTO> vendas = new ArrayList<>();
+            if(pagamento.getIdVenda() == null){
+                vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId(),null);
+            }else{
+                vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId(),pagamento.getIdVenda());
+            }
             BigDecimal valorPago = pagamento.getValorPagamento();
             for (VendaDTO vendaDTO : vendas) {
-                
+                if(valorPago.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) > 0
+                        || valorPago.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) == 0){
+                    vendaDAO.atualizarItemVenda(vendaDTO.getIdItemVenda(),pagamento.getId());
+                    valorPago = valorPago.subtract(vendaDTO.getTotalProduto());
+                }
+            }
+            if(valorPago.compareTo(BigDecimal.ZERO) > 0){
+                clienteDAO.atualizaSaldoCliente(pagamento.getCliente().getId(), valorPago);
             }
         }
-        return idPagamento;
+        return pagamento.getId();
     }
-            
+    
+    public Integer retornaCodigoPagamento() throws SQLException{
+        ResultSet rs = executeQuery("SELECT NEXTVAL('pagamento_id_seq') as idPagamento;");
+        Integer retorno = null;
+        while(rs.next()){
+            retorno = rs.getInt("idPagamento");
+        }
+        rs.close();
+        return retorno;
+    } 
+     
     public void removerPagamento(int idPagamento) throws SQLException{
         String queryPagamento = "DELETE FROM public.pagamento WHERE ID = ?";
         executeCommand(queryPagamento, idPagamento);

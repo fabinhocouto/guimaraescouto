@@ -7,6 +7,7 @@
 package br.com.guimaraescouto.dao;
 
 import br.com.guimaraescouto.entity.Cliente;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -34,6 +35,13 @@ public class ClienteDAO extends GenericDAO {
         executeCommand(query, cliente.getNome(),cliente.getEndereco(),cliente.getTelefone(), cliente.getId());
     }
     
+    public void atualizaSaldoCliente(Integer idCliente, BigDecimal credito) throws SQLException{
+        Cliente cliente = retornaClientePorId(idCliente);
+        credito = credito.add(cliente.getSaldo());
+        String query = "UPDATE public.cliente SET credito = ? where id = ?";
+        executeCommand(query, credito ,idCliente);
+    }
+    
     public Cliente retornaClientePorId(int idCliente) throws SQLException{
         ResultSet rs = executeQuery("SELECT * FROM PUBLIC.CLIENTE WHERE ID = ?", idCliente);
          Cliente cliente = new Cliente();
@@ -50,6 +58,7 @@ public class ClienteDAO extends GenericDAO {
         clienteRetorno.setNome(rs.getString("NOME"));
         clienteRetorno.setEndereco(rs.getString("ENDERECO"));
         clienteRetorno.setTelefone(rs.getString("TELEFONE"));
+        clienteRetorno.setSaldo(rs.getBigDecimal("CREDITO"));
         return clienteRetorno;
     }
     

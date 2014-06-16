@@ -335,9 +335,8 @@ public class frmVenda extends javax.swing.JDialog{
 
         txtTroco.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtTroco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtTroco.setBorder(null);
+        txtTroco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtTroco.setDisabledTextColor(new java.awt.Color(51, 51, 255));
-        txtTroco.setEnabled(false);
         txtTroco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTrocoActionPerformed(evt);
@@ -379,6 +378,7 @@ public class frmVenda extends javax.swing.JDialog{
         jLabel13.setText("Atendente:");
 
         txtAtendente.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtAtendente.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtAtendente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAtendenteActionPerformed(evt);
@@ -444,9 +444,9 @@ public class frmVenda extends javax.swing.JDialog{
                         .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtValorPago, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(txtValorTotalVenda)
                             .addComponent(txtTroco)
-                            .addComponent(txtAtendente))))
+                            .addComponent(txtAtendente)
+                            .addComponent(txtValorTotalVenda))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -724,12 +724,21 @@ public class frmVenda extends javax.swing.JDialog{
             String valorPagoStr = txtValorPago.getText().replace(".", "");
             valorPagoStr = valorPagoStr.replace(",", ".");
             BigDecimal valorPago = new BigDecimal(valorPagoStr);
-            Pagamento pagamento = new Pagamento();
-            pagamento.setCliente(cliente);
-            pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
-            pagamento.setValorPagamento(valorPago);
-            pagamento.setUsuario(atendente);
-            pagamentoDAO.adicionarPagamento(pagamento);
+            String valorTrocoStr = txtTroco.getText().replace(".", "");
+            valorTrocoStr = valorTrocoStr.replace(",", ".");
+            BigDecimal valorTroco = new BigDecimal(valorTrocoStr);
+            if(valorTroco.compareTo(BigDecimal.ZERO) == 1 ){
+                
+            }
+            if(valorPago.compareTo(BigDecimal.ZERO) == 1){
+                Pagamento pagamento = new Pagamento();
+                pagamento.setCliente(cliente);
+                pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
+                pagamento.setValorPagamento(valorPago.subtract(valorTroco));
+                pagamento.setUsuario(atendente);
+                pagamento.setIdVenda(venda.getId());
+                pagamentoDAO.adicionarPagamento(pagamento);
+            }
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -828,7 +837,8 @@ public class frmVenda extends javax.swing.JDialog{
 
     private void txtAtendenteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAtendenteFocusLost
         // TODO add your handling code here:
-        if(txtAtendente.getText() != null){
+        if(txtAtendente.getText() != null
+                && !txtAtendente.getText().equals("")){
             try {
                 atendente = atendenteDAO.retornaUsuario(new Integer(txtAtendente.getText()));
             } catch (SQLException ex) {

@@ -55,12 +55,17 @@ public class VendaDAO extends GenericDAO{
         }
     }
      
-     public int atualizarItemVenda(ItemVenda itemVenda) throws SQLException {
+    public int atualizarItemVenda(ItemVenda itemVenda) throws SQLException {
         String query = "UPDATE public.itens_Venda id_produto = ? , qtd = ?, id_venda= ?, preco_unitario=? where id = ?";
         executeCommand(query, itemVenda.getId(),itemVenda.getProduto().getId(),itemVenda.getQuantidade(),itemVenda.getPrecoUnitario(),itemVenda.getVenda().getId());
         return itemVenda.getId();
     }
-     
+    
+    public void atualizarItemVenda(Integer idItemVenda, Integer idPagamento) throws SQLException {
+        String query = "UPDATE public.itens_Venda set id_pagamento = ? where id = ?";
+        executeCommand(query, idPagamento,idItemVenda);
+    }
+    
     public BigDecimal calcularTotalVenda(List<ItemVenda> itensVenda){
         BigDecimal totalDaVenda = new BigDecimal(0);
         for(ItemVenda itemVenda: itensVenda){
@@ -91,8 +96,16 @@ public class VendaDAO extends GenericDAO{
         return venda;
     }
     
-    public List<VendaDTO> retornarVendasDTO(int idCliente) throws SQLException{
-        ResultSet rs = executeQuery("SELECT VENDA.ID AS IDVENDA, VENDA.DATA_VENDA AS DATAVENDA, PRODUTO.DESCRICAO AS DESCRICAOPRODUTO,ITEMVENDA.PRECO_UNITARIO AS PRECOUNITARIOPRODUTO, ITEMVENDA.QTD AS QUANTIDADEPRODUTO, ITEMVENDA.QTD*ITEMVENDA.PRECO_UNITARIO AS TOTALPRODUTO  FROM PUBLIC.VENDA VENDA LEFT JOIN PUBLIC.ITENS_VENDA ITEMVENDA ON (VENDA.ID = ITEMVENDA.ID_VENDA) LEFT JOIN PUBLIC.PRODUTO PRODUTO ON(ITEMVENDA.ID_PRODUTO = PRODUTO.ID) WHERE VENDA.ID_CLIENTE = ? AND ITEMVENDA.FLAG_PAGO = FALSE", idCliente);
+    public List<VendaDTO> retornarVendasDTO(Integer idCliente, Integer idVenda) throws SQLException{
+        StringBuffer query = new StringBuffer();
+        query.append(" SELECT VENDA.ID AS IDVENDA, VENDA.DATA_VENDA AS DATAVENDA, PRODUTO.DESCRICAO AS DESCRICAOPRODUTO,ITEMVENDA.PRECO_UNITARIO AS PRECOUNITARIOPRODUTO, ITEMVENDA.QTD AS QUANTIDADEPRODUTO, ITEMVENDA.QTD*ITEMVENDA.PRECO_UNITARIO AS TOTALPRODUTO, ITEMVENDA.ID AS IDITEMVENDA   FROM PUBLIC.VENDA VENDA LEFT JOIN PUBLIC.ITENS_VENDA ITEMVENDA ON (VENDA.ID = ITEMVENDA.ID_VENDA) LEFT JOIN PUBLIC.PRODUTO PRODUTO ON(ITEMVENDA.ID_PRODUTO = PRODUTO.ID) ");
+        query.append(" WHERE ");
+        query.append(" VENDA.ID_CLIENTE = " + idCliente);
+        if(idVenda != null){
+            query.append(" AND VENDA.ID =  " + idVenda);
+        }
+        query.append(" AND ITEMVENDA.ID_PAGAMENTO IS NULL ORDER BY DATAVENDA ASC ");
+        ResultSet rs = executeQuery(query.toString());
         List<VendaDTO> retorno = new ArrayList<VendaDTO>();
         while(rs.next()){
             retorno.add(popularVendaDTO(rs));
@@ -121,6 +134,7 @@ public class VendaDAO extends GenericDAO{
         retorno.setPrecoUnitarioProduto(rs.getBigDecimal("PRECOUNITARIOPRODUTO"));
         retorno.setQuantidadeProduto(rs.getInt("QUANTIDADEPRODUTO"));
         retorno.setTotalProduto(rs.getBigDecimal("TOTALPRODUTO"));
+        retorno.setIdItemVenda(rs.getInt("IDITEMVENDA"));
         return retorno;
     }
     public List<ItemVenda> retornarItemVenda(Venda venda) throws SQLException{
