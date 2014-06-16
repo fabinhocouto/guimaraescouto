@@ -31,6 +31,7 @@ public class VendaDTO {
     private Integer quantidadeProduto;
     @SwingColumn(description = "TOTAL",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal totalProduto;
+    private Integer idItemVenda;
 
     public Integer getIdVenda() {
         return idVenda;
@@ -88,6 +89,14 @@ public class VendaDTO {
         this.totalProduto = totalProduto;
     }
 
+    public Integer getIdItemVenda() {
+        return idItemVenda;
+    }
+
+    public void setIdItemVenda(Integer idItemVenda) {
+        this.idItemVenda = idItemVenda;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

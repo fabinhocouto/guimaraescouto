@@ -27,7 +27,8 @@ public class Pagamento implements java.io.Serializable{
     private BigDecimal valorPagamento;
     @SwingColumn(description = "ATENDENTE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Usuario usuario;
-        
+    private Integer idVenda;
+    
     public Integer getId() {
         return id;
     }
@@ -67,6 +68,14 @@ public class Pagamento implements java.io.Serializable{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }    
+
+    public Integer getIdVenda() {
+        return idVenda;
+    }
+
+    public void setIdVenda(Integer idVenda) {
+        this.idVenda = idVenda;
+    }
     
     @Override
     public int hashCode() {
