@@ -720,28 +720,31 @@ public class frmVenda extends javax.swing.JDialog{
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
-         try {
-            String valorPagoStr = txtValorPago.getText().replace(".", "");
-            valorPagoStr = valorPagoStr.replace(",", ".");
-            BigDecimal valorPago = new BigDecimal(valorPagoStr);
-            String valorTrocoStr = txtTroco.getText().replace(".", "");
-            valorTrocoStr = valorTrocoStr.replace(",", ".");
-            BigDecimal valorTroco = new BigDecimal(valorTrocoStr);
-            if(valorTroco.compareTo(BigDecimal.ZERO) == 1 ){
-                
-            }
-            if(valorPago.compareTo(BigDecimal.ZERO) == 1){
-                Pagamento pagamento = new Pagamento();
-                pagamento.setCliente(cliente);
-                pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
-                pagamento.setValorPagamento(valorPago.subtract(valorTroco));
-                pagamento.setUsuario(atendente);
-                pagamento.setIdVenda(venda.getId());
-                pagamentoDAO.adicionarPagamento(pagamento);
-            }
-         } catch (SQLException ex) {
+         if(cliente.getId().compareTo(new Integer(1)) != 0){
+            try {
+                String valorPagoStr = txtValorPago.getText().replace(".", "");
+                valorPagoStr = valorPagoStr.replace(",", ".");
+                BigDecimal valorPago = new BigDecimal(valorPagoStr);
+                String valorTrocoStr = txtTroco.getText().replace(".", "");
+                valorTrocoStr = valorTrocoStr.replace(",", ".");
+                BigDecimal valorTroco = new BigDecimal(valorTrocoStr);
+                if(valorTroco.compareTo(BigDecimal.ZERO) == 1 ){
+                //IMPLEMENTAR ESSA PARTE
+                }
+                if(valorPago.compareTo(BigDecimal.ZERO) == 1){
+                    Pagamento pagamento = new Pagamento();
+                    pagamento.setCliente(cliente);
+                    pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
+                    pagamento.setValorPagamento(valorPago.subtract(valorTroco));
+                    pagamento.setUsuario(atendente);
+                    pagamento.setIdVenda(venda.getId());
+                    pagamentoDAO.adicionarPagamento(pagamento);
+                }
+            } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+            } 
          }
+         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
