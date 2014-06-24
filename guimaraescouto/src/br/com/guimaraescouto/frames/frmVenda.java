@@ -725,17 +725,18 @@ public class frmVenda extends javax.swing.JDialog{
                 String valorPagoStr = txtValorPago.getText().replace(".", "");
                 valorPagoStr = valorPagoStr.replace(",", ".");
                 BigDecimal valorPago = new BigDecimal(valorPagoStr);
-                String valorTrocoStr = txtTroco.getText().replace(".", "");
-                valorTrocoStr = valorTrocoStr.replace(",", ".");
-                BigDecimal valorTroco = new BigDecimal(valorTrocoStr);
-                if(valorTroco.compareTo(BigDecimal.ZERO) == 1 ){
-                //IMPLEMENTAR ESSA PARTE
-                }
+                String valorTotalVendaStr = txtValorTotalVenda.getText().replace(".", "");
+                valorTotalVendaStr = valorTotalVendaStr.replace(",", ".");
+                BigDecimal valorTotalVenda = new BigDecimal(valorTotalVendaStr);
                 if(valorPago.compareTo(BigDecimal.ZERO) == 1){
                     Pagamento pagamento = new Pagamento();
                     pagamento.setCliente(cliente);
                     pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
-                    pagamento.setValorPagamento(valorPago.subtract(valorTroco));
+                    if(valorPago.subtract(valorTotalVenda).compareTo(BigDecimal.ZERO) >= 0){
+                        pagamento.setValorPagamento(valorTotalVenda);
+                    }else{
+                        pagamento.setValorPagamento(valorPago);
+                    }
                     pagamento.setUsuario(atendente);
                     pagamento.setIdVenda(venda.getId());
                     pagamentoDAO.adicionarPagamento(pagamento);

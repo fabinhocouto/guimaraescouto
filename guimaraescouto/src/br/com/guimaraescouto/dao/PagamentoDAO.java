@@ -6,11 +6,13 @@
 
 package br.com.guimaraescouto.dao;
 
+import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Pagamento;
 import br.com.guimaraescouto.entity.Venda;
 import br.com.guimaraescouto.entity.VendaDTO;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,23 +33,26 @@ public class PagamentoDAO extends GenericDAO{
         pagamento.setId(retornaCodigoPagamento());
         String query = "INSERT INTO public.pagamento (id,valor_pagamento,data_pagamento,id_cliente, id_usuario) values (?,?,?,?,?)";
         executeCommand(query,pagamento.getId(),pagamento.getValorPagamento(),pagamento.getDataPagamento(), pagamento.getCliente().getId(), pagamento.getUsuario().getId());
-        if(pagamento.getValorPagamento().compareTo(BigDecimal.ZERO) == 1){
+        Cliente cliente = clienteDAO.retornaClientePorId(pagamento.getCliente().getId());
+        BigDecimal pagamentoTotal = new BigDecimal(BigInteger.ZERO);
+        pagamentoTotal = cliente.getSaldo().add(pagamento.getValorPagamento());
+                
+        if(pagamentoTotal.compareTo(BigDecimal.ZERO) == 1){
             List<VendaDTO> vendas = new ArrayList<>();
             if(pagamento.getIdVenda() == null){
                 vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId(),null);
             }else{
                 vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId(),pagamento.getIdVenda());
             }
-            BigDecimal valorPago = pagamento.getValorPagamento();
             for (VendaDTO vendaDTO : vendas) {
-                if(valorPago.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) > 0
-                        || valorPago.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) == 0){
+                if(pagamentoTotal.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) > 0
+                        || pagamentoTotal.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) == 0){
                     vendaDAO.atualizarItemVenda(vendaDTO.getIdItemVenda(),pagamento.getId());
-                    valorPago = valorPago.subtract(vendaDTO.getTotalProduto());
+                    pagamentoTotal = pagamentoTotal.subtract(vendaDTO.getTotalProduto());
                 }
             }
-            if(valorPago.compareTo(BigDecimal.ZERO) > 0){
-                clienteDAO.atualizaSaldoCliente(pagamento.getCliente().getId(), valorPago);
+            if(pagamentoTotal.compareTo(BigDecimal.ZERO) > 0){
+                clienteDAO.atualizaSaldoCliente(pagamento.getCliente().getId(), pagamentoTotal);
             }
         }
         return pagamento.getId();
