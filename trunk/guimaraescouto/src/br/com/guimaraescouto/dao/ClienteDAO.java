@@ -36,8 +36,6 @@ public class ClienteDAO extends GenericDAO {
     }
     
     public void atualizaSaldoCliente(Integer idCliente, BigDecimal credito) throws SQLException{
-        Cliente cliente = retornaClientePorId(idCliente);
-        credito = credito.add(cliente.getSaldo());
         String query = "UPDATE public.cliente SET credito = ? where id = ?";
         executeCommand(query, credito ,idCliente);
     }
