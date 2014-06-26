@@ -335,8 +335,9 @@ public class frmVenda extends javax.swing.JDialog{
 
         txtTroco.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         txtTroco.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtTroco.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTroco.setBorder(null);
         txtTroco.setDisabledTextColor(new java.awt.Color(51, 51, 255));
+        txtTroco.setEnabled(false);
         txtTroco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTrocoActionPerformed(evt);
@@ -710,6 +711,7 @@ public class frmVenda extends javax.swing.JDialog{
         venda.setDataVenda(new java.sql.Date(new java.util.Date().getTime()));
         venda.setTotal(calcularTotalVenda(itensVenda));
         venda.setItens(itensVenda);
+        venda.setVendedor(atendente);
         for (ItemVenda itemVenda : itensVenda) {
             itemVenda.setVenda(venda);
         }
@@ -720,7 +722,11 @@ public class frmVenda extends javax.swing.JDialog{
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
-         if(cliente.getId().compareTo(new Integer(1)) != 0){
+         
+         if(cliente.getSaldo().compareTo(BigDecimal.ZERO) > 0){
+             //Implementar aqui
+         }
+         /*if(cliente.getId().compareTo(new Integer(1)) != 0){
             try {
                 String valorPagoStr = txtValorPago.getText().replace(".", "");
                 valorPagoStr = valorPagoStr.replace(",", ".");
@@ -728,10 +734,12 @@ public class frmVenda extends javax.swing.JDialog{
                 String valorTotalVendaStr = txtValorTotalVenda.getText().replace(".", "");
                 valorTotalVendaStr = valorTotalVendaStr.replace(",", ".");
                 BigDecimal valorTotalVenda = new BigDecimal(valorTotalVendaStr);
+                //Se valorPago for maior que R$0,00
                 if(valorPago.compareTo(BigDecimal.ZERO) == 1){
                     Pagamento pagamento = new Pagamento();
                     pagamento.setCliente(cliente);
                     pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
+                    //Se valorTotalVendas for maior ou igual que R$0,00
                     if(valorPago.subtract(valorTotalVenda).compareTo(BigDecimal.ZERO) >= 0){
                         pagamento.setValorPagamento(valorTotalVenda);
                     }else{
@@ -744,7 +752,7 @@ public class frmVenda extends javax.swing.JDialog{
             } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
             } 
-         }
+         }*/
          
     }//GEN-LAST:event_btnSalvarActionPerformed
 
