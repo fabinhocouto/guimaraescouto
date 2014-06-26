@@ -50,6 +50,7 @@ public class frmPagamento extends javax.swing.JDialog {
      * Creates new form frmPagamento
      */
     public frmPagamento(java.awt.Frame parent, boolean modal) {
+        super(parent,modal);
         initComponents();
         loadInitialData();
     }
@@ -382,6 +383,10 @@ public class frmPagamento extends javax.swing.JDialog {
                 for (VendaDTO vendaDTO : vendasDTO) {
                      totalDebito = totalDebito.add(vendaDTO.getTotalProduto());
                 }
+                if(totalDebito.subtract(cliente.getSaldo()).compareTo(BigDecimal.ZERO) == 1){
+                    totalDebito = totalDebito.subtract(cliente.getSaldo());
+                }
+                
                 txtDeve.setText(df.format(totalDebito));
                 
              }else{
@@ -446,15 +451,30 @@ public class frmPagamento extends javax.swing.JDialog {
             String valorPagoStr = txtValorPago.getText().replace(".", "");
             valorPagoStr = valorPagoStr.replace(",", ".");
             BigDecimal valorPago = new BigDecimal(valorPagoStr);
+            String valorTotalVendasStr = txtDeve.getText().replace(".", "");
+            valorTotalVendasStr = valorTotalVendasStr.replace(",", ".");
+            BigDecimal valorTotalVendas = new BigDecimal(valorTotalVendasStr);
+            String valorCreditoStr = txtCredito.getText().replace(".", "");
+            valorCreditoStr = valorCreditoStr.replace(",", ".");
+            BigDecimal valorCredito = new BigDecimal(valorCreditoStr);
+            //Se valorPago for maior que R$0,00
             if(valorPago.compareTo(BigDecimal.ZERO) == 1){
                 Pagamento pagamento = new Pagamento();
                 pagamento.setCliente(cliente);
                 pagamento.setDataPagamento(new java.sql.Date(new java.util.Date().getTime()));
-                pagamento.setValorPagamento(valorPago);
+                //Se valorTotalVendas for maior ou igual que R$0,00
+                if(valorPago.subtract(valorTotalVendas).compareTo(BigDecimal.ZERO) > 0
+                        && valorTotalVendas.compareTo(BigDecimal.ZERO) != 0 ){
+                    pagamento.setValorPagamento(valorTotalVendas);
+                }else{
+                    pagamento.setValorPagamento(valorPago);
+                }
                 pagamento.setUsuario(atendente);
                 pagamento.setIdVenda(null);
                 pagamentoDAO.adicionarPagamento(pagamento);
-            }else{
+                JOptionPane.showMessageDialog(this, "Pagamento realizado com sucesso.");
+                setVisible(false);
+             }else{
                 JOptionPane.showMessageDialog(this, "Pagamento deve ser maior que R$0,00.");
                 txtValorPago.requestFocus();
                 return;
@@ -506,6 +526,9 @@ public class frmPagamento extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void loadInitialData(){
+        txtDeve.setText("0,00");
+        txtValorPago.setText("0,00");
+        txtTroco.setText("0,00");
         ConsideraEnterTab.considerarEnterComoTab(txtCodCliente);
         ConsideraEnterTab.considerarEnterComoTab(txtValorPago);
         ConsideraEnterTab.considerarEnterComoTab(txtCodAtendente);

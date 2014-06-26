@@ -45,17 +45,20 @@ public class PagamentoDAO extends GenericDAO{
                 vendas = vendaDAO.retornarVendasDTO(pagamento.getCliente().getId(),pagamento.getIdVenda());
             }
             for (VendaDTO vendaDTO : vendas) {
-                if(pagamentoTotal.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) > 0
-                        || pagamentoTotal.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) == 0){
+                if(pagamentoTotal.subtract(vendaDTO.getTotalProduto()).compareTo(BigDecimal.ZERO) >= 0){
                     vendaDAO.atualizarItemVenda(vendaDTO.getIdItemVenda(),pagamento.getId());
                     pagamentoTotal = pagamentoTotal.subtract(vendaDTO.getTotalProduto());
                 }
             }
-            if(pagamentoTotal.compareTo(BigDecimal.ZERO) > 0){
+            if(pagamentoTotal.compareTo(BigDecimal.ZERO) >= 0){
                 clienteDAO.atualizaSaldoCliente(pagamento.getCliente().getId(), pagamentoTotal);
             }
         }
         return pagamento.getId();
+    }
+     
+    public void mudaStatusItemParaPago(){
+        //Implementar aqui
     }
     
     public Integer retornaCodigoPagamento() throws SQLException{

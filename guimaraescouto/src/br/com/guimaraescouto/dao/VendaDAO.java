@@ -26,8 +26,8 @@ public class VendaDAO extends GenericDAO{
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
     
      public int adicionarVenda(Venda venda, boolean... cascade) throws SQLException{
-        String query = "INSERT INTO public.venda (id,id_cliente,data_venda,total) values (?,?,?,?)";
-        Integer idVenda = executeCommand(query,venda.getId(),venda.getCliente().getId(),venda.getDataVenda(),venda.getTotal());
+        String query = "INSERT INTO public.venda (id,id_usuario,id_cliente,data_venda,total) values (?,?,?,?,?)";
+        Integer idVenda = executeCommand(query,venda.getId(),venda.getVendedor().getId(),venda.getCliente().getId(),venda.getDataVenda(),venda.getTotal());
         
             if(cascade != null){
                 for(ItemVenda itemVenda: venda.getItens()){
