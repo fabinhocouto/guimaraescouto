@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="debitoPorCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aece0cc9-4c8c-4e98-82a9-0f8c8f46ac81">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<field name="field1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="64" uuid="7be9d4a9-7492-478c-9d28-6d818531f31a"/>
+			</rectangle>
+			<image>
+				<reportElement x="28" y="5" width="115" height="54" uuid="ff5a83dd-6cac-4027-817a-01c87453b58b"/>
+				<imageExpression><![CDATA["D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\build\\classes\\Logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="190" y="13" width="324" height="35" uuid="924066c0-0383-44f0-bbf7-c1463ce9d01b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Débitos por Cliente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="8" width="49" height="20" uuid="397a7973-fa8f-45dc-8baf-3759b2056a1a"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="28" width="60" height="20" uuid="7f90d586-905d-4184-8ba2-c2bf27864bbb"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="48" width="60" height="20" uuid="bd9b66ab-6d60-4eda-b32f-7888982ea882"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+		<band height="50"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
