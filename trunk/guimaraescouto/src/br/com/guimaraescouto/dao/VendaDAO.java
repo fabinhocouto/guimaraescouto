@@ -66,6 +66,11 @@ public class VendaDAO extends GenericDAO{
         executeCommand(query, idPagamento,idItemVenda);
     }
     
+    public void atualizarIdPagamentoItemVenda(Integer idPagamento) throws SQLException {
+        String query = "UPDATE public.itens_Venda set id_pagamento = null where id_pagamento = ?";
+        executeCommand(query, idPagamento);
+    }
+    
     public BigDecimal calcularTotalVenda(List<ItemVenda> itensVenda){
         BigDecimal totalDaVenda = new BigDecimal(0);
         for(ItemVenda itemVenda: itensVenda){

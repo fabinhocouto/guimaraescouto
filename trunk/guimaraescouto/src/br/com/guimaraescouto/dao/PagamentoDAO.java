@@ -72,8 +72,10 @@ public class PagamentoDAO extends GenericDAO{
     } 
      
     public void removerPagamento(int idPagamento) throws SQLException{
+        vendaDAO.atualizarIdPagamentoItemVenda(idPagamento);
         String queryPagamento = "DELETE FROM public.pagamento WHERE ID = ?";
         executeCommand(queryPagamento, idPagamento);
+        
     }
     
     public List<Pagamento> retornarPagamento(Integer idCliente) throws SQLException{
