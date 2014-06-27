@@ -20,6 +20,7 @@ import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import br.com.guimaraescouto.util.MyTableModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.SQLException;
@@ -104,6 +105,11 @@ public class frmPagamento extends javax.swing.JDialog {
                 txtCodClienteFocusLost(evt);
             }
         });
+        txtCodCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodClienteKeyPressed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +172,11 @@ public class frmPagamento extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblPagamento);
 
         jButton4.setText("Excluir Pagamento");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -493,6 +504,32 @@ public class frmPagamento extends javax.swing.JDialog {
          }
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_F1){
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, this);
+            dialog.setVisible(true);
+        }
+    }//GEN-LAST:event_txtCodClienteKeyPressed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(tblPagamento.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Selecione o pagamento a ser removido.");
+            return;
+        }
+        int result = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir o pagamento selecionado?","Excluir Pagamento",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(result == 2){
+            return;
+        }
+        Pagamento pagamento = pagamentos.get(tblPagamento.getSelectedRow());
+        try {
+            pagamentoDAO.removerPagamento(pagamento.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPagamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
