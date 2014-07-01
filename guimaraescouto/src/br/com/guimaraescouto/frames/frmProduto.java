@@ -20,6 +20,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -211,7 +214,7 @@ public class frmProduto extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO, this,null);
+        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO, this,null,null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -253,6 +256,7 @@ public class frmProduto extends javax.swing.JDialog {
             tblProduto.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
             RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
             tblProduto.setRowSorter(sorter);
+            setaTamanhoColunasTabela(tblProduto);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Produto");
@@ -328,11 +332,23 @@ public class frmProduto extends javax.swing.JDialog {
             tblProduto.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
             RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
             tblProduto.setRowSorter(sorter);
+            setaTamanhoColunasTabela(tblProduto);
             ConsideraEnterTab.considerarEnterComoTab(txtCodigoBarras);
             ConsideraEnterTab.considerarEnterComoTab(txtDescricao);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Produto");
         }
+    }
+    
+    private void setaTamanhoColunasTabela(javax.swing.JTable tblProduto){
+        TableColumnModel modeloDaColuna = tblProduto.getColumnModel();
+        DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
+        rendererCentro.setHorizontalAlignment(SwingConstants.CENTER); 
+        modeloDaColuna.getColumn(0).setMaxWidth(89); 
+        modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
+        modeloDaColuna.getColumn(1).setMaxWidth(2000); 
+        modeloDaColuna.getColumn(2).setMaxWidth(70); 
+        modeloDaColuna.getColumn(3).setMaxWidth(45); 
     }
 }

@@ -87,6 +87,12 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             }
         });
 
+        txtCodigoBarras.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoBarrasFocusLost(evt);
+            }
+        });
+
         jLabel4.setText("De Seção?");
 
         checkSecao.addItemListener(new java.awt.event.ItemListener() {
@@ -195,6 +201,19 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             return;
         }
         
+        try {
+            Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
+            if(produto.getId() != null){
+                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                txtDescricao.requestFocus();
+                return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmAdicionarProduto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar produto.","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         int result = JOptionPane.showConfirmDialog(this, "Deseja alterar o Produto?","Alterar Produto",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(result == 2){
             return;
@@ -234,6 +253,22 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             txtPreco.enable();
         }
     }//GEN-LAST:event_checkSecaoItemStateChanged
+
+    private void txtCodigoBarrasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoBarrasFocusLost
+        // TODO add your handling code here:
+        try {
+            Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
+            if(produto.getId() != null){
+                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                txtDescricao.requestFocus();
+                return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmAdicionarProduto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar produto.","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_txtCodigoBarrasFocusLost
 
     /**
      * @param args the command line arguments

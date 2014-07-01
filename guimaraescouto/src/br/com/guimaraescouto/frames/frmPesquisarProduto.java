@@ -6,11 +6,12 @@
 
 package br.com.guimaraescouto.frames;
 
-import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.ConsideraEnterTab;
+import br.com.guimaraescouto.util.MyGenericCellRenderer;
+import br.com.guimaraescouto.util.MyTableModel;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,6 +19,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -190,6 +194,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
             produtos = produtoDAO.retornarProdutosPorDescricao(txtDescricaoProduto.getText());
             MyTableModel tableModel = new MyTableModel(Produto.class, produtos, tblProduto );
             tblProduto.setModel(tableModel);
+            setaTamanhoColunasTabela(tblProduto);
         } catch (SQLException ex) {
             Logger.getLogger(frmPesquisarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -211,6 +216,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
             produtos = produtoDAO.retornarProdutosPorDescricao(txtDescricaoProduto.getText());
             MyTableModel tableModel = new MyTableModel(Produto.class, produtos, tblProduto );
             tblProduto.setModel(tableModel);
+            setaTamanhoColunasTabela(tblProduto);
         } catch (SQLException ex) {
             Logger.getLogger(frmPesquisarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -290,6 +296,19 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
     public void loadInitialData() {
         MyTableModel tableModel = new MyTableModel(Produto.class, new ArrayList(), tblProduto );
         tblProduto.setModel(tableModel);
+        tblProduto.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+        setaTamanhoColunasTabela(tblProduto);
         ConsideraEnterTab.considerarEnterComoTab(txtDescricaoProduto);
+    }
+    
+    private void setaTamanhoColunasTabela(javax.swing.JTable tblProduto){
+        TableColumnModel modeloDaColuna = tblProduto.getColumnModel();
+        DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
+        rendererCentro.setHorizontalAlignment(SwingConstants.CENTER); 
+        modeloDaColuna.getColumn(0).setMaxWidth(89); 
+        modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
+        modeloDaColuna.getColumn(1).setMaxWidth(2000); 
+        modeloDaColuna.getColumn(2).setMaxWidth(70); 
+        modeloDaColuna.getColumn(3).setMaxWidth(45); 
     }
 }

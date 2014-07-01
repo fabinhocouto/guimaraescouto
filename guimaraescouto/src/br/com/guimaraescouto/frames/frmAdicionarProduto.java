@@ -34,14 +34,14 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
     /**
      * Creates new form frmAdicionarProduto
      */
-    public frmAdicionarProduto(java.awt.Frame parent, boolean modal, ProdutoDAO produtoDAO, frmProduto controlProduto, frmVenda controlVenda) {
+    public frmAdicionarProduto(java.awt.Frame parent, boolean modal, ProdutoDAO produtoDAO, frmProduto controlProduto, frmVenda controlVenda, String codigoBarras) {
         super(parent, modal);
         this.produtoDAO = produtoDAO;
         this.controlProduto = controlProduto;
         this.controlVenda = controlVenda;
         initComponents();
         ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));
-        loadInitMyComponents();
+        loadInitMyComponents(codigoBarras);
     }
 
     /**
@@ -91,6 +91,11 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
             }
         });
 
+        txtCodigoBarras.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCodigoBarrasFocusLost(evt);
+            }
+        });
         txtCodigoBarras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoBarrasActionPerformed(evt);
@@ -275,6 +280,34 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_checkSecaoItemStateChanged
 
+    private void txtCodigoBarrasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoBarrasFocusLost
+        // TODO add your handling code here:
+        try {
+            Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
+            if(produto.getId() != null){
+                txtDescricao.setText(produto.getDescricao());
+                if(produto.getSecao()){
+                    txtPreco.setText("");
+                    txtPreco.disable();
+                }else{
+                    txtPreco.setText(String.valueOf(produto.getPreco()));
+                }
+                checkSecao.setSelected(produto.getSecao());
+                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                txtDescricao.requestFocus();
+                return;
+            }else{
+                txtDescricao.setText("");
+                txtPreco.setText("");
+                checkSecao.setSelected(false);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmAdicionarProduto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar produto.","Erro",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_txtCodigoBarrasFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -305,7 +338,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, new ProdutoDAO(),null,null);
+                frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, new ProdutoDAO(),null,null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -331,11 +364,15 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 
-    public void loadInitMyComponents(){
+    public void loadInitMyComponents(String codigoBarras){
         ConsideraEnterTab.considerarEnterComoTab(txtCodigoBarras);
         ConsideraEnterTab.considerarEnterComoTab(txtDescricao);
         ConsideraEnterTab.considerarEnterComoTab(txtPreco);
         ConsideraEnterTab.considerarEnterComoTab(checkSecao);
+        if(codigoBarras != null){
+            txtCodigoBarras.setText(codigoBarras);
+            txtDescricao.requestFocus();
+        }
         
     }
 

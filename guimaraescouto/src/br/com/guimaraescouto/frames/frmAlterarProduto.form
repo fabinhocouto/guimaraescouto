@@ -156,6 +156,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCodigoBarras">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCodigoBarrasFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

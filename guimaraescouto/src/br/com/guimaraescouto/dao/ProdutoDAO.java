@@ -67,7 +67,7 @@ public class ProdutoDAO extends GenericDAO{
     
     public List<Produto> retornarTodosProdutos() throws SQLException {
         List<Produto> retorno = new LinkedList<Produto>();
-        ResultSet rs = executeQuery("Select * from public.produto order by id");
+        ResultSet rs = executeQuery("Select * from public.produto order by descricao asc");
         while(rs.next()){
             retorno.add(popularProdutoInfo(rs));
         }
@@ -77,7 +77,7 @@ public class ProdutoDAO extends GenericDAO{
     
     public List<Produto> retornarProdutosPorDescricao(String descricao) throws SQLException {
         List<Produto> retorno = new LinkedList<Produto>();
-        ResultSet rs = executeQuery("Select * from public.produto where descricao like ?","%"+descricao+"%");
+        ResultSet rs = executeQuery("Select * from public.produto where descricao like ? order by descricao asc","%"+descricao+"%");
         while(rs.next()){
             retorno.add(popularProdutoInfo(rs));
         }
