@@ -50,7 +50,10 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import sun.text.resources.FormatData;
 
 /**
@@ -796,6 +799,7 @@ public class frmVenda extends javax.swing.JDialog{
         ordemItens = count;
         Collections.sort(itensVenda);
         tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
+        setaTamanhoColunasTabela(tblItensVenda);
         txtValorTotalVenda.setText(df.format(calcularTotalVenda(itensVenda)));
     }//GEN-LAST:event_btnExcluirItemActionPerformed
 
@@ -870,6 +874,7 @@ public class frmVenda extends javax.swing.JDialog{
         Collections.sort(itensVenda);
         tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
         tblItensVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+        setaTamanhoColunasTabela(tblItensVenda);
         txtValorTotalVenda.setText(df.format(calcularTotalVenda(itensVenda)));
     }
     
@@ -966,6 +971,7 @@ public class frmVenda extends javax.swing.JDialog{
              txtTroco.setText("0,00");
              txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
              tblItensVenda.getTableHeader().setFont(new Font("Arial", Font.BOLD,17));
+             setaTamanhoColunasTabela(tblItensVenda);
              considerarEnterComoTab(txtCodCliente);
              considerarEnterComoTab(txtCodBarras);
              considerarEnterComoTab(txtValorUnitario);
@@ -980,5 +986,17 @@ public class frmVenda extends javax.swing.JDialog{
          } catch (SQLException ex) {
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
+    }
+    private void setaTamanhoColunasTabela(javax.swing.JTable tblItensVenda){
+        TableColumnModel modeloDaColuna = tblItensVenda.getColumnModel();
+        DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
+        rendererCentro.setHorizontalAlignment(SwingConstants.CENTER); 
+        modeloDaColuna.getColumn(0).setMaxWidth(48); 
+        modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
+        modeloDaColuna.getColumn(1).setMaxWidth(2000); 
+        modeloDaColuna.getColumn(2).setMaxWidth(400); 
+        modeloDaColuna.getColumn(2).setCellRenderer(rendererCentro);
+        modeloDaColuna.getColumn(3).setMaxWidth(400); 
+        modeloDaColuna.getColumn(4).setMaxWidth(400); 
     }
 }
