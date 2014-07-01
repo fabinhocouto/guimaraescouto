@@ -590,7 +590,7 @@ public class frmVenda extends javax.swing.JDialog{
                      if(produto.getId() == null){
                          int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                          if(result == 0){
-                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this);
+                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,txtCodBarras.getText());
                              dialog.setVisible(true);
                              txtCodBarras.requestFocus();
                              flagFinalizar = false;
@@ -622,7 +622,7 @@ public class frmVenda extends javax.swing.JDialog{
                      if(produto.getId() == null){
                          int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                          if(result == 0){
-                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this );
+                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,txtCodBarras.getText() );
                              dialog.setVisible(true);
                          }else{
                              txtCodBarras.setText(null);
@@ -641,7 +641,7 @@ public class frmVenda extends javax.swing.JDialog{
                  if(produto.getId() == null){
                     int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                     if(result == 0){
-                        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this );
+                        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,txtCodBarras.getText() );
                         dialog.setVisible(true);
                     }else{
                         txtCodBarras.setText(null);
@@ -723,6 +723,7 @@ public class frmVenda extends javax.swing.JDialog{
              vendaDAO.adicionarVenda(venda, true);
              setVisible(false);
          } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
          
@@ -858,6 +859,7 @@ public class frmVenda extends javax.swing.JDialog{
             try {
                 atendente = atendenteDAO.retornaUsuario(new Integer(txtAtendente.getText()));
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao tentar retornar o usuário.","Erro",JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -984,6 +986,7 @@ public class frmVenda extends javax.swing.JDialog{
              setSize(screenSize);
              setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
          } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(this, "Erro ao tentar recuperar código da venda.","Erro",JOptionPane.ERROR_MESSAGE);
              Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
@@ -994,9 +997,9 @@ public class frmVenda extends javax.swing.JDialog{
         modeloDaColuna.getColumn(0).setMaxWidth(48); 
         modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
         modeloDaColuna.getColumn(1).setMaxWidth(2000); 
-        modeloDaColuna.getColumn(2).setMaxWidth(400); 
+        modeloDaColuna.getColumn(2).setMaxWidth(200); 
         modeloDaColuna.getColumn(2).setCellRenderer(rendererCentro);
-        modeloDaColuna.getColumn(3).setMaxWidth(400); 
-        modeloDaColuna.getColumn(4).setMaxWidth(400); 
+        modeloDaColuna.getColumn(3).setMaxWidth(300); 
+        modeloDaColuna.getColumn(4).setMaxWidth(300); 
     }
 }

@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class Produto implements java.io.Serializable{
     
     private Integer id;
-    @SwingColumn(description = "CÓDIGO BARRAS",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "CÓD BARRAS",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String codigoBarras;
     @SwingColumn(description = "DESCRIÇÃO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String descricao;
