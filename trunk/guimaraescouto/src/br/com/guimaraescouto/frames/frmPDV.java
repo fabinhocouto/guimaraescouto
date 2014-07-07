@@ -60,7 +60,7 @@ import sun.text.resources.FormatData;
  *
  * @author Fábio
  */
-public class frmVenda extends javax.swing.JDialog{
+public class frmPDV extends javax.swing.JDialog{
     
      private final VendaDAO vendaDAO = new VendaDAO(); 
      private final ClienteDAO clienteDAO = new ClienteDAO();
@@ -79,7 +79,7 @@ public class frmVenda extends javax.swing.JDialog{
     /**
      * Creates new form frmVenda
      */
-    public frmVenda(java.awt.Frame parent, boolean modal) {
+    public frmPDV(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         loadInitialData();
@@ -724,7 +724,7 @@ public class frmVenda extends javax.swing.JDialog{
              setVisible(false);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);
-             Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
          }
          
          if(cliente.getSaldo().compareTo(BigDecimal.ZERO) > 0){
@@ -754,7 +754,7 @@ public class frmVenda extends javax.swing.JDialog{
                     pagamentoDAO.adicionarPagamento(pagamento);
                 }
             } catch (SQLException ex) {
-             Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
             } 
          }*/
          
@@ -860,7 +860,7 @@ public class frmVenda extends javax.swing.JDialog{
                 atendente = atendenteDAO.retornaUsuario(new Integer(txtAtendente.getText()));
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao tentar retornar o usuário.","Erro",JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_txtAtendenteFocusLost
@@ -904,20 +904,20 @@ public class frmVenda extends javax.swing.JDialog{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmVenda dialog = new frmVenda(new javax.swing.JFrame(), true);
+                frmPDV dialog = new frmPDV(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -987,7 +987,7 @@ public class frmVenda extends javax.swing.JDialog{
              setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar recuperar código da venda.","Erro",JOptionPane.ERROR_MESSAGE);
-             Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
     private void setaTamanhoColunasTabela(javax.swing.JTable tblItensVenda){

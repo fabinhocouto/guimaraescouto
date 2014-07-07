@@ -29,12 +29,12 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
 
     private final ProdutoDAO produtoDAO;
     private final frmProduto controlProduto;
-    private final frmVenda controlVenda;
+    private final frmPDV controlVenda;
     
     /**
      * Creates new form frmAdicionarProduto
      */
-    public frmAdicionarProduto(java.awt.Frame parent, boolean modal, ProdutoDAO produtoDAO, frmProduto controlProduto, frmVenda controlVenda, String codigoBarras) {
+    public frmAdicionarProduto(java.awt.Frame parent, boolean modal, ProdutoDAO produtoDAO, frmProduto controlProduto, frmPDV controlVenda, String codigoBarras) {
         super(parent, modal);
         this.produtoDAO = produtoDAO;
         this.controlProduto = controlProduto;
