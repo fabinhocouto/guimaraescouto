@@ -26,13 +26,13 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
 
     private final ClienteDAO clienteDAO = new ClienteDAO();
     private List<Cliente> clientes;
-    private frmVenda vendaForm;
+    private frmPDV vendaForm;
     private frmPagamento pagamentoForm;
     
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmVenda vendaForm, frmPagamento pagamentoForm) {
+    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmPDV vendaForm, frmPagamento pagamentoForm) {
         super(parent, modal);
         this.vendaForm = vendaForm;
         this.pagamentoForm = pagamentoForm;

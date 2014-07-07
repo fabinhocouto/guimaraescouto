@@ -443,7 +443,7 @@ public class frmPagamento extends javax.swing.JDialog {
             try {
                 atendente = atendenteDAO.retornaUsuario(new Integer(txtCodAtendente.getText()));
             } catch (SQLException ex) {
-                Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_txtCodAtendenteFocusLost
@@ -500,7 +500,7 @@ public class frmPagamento extends javax.swing.JDialog {
                 return;
             }
          } catch (SQLException ex) {
-             Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
          }
         
     }//GEN-LAST:event_jButton3ActionPerformed
