@@ -15,6 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -51,6 +54,9 @@ public class frmCliente extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtNomeCliente = new javax.swing.JTextField();
+        txtPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -124,6 +130,15 @@ public class frmCliente extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblCliente);
 
+        jLabel1.setText("Nome:");
+
+        txtPesquisar.setText("Pesquisar");
+        txtPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesquisarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,7 +147,14 @@ public class frmCliente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPesquisar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,12 +162,17 @@ public class frmCliente extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesquisar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(579, 388));
+        setSize(new java.awt.Dimension(947, 446));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,6 +215,20 @@ public class frmCliente extends javax.swing.JDialog {
         }
         loadInitialData();        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
+        try {
+            // TODO add your handling code here:
+            clientes = clienteDAO.retornarClientesPorNome(txtNomeCliente.getText());
+            MyTableModel tableModel = new MyTableModel(Cliente.class, clientes, tblCliente );
+            tblCliente.setModel(tableModel);
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblCliente.setRowSorter(sorter);
+            setaTamanhoColunasTabela(tblCliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,9 +277,12 @@ public class frmCliente extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCliente;
+    private javax.swing.JTextField txtNomeCliente;
+    private javax.swing.JButton txtPesquisar;
     // End of variables declaration//GEN-END:variables
 
     public void loadInitialData() {
@@ -248,9 +292,22 @@ public class frmCliente extends javax.swing.JDialog {
             tblCliente.setModel(tableModel);
             RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
             tblCliente.setRowSorter(sorter);
+            setaTamanhoColunasTabela(tblCliente);
+            txtPesquisar.requestFocus();
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Cliente");
         }
+    }
+    
+    private void setaTamanhoColunasTabela(javax.swing.JTable tblCliente){
+        TableColumnModel modeloDaColuna = tblCliente.getColumnModel();
+        DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
+        rendererCentro.setHorizontalAlignment(SwingConstants.CENTER); 
+        modeloDaColuna.getColumn(0).setMaxWidth(70); 
+        modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
+        modeloDaColuna.getColumn(1).setMaxWidth(800); 
+        modeloDaColuna.getColumn(2).setMaxWidth(1200); 
+        modeloDaColuna.getColumn(3).setMaxWidth(100); 
     }
 }
