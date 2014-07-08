@@ -38,6 +38,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
         this.control = control;
         initComponents();
         initMyComponents();
+        txtPreco.requestFocus();
     }
 
     /**
@@ -255,19 +256,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_checkSecaoItemStateChanged
 
     private void txtCodigoBarrasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoBarrasFocusLost
-        // TODO add your handling code here:
-        try {
-            Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
-            if(produto.getId() != null){
-                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
-                txtDescricao.requestFocus();
-                return;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(frmAdicionarProduto.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar produto.","Erro",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+       
     }//GEN-LAST:event_txtCodigoBarrasFocusLost
 
     /**
@@ -342,5 +331,6 @@ public class frmAlterarProduto extends javax.swing.JDialog {
         ConsideraEnterTab.considerarEnterComoTab(txtDescricao);
         ConsideraEnterTab.considerarEnterComoTab(txtPreco);
         ConsideraEnterTab.considerarEnterComoTab(checkSecao);
+        txtPreco.requestFocus();
     }
 }

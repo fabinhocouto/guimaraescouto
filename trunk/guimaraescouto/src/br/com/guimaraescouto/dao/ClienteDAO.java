@@ -71,7 +71,7 @@ public class ClienteDAO extends GenericDAO {
     
     public List<Cliente> retornarTodosClientes() throws SQLException {
         List<Cliente> retorno = new LinkedList<Cliente>();
-        ResultSet rs = executeQuery("Select * from public.cliente order by id");
+        ResultSet rs = executeQuery("Select * from public.cliente order by nome");
         while(rs.next()){
             retorno.add(popularClienteInfo(rs));
         }

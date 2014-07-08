@@ -6,11 +6,13 @@
 
 package br.com.guimaraescouto.entity;
 
+import br.com.guimaraescouto.util.SwingColumn;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -18,12 +20,18 @@ import java.util.Objects;
  */
 public class Venda implements java.io.Serializable  {
     
+    @SwingColumn(description = "CÓD VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
-    private Usuario vendedor;
-    private Date dataVenda;
-    private BigDecimal total;
-    private List<ItemVenda> itens = new LinkedList<ItemVenda>();
+    @SwingColumn(description = "CLIENTE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Cliente cliente;
+    @SwingColumn(description = "DATA VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    private Date dataVenda;
+    @SwingColumn(description = "TOTAL VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    private BigDecimal total;
+    @SwingColumn(description = "ATENDENTE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    private Usuario vendedor;
+    private List<ItemVenda> itens = new LinkedList<ItemVenda>();
+    
     
     public Venda(){
     }

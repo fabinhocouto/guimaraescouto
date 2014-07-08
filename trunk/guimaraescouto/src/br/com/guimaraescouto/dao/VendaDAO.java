@@ -24,6 +24,7 @@ public class VendaDAO extends GenericDAO{
     
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
     private final UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private final ClienteDAO clienteDAO = new ClienteDAO();
     
      public int adicionarVenda(Venda venda, boolean... cascade) throws SQLException{
         String query = "INSERT INTO public.venda (id,id_usuario,id_cliente,data_venda,total) values (?,?,?,?,?)";
@@ -122,6 +123,7 @@ public class VendaDAO extends GenericDAO{
     public Venda popularVenda(ResultSet rs, boolean popularItens) throws SQLException{
         Venda retorno = new Venda();
         retorno.setId(rs.getInt("ID"));
+        retorno.setCliente(clienteDAO.retornaClientePorId(rs.getInt("ID_CLIENTE")));
         retorno.setVendedor(usuarioDAO.retornaUsuario(rs.getInt("ID_USUARIO")));
         retorno.setDataVenda(rs.getDate("DATA_VENDA"));
         retorno.setTotal(rs.getBigDecimal("TOTAL"));
@@ -178,6 +180,16 @@ public class VendaDAO extends GenericDAO{
         Integer retorno = null;
         while(rs.next()){
             retorno = rs.getInt("idVenda");
+        }
+        rs.close();
+        return retorno;
+    }
+    
+    public List<Venda> retornarCemUltimasVendas() throws SQLException {
+        List<Venda> retorno = new LinkedList<Venda>();
+        ResultSet rs = executeQuery("Select * from public.venda order by id desc");
+        while(rs.next()){
+            retorno.add(popularVenda(rs,false));
         }
         rs.close();
         return retorno;
