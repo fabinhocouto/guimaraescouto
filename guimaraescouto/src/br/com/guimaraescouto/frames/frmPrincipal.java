@@ -11,6 +11,7 @@ import br.com.guimaraescouto.util.JMoneyFieldValor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -343,6 +344,18 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario3ActionPerformed
         // TODO add your handling code here:
+        try{
+            ProcessBuilder pb;
+            Process p;
+            pb = new ProcessBuilder("F:\\Arquivos de Programas\\PostgreSQL\\9.2\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p",
+            "5432","-U", "postgres", "-F", "c", "-b", "-v" ,"-f",
+            "F:\\Desenvolvimento\\TesteBKP.sql", "teste");
+            pb.environment().put("PGPASSWORD", "binza361616");
+            pb.redirectErrorStream(true);
+            p = pb.start();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }//GEN-LAST:event_btnUsuario3ActionPerformed
 
     /**
