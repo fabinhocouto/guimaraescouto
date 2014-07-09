@@ -83,8 +83,8 @@ public class VendaDAO extends GenericDAO{
     public void removerVenda(int idVenda) throws SQLException{
         String queryVenda = "DELETE FROM public.venda WHERE ID = ?";
         String queryItensVenda = "DELETE FROM public.itens_venda WHERE ID_VENDA = ?";
-        executeCommand(queryVenda, idVenda);
         executeCommand(queryItensVenda, idVenda);
+        executeCommand(queryVenda, idVenda);
     }
     
     public void removerItemVenda(int idItensVenda) throws SQLException{
