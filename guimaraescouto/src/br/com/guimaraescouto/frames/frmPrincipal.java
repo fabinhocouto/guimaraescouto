@@ -347,9 +347,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         try{
             ProcessBuilder pb;
             Process p;
-            pb = new ProcessBuilder("F:\\Arquivos de Programas\\PostgreSQL\\9.2\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p",
+            //pb = new ProcessBuilder("F:\\Arquivos de Programas\\PostgreSQL\\9.2\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p",
+            pb = new ProcessBuilder("C:\\Program Files\\PostgreSQL\\9.3\\bin\\pg_dump.exe ", "-h", "localhost", "-p",
             "5432","-U", "postgres", "-F", "c", "-b", "-v" ,"-f",
-            "F:\\Desenvolvimento\\TesteBKP.sql", "teste");
+            "D:\\Arquivos Fábio\\Desenvolvimento\\TesteBKP.sql");
             pb.environment().put("PGPASSWORD", "binza361616");
             pb.redirectErrorStream(true);
             p = pb.start();
