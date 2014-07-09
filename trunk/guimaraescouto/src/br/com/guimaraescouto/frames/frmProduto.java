@@ -214,7 +214,7 @@ public class frmProduto extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO, this,null,null);
+        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO, this,null,null,null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
