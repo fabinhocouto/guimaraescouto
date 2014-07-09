@@ -29,15 +29,17 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
 
     private final ProdutoDAO produtoDAO;
     private final frmProduto controlProduto;
-    private final frmPDV controlVenda;
+    private final frmPDV controlPDV;
+    private final frmAlterarVenda controlVenda;
     
     /**
      * Creates new form frmAdicionarProduto
      */
-    public frmAdicionarProduto(java.awt.Frame parent, boolean modal, ProdutoDAO produtoDAO, frmProduto controlProduto, frmPDV controlVenda, String codigoBarras) {
+    public frmAdicionarProduto(java.awt.Frame parent, boolean modal, ProdutoDAO produtoDAO, frmProduto controlProduto, frmPDV controlPDV, frmAlterarVenda controlVenda, String codigoBarras) {
         super(parent, modal);
         this.produtoDAO = produtoDAO;
         this.controlProduto = controlProduto;
+        this.controlPDV = controlPDV;
         this.controlVenda = controlVenda;
         initComponents();
         ((AbstractDocument) txtCodigoBarras.getDocument()).setDocumentFilter(new RandomValidator(15, true, false, false, false, '1'));
@@ -256,7 +258,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         }
         if(controlProduto != null){
             controlProduto.loadInitialData();
-        }else if(controlVenda != null){
+        }else if(controlPDV != null){
             
         }
         
@@ -338,7 +340,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, new ProdutoDAO(),null,null,null);
+                frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, new ProdutoDAO(),null,null,null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

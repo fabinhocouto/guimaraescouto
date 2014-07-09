@@ -92,11 +92,11 @@ public class VendaDAO extends GenericDAO{
         executeCommand(query, idItensVenda);
     }
     
-    public Venda retornarVenda(int idVenda) throws SQLException{
+    public Venda retornarVenda(int idVenda, boolean buscaItensVenda) throws SQLException{
         ResultSet rs = executeQuery("SELECT * FROM PUBLIC.VENDA WHERE ID = ?", idVenda);
         Venda venda = new Venda();
         if(rs.next()){
-            venda = popularVenda(rs,true);
+            venda = popularVenda(rs,buscaItensVenda);
         }     
         rs.close();
         return venda;
@@ -170,7 +170,7 @@ public class VendaDAO extends GenericDAO{
         if(venda != null){
             retorno.setVenda(venda[0]);
         }else{
-            retorno.setVenda(retornarVenda(rs.getInt("ID_VENDA")));
+            retorno.setVenda(retornarVenda(rs.getInt("ID_VENDA"),true));
         }
         return retorno;
     }

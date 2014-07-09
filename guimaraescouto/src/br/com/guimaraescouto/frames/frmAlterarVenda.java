@@ -60,13 +60,15 @@ import sun.text.resources.FormatData;
  *
  * @author Fábio
  */
-public class frmPDV extends javax.swing.JDialog{
+public class frmAlterarVenda extends javax.swing.JDialog{
     
+     private frmVenda frmVenda;
      private final VendaDAO vendaDAO = new VendaDAO(); 
      private final ClienteDAO clienteDAO = new ClienteDAO();
      private final ProdutoDAO produtoDAO = new ProdutoDAO();
      private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
      private final UsuarioDAO atendenteDAO = new UsuarioDAO();
+     private Venda vendaEmAlteracao;
      private Cliente cliente = new Cliente(); 
      private Produto produto = new Produto();
      private Usuario atendente = new Usuario();
@@ -79,8 +81,10 @@ public class frmPDV extends javax.swing.JDialog{
     /**
      * Creates new form frmVenda
      */
-    public frmPDV(java.awt.Frame parent, boolean modal) {
+    public frmAlterarVenda(java.awt.Frame parent, boolean modal,Venda vendaEmAlteracao, frmVenda frmVenda) {
         super(parent, modal);
+        this.vendaEmAlteracao = vendaEmAlteracao;
+        this.frmVenda = frmVenda;
         initComponents();
         loadInitialData();
     }
@@ -537,7 +541,7 @@ public class frmPDV extends javax.swing.JDialog{
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // TODO add your handling code here:
-        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null, null);
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, null, this);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
@@ -590,7 +594,7 @@ public class frmPDV extends javax.swing.JDialog{
                      if(produto.getId() == null){
                          int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                          if(result == 0){
-                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,null,txtCodBarras.getText());
+                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,null,this,txtCodBarras.getText());
                              dialog.setVisible(true);
                              txtCodBarras.requestFocus();
                              flagFinalizar = false;
@@ -622,7 +626,7 @@ public class frmPDV extends javax.swing.JDialog{
                      if(produto.getId() == null){
                          int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                          if(result == 0){
-                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,null,txtCodBarras.getText() );
+                             frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,null,this,txtCodBarras.getText() );
                              dialog.setVisible(true);
                          }else{
                              txtCodBarras.setText(null);
@@ -641,7 +645,7 @@ public class frmPDV extends javax.swing.JDialog{
                  if(produto.getId() == null){
                     int result = JOptionPane.showConfirmDialog(this, "Produto não encontrado. Deseja adicionar?","Produto não encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                     if(result == 0){
-                        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,null,txtCodBarras.getText() );
+                        frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,null,this,txtCodBarras.getText() );
                         dialog.setVisible(true);
                     }else{
                         txtCodBarras.setText(null);
@@ -709,22 +713,19 @@ public class frmPDV extends javax.swing.JDialog{
             return;
         }
         
-        Venda venda = new Venda();
-        venda.setId(new Integer(txtNumVenda.getText()));
-        venda.setDataVenda(new java.sql.Date(new java.util.Date().getTime()));
-        venda.setTotal(calcularTotalVenda(itensVenda));
-        venda.setItens(itensVenda);
-        venda.setVendedor(atendente);
+        vendaEmAlteracao.setTotal(calcularTotalVenda(itensVenda));
+        vendaEmAlteracao.setItens(itensVenda);
+        vendaEmAlteracao.setVendedor(atendente);
         for (ItemVenda itemVenda : itensVenda) {
-            itemVenda.setVenda(venda);
+            itemVenda.setVenda(vendaEmAlteracao);
         }
-        venda.setCliente(cliente);
+        vendaEmAlteracao.setCliente(cliente);
          try {
-             vendaDAO.adicionarVenda(venda, true);
+             vendaDAO.adicionarVenda(vendaEmAlteracao, true);
              setVisible(false);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);
-             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frmAlterarVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
          
          if(cliente.getSaldo().compareTo(BigDecimal.ZERO) > 0){
@@ -762,7 +763,7 @@ public class frmPDV extends javax.swing.JDialog{
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
         // TODO add your handling code here:
-        frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true,  this,null);
+        frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, null, this);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
 
@@ -807,7 +808,7 @@ public class frmPDV extends javax.swing.JDialog{
     private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F1){
-            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null, null);
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, null, this);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
             flagFinalizar = true;
@@ -818,7 +819,7 @@ public class frmPDV extends javax.swing.JDialog{
     private void txtCodBarrasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodBarrasKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F2){
-            frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, this,null);
+            frmPesquisarProduto dialog = new frmPesquisarProduto(new javax.swing.JFrame(), true, null, this);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
             flagFinalizar = true;
@@ -860,7 +861,7 @@ public class frmPDV extends javax.swing.JDialog{
                 atendente = atendenteDAO.retornaUsuario(new Integer(txtAtendente.getText()));
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao tentar retornar o usuário.","Erro",JOptionPane.ERROR_MESSAGE);
-                Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmAlterarVenda.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_txtAtendenteFocusLost
@@ -904,20 +905,20 @@ public class frmPDV extends javax.swing.JDialog{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmAlterarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmAlterarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmAlterarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmPDV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmAlterarVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPDV dialog = new frmPDV(new javax.swing.JFrame(), true);
+                frmAlterarVenda dialog = new frmAlterarVenda(new javax.swing.JFrame(), true,null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -967,11 +968,21 @@ public class frmPDV extends javax.swing.JDialog{
 
     private void loadInitialData() {
          try {
-             txtNumVenda.setText(vendaDAO.retornaCodigoVenda().toString());
-             txtValorTotalVenda.setText("0,00");
+             vendaEmAlteracao = vendaDAO.retornarVenda(vendaEmAlteracao.getId(), true);
+             txtNumVenda.setText(vendaEmAlteracao.getId().toString());
+             txtValorTotalVenda.setText(df.format(vendaEmAlteracao.getTotal()));
              txtValorPago.setText("0,00");
              txtTroco.setText("0,00");
-             txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+             txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy").format(vendaEmAlteracao.getDataVenda()));
+             itensVenda = vendaEmAlteracao.getItens();
+             for (ItemVenda itemVenda : itensVenda) {
+                 itemVenda.setOrdem(ordemItens++);
+             }
+             cliente = vendaEmAlteracao.getCliente();
+             txtCodCliente.setText(cliente.getId().toString());
+             txtNomeCliente.setText(cliente.getNome());
+             tblItensVenda.setModel(new MyTableModel(ItemVenda.class, itensVenda,tblItensVenda));
+             tblItensVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
              tblItensVenda.getTableHeader().setFont(new Font("Arial", Font.BOLD,17));
              setaTamanhoColunasTabela(tblItensVenda);
              considerarEnterComoTab(txtCodCliente);
@@ -987,7 +998,7 @@ public class frmPDV extends javax.swing.JDialog{
              setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar recuperar código da venda.","Erro",JOptionPane.ERROR_MESSAGE);
-             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frmAlterarVenda.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
     private void setaTamanhoColunasTabela(javax.swing.JTable tblItensVenda){
