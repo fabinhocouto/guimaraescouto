@@ -324,8 +324,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
         // TODO add your handling code here:
-        frmPagamento dialog = new frmPagamento(new javax.swing.JFrame(), true);
-        dialog.setVisible(true);
+        //frmPagamento dialog = new frmPagamento(new javax.swing.JFrame(), true);
+        //dialog.setVisible(true);
     }//GEN-LAST:event_btnPagamentoActionPerformed
 
     private void btnPDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDVActionPerformed

@@ -721,7 +721,8 @@ public class frmAlterarVenda extends javax.swing.JDialog{
         }
         vendaEmAlteracao.setCliente(cliente);
          try {
-             vendaDAO.adicionarVenda(vendaEmAlteracao, true);
+             vendaDAO.atualizarVenda(vendaEmAlteracao, true);
+             frmVenda.loadInitialData();
              setVisible(false);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);

@@ -45,14 +45,15 @@ public class VendaDAO extends GenericDAO{
         return id;
     }
     
-     public void atualizaVenda(Venda venda, boolean... cascade) throws SQLException{
-        String query = "UPDATE public.venda SET id_usuario=?,data_venda=?,total=? where id = ?";
-        executeCommand(query, venda.getVendedor().getId(),venda.getDataVenda(),calcularTotalVenda(venda.getItens()), venda.getId());
+     public void atualizarVenda(Venda venda, boolean... cascade) throws SQLException{
+        String query = "UPDATE public.venda SET id_usuario=?,id_cliente=?,data_venda=?,total=? where id = ?";
+        executeCommand(query, venda.getVendedor().getId(),venda.getCliente().getId(),venda.getDataVenda(),venda.getTotal(), venda.getId());
         
         if(cascade != null){
+            removerItemVendaPorIdVenda(venda.getId());
             for(ItemVenda itemVenda: venda.getItens()){
-                 atualizarItemVenda(itemVenda);
-            }         
+                adicionarItemVenda(itemVenda);
+            }
         }
     }
      
@@ -72,14 +73,6 @@ public class VendaDAO extends GenericDAO{
         executeCommand(query, idPagamento);
     }
     
-    public BigDecimal calcularTotalVenda(List<ItemVenda> itensVenda){
-        BigDecimal totalDaVenda = new BigDecimal(0);
-        for(ItemVenda itemVenda: itensVenda){
-            totalDaVenda.add(itemVenda.getPrecoUnitario().multiply(new BigDecimal(itemVenda.getQuantidade())));
-        }
-        return totalDaVenda;
-    }
-    
     public void removerVenda(int idVenda) throws SQLException{
         String queryVenda = "DELETE FROM public.venda WHERE ID = ?";
         String queryItensVenda = "DELETE FROM public.itens_venda WHERE ID_VENDA = ?";
@@ -90,6 +83,11 @@ public class VendaDAO extends GenericDAO{
     public void removerItemVenda(int idItensVenda) throws SQLException{
         String query = "DELETE FROM public.itens_venda WHERE ID = ?";
         executeCommand(query, idItensVenda);
+    }
+    
+    public void removerItemVendaPorIdVenda(int idVenda) throws SQLException{
+        String query = "DELETE FROM public.itens_venda WHERE ID_VENDA = ?";
+        executeCommand(query, idVenda);
     }
     
     public Venda retornarVenda(int idVenda, boolean buscaItensVenda) throws SQLException{
@@ -197,7 +195,7 @@ public class VendaDAO extends GenericDAO{
             query.append(" and ID_CLIENTE = "+ codCliente);
         }
         if(!"".equals(dataVenda)){
-            query.append(" and DATA_VENDA = "+ dataVenda);
+            //query.append(" and DATA_VENDA = "+ dataVenda);
         }
         
         query.append(" order by id desc");

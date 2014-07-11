@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Venda"/>
@@ -59,7 +59,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="326" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="327" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -192,9 +192,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCodCliente" max="32767" attributes="0"/>
+                          <Component id="txtCodCliente" pref="59" max="32767" attributes="0"/>
                           <Component id="txtCodVenda" max="32767" attributes="0"/>
-                          <Component id="txtDataVenda" min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="txtDataVenda" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -233,8 +233,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCodClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDataVenda">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data Venda:"/>
@@ -249,6 +247,8 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="C&#xf3;d Venda:"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtDataVenda">
             </Component>
           </SubComponents>
         </Container>
