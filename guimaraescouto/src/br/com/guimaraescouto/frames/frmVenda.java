@@ -13,6 +13,8 @@ import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import br.com.guimaraescouto.util.MyTableModel;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
@@ -56,9 +58,9 @@ public class frmVenda extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVenda = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtCodVenda = new javax.swing.JTextField();
+        txtCodCliente = new javax.swing.JTextField();
+        txtDataVenda = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -94,6 +96,11 @@ public class frmVenda extends javax.swing.JDialog {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
         jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -134,13 +141,19 @@ public class frmVenda extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Campos p/ Pesquisa"));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtCodVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtCodVendaActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Data:");
+        txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Data Venda:");
 
         jLabel2.setText("Cód Cliente:");
 
@@ -158,9 +171,9 @@ public class frmVenda extends javax.swing.JDialog {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodCliente)
+                    .addComponent(txtCodVenda)
+                    .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -169,15 +182,15 @@ public class frmVenda extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -252,9 +265,28 @@ public class frmVenda extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtCodClienteActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            vendas = vendaDAO.retornarCemUltimasVendas(txtCodVenda.getText(),txtCodCliente.getText(),txtDataVenda.getText());
+            MyTableModel tableModel = new MyTableModel(Venda.class, vendas, tblVenda );
+            tblVenda.setModel(tableModel);
+            tblVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblVenda.setRowSorter(sorter);
+            setaTamanhoColunasTabela(tblVenda);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCodVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,15 +342,15 @@ public class frmVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tblVenda;
+    private javax.swing.JTextField txtCodCliente;
+    private javax.swing.JTextField txtCodVenda;
+    private javax.swing.JTextField txtDataVenda;
     // End of variables declaration//GEN-END:variables
 
     public void loadInitialData() {
         try {
-            vendas = vendaDAO.retornarCemUltimasVendas();
+            vendas = vendaDAO.retornarCemUltimasVendas(txtCodVenda.getText(),txtCodCliente.getText(),txtDataVenda.getText());
             MyTableModel tableModel = new MyTableModel(Venda.class, vendas, tblVenda );
             tblVenda.setModel(tableModel);
             tblVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
