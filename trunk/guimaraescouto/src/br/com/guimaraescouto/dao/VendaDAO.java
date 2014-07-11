@@ -185,9 +185,23 @@ public class VendaDAO extends GenericDAO{
         return retorno;
     }
     
-    public List<Venda> retornarCemUltimasVendas() throws SQLException {
+    public List<Venda> retornarCemUltimasVendas(String codVenda, String codCliente, String dataVenda) throws SQLException {
         List<Venda> retorno = new LinkedList<Venda>();
-        ResultSet rs = executeQuery("Select * from public.venda order by id desc");
+        StringBuffer query = new StringBuffer();
+        query.append("Select * from public.venda ");
+        query.append(" where 0 = 0");
+        if(!"".equals(codVenda)){
+            query.append(" and ID = " + codVenda);
+        }
+        if(!"".equals(codCliente)){
+            query.append(" and ID_CLIENTE = "+ codCliente);
+        }
+        if(!"".equals(dataVenda)){
+            query.append(" and DATA_VENDA = "+ dataVenda);
+        }
+        
+        query.append(" order by id desc");
+        ResultSet rs = executeQuery(query.toString());
         while(rs.next()){
             retorno.add(popularVenda(rs,false));
         }
