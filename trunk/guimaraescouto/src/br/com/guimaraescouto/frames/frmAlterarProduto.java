@@ -202,18 +202,21 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             return;
         }
         
-        try {
+        if(!txtCodigoBarras.getText().equals(produtoEmAlteracao.getCodigoBarras())){
+            try {
             Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
             if(produto.getId() != null){
                 JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
                 txtDescricao.requestFocus();
                 return;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(frmAdicionarProduto.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar produto.","Erro",JOptionPane.ERROR_MESSAGE);
-            return;
+            } catch (SQLException ex) {
+                Logger.getLogger(frmAdicionarProduto.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar produto.","Erro",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
+        
         
         int result = JOptionPane.showConfirmDialog(this, "Deseja alterar o Produto?","Alterar Produto",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(result == 2){

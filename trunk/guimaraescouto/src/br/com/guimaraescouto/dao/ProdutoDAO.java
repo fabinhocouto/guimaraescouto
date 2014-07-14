@@ -90,14 +90,18 @@ public class ProdutoDAO extends GenericDAO{
         String query = "Select * from public.produto  ";
         if(!descricao.equals("") && !codigoBarras.equals("")){
             query = query + " where descricao like ? and codigo_barras = ?";
+            query = query + " order by descricao";
             rs = executeQuery(query,"%"+descricao+"%",codigoBarras);
         }else if(!descricao.equals("") && codigoBarras.equals("")){
             query = query + " where descricao like ?";
+            query = query + " order by descricao";
             rs = executeQuery(query,"%"+descricao+"%");
         }else if(descricao.equals("") && !codigoBarras.equals("")){
             query = query + " where codigo_barras = ?";
+            query = query + " order by descricao";
             rs = executeQuery(query,codigoBarras);
         }else{
+            query = query + " order by descricao";
             rs = executeQuery(query);
         }
         while(rs.next()){
