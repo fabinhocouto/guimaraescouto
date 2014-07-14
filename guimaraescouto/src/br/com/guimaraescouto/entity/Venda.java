@@ -8,7 +8,7 @@ package br.com.guimaraescouto.entity;
 
 import br.com.guimaraescouto.util.SwingColumn;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +25,7 @@ public class Venda implements java.io.Serializable  {
     @SwingColumn(description = "CLIENTE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Cliente cliente;
     @SwingColumn(description = "DATA VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
-    private Date dataVenda;
+    private Timestamp dataVenda;
     @SwingColumn(description = "TOTAL VENDA",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal total;
     @SwingColumn(description = "ATENDENTE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
@@ -40,7 +40,7 @@ public class Venda implements java.io.Serializable  {
         this.id = id;
     }
 
-    public Venda(Integer id, Usuario vendedor, Date dataVenda, BigDecimal total, Cliente cliente) {
+    public Venda(Integer id, Usuario vendedor, Timestamp dataVenda, BigDecimal total, Cliente cliente) {
         this.id = id;
         this.vendedor = vendedor;
         this.dataVenda = dataVenda;
@@ -72,11 +72,11 @@ public class Venda implements java.io.Serializable  {
         this.cliente = cliente;
     }
 
-    public Date getDataVenda() {
+    public Timestamp getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(Date dataVenda) {
+    public void setDataVenda(Timestamp dataVenda) {
         this.dataVenda = dataVenda;
     }
 

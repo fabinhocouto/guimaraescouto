@@ -44,7 +44,7 @@ public class MyGenericCellRenderer extends DefaultTableCellRenderer {
             super.setValue(true == valor?"Sim":"Não");
         } else if(value != null
                 && value instanceof Date){
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date valuefOfdate = (Date) value;
             super.setValue(sdf.format(valuefOfdate));
         }

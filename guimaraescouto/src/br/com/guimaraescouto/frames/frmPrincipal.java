@@ -6,14 +6,30 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.DecimalFormattedField;
 import br.com.guimaraescouto.util.JMoneyFieldValor;
+import br.com.guimaraescouto.util.ReportUtils;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
@@ -336,6 +352,39 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario1ActionPerformed
         // TODO add your handling code here:
+        Path copy_from_2 = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(copy_from_2.toFile());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        Map parametros = new HashMap();
+ 
+        // criando os dados que serão passados ao datasource
+        List dados = new ArrayList();
+ 
+        for ( int i = 1; i <= 50; i++ ) {
+            Produto c = new Produto();
+            c.setId( i );
+            c.setDescricao( "Nome Cliente " + i );
+            //c.setSobrenome( "Sobrenome Cliente " + i );
+            dados.add( c );
+        }
+ 
+        // criando o datasource com os dados criados
+        JRDataSource ds = new JRBeanCollectionDataSource( dados );
+ 
+        try {
+ 
+            // passando o datasource para o método de criação e exibição do relatório
+            ReportUtils.openReport( "Clientes - Bean Collection Data Source", inputStream, parametros,
+                    ds );
+ 
+        } catch ( JRException exc ) {
+            exc.printStackTrace();
+        }
     }//GEN-LAST:event_btnUsuario1ActionPerformed
 
     private void btnUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario2ActionPerformed
@@ -347,15 +396,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         try{
             ProcessBuilder pb;
             Process p;
-            //pb = new ProcessBuilder("F:\\Arquivos de Programas\\PostgreSQL\\9.2\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p",
-            pb = new ProcessBuilder("C:\\Program Files\\PostgreSQL\\9.3\\bin\\pg_dump.exe ", "-h", "localhost", "-p",
-            "5432","-U", "postgres", "-F", "c", "-b", "-v" ,"-f",
-            "D:\\Arquivos Fábio\\Desenvolvimento\\TesteBKP.sql");
+            GregorianCalendar calendar = new GregorianCalendar();  
+            pb = new ProcessBuilder("C:\\Program Files\\PostgreSQL\\9.3\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p", "5432","-U", "postgres", "-F", "c", "-b", "-v" ,"-f", 
+                    "D:\\Arquivos Fábio\\Desenvolvimento\\Backup_"+ calendar.get(GregorianCalendar.DAY_OF_MONTH)+ "_"+ calendar.get(GregorianCalendar.MONTH)+"_"+ calendar.get(GregorianCalendar.HOUR_OF_DAY)+"_"+ calendar.get(GregorianCalendar.MINUTE)+".sql", "guimaraescouto");
             pb.environment().put("PGPASSWORD", "binza361616");
             pb.redirectErrorStream(true);
             p = pb.start();
+            JOptionPane.showMessageDialog(this, "Backup realizado com sucesso.","Backup",JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao tentar realizar o backup.","Erro Backup",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnUsuario3ActionPerformed
 

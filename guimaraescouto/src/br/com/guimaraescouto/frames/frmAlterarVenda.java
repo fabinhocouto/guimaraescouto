@@ -974,7 +974,7 @@ public class frmAlterarVenda extends javax.swing.JDialog{
              txtValorTotalVenda.setText(df.format(vendaEmAlteracao.getTotal()));
              txtValorPago.setText("0,00");
              txtTroco.setText("0,00");
-             txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy").format(vendaEmAlteracao.getDataVenda()));
+             txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(vendaEmAlteracao.getDataVenda()));
              itensVenda = vendaEmAlteracao.getItens();
              for (ItemVenda itemVenda : itensVenda) {
                  itemVenda.setOrdem(ordemItens++);
