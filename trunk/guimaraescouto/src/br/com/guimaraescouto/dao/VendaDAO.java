@@ -6,7 +6,9 @@
 
 package br.com.guimaraescouto.dao;
 
+import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.ItemVenda;
+import br.com.guimaraescouto.entity.Usuario;
 import br.com.guimaraescouto.entity.Venda;
 import br.com.guimaraescouto.entity.VendaDTO;
 import java.math.BigDecimal;
@@ -123,7 +125,7 @@ public class VendaDAO extends GenericDAO{
         retorno.setId(rs.getInt("ID"));
         retorno.setCliente(clienteDAO.retornaClientePorId(rs.getInt("ID_CLIENTE")));
         retorno.setVendedor(usuarioDAO.retornaUsuario(rs.getInt("ID_USUARIO")));
-        retorno.setDataVenda(rs.getDate("DATA_VENDA"));
+        retorno.setDataVenda(rs.getTimestamp("DATA_VENDA"));
         retorno.setTotal(rs.getBigDecimal("TOTAL"));
         if(popularItens){
             retorno.setItens(retornarItemVenda(retorno));
@@ -186,22 +188,38 @@ public class VendaDAO extends GenericDAO{
     public List<Venda> retornarCemUltimasVendas(String codVenda, String codCliente, String dataVenda) throws SQLException {
         List<Venda> retorno = new LinkedList<Venda>();
         StringBuffer query = new StringBuffer();
-        query.append("Select * from public.venda ");
+        query.append("select VEN.ID AS ID_VENDA, ven.data_venda AS DATA_VENDA, ven.total AS TOTAL, cli.id AS ID_CLIENTE, cli.nome AS NOME_CLIENTE, usu.id AS ID_USUARIO, usu.nome AS NOME_USUARIO ");
+        query.append(" from public.venda ven ");
+        query.append(" left join public.cliente cli on ven.id_cliente = cli.id ");
+        query.append(" left join public.usuario usu on ven.id_usuario = usu.id ");
         query.append(" where 0 = 0");
         if(!"".equals(codVenda)){
-            query.append(" and ID = " + codVenda);
+            query.append(" and VEN.ID = " + codVenda);
         }
         if(!"".equals(codCliente)){
-            query.append(" and ID_CLIENTE = "+ codCliente);
+            query.append(" and VEN.ID_CLIENTE = "+ codCliente);
         }
         if(!"".equals(dataVenda)){
-            //query.append(" and DATA_VENDA = "+ dataVenda);
+            //query.append(" and VEN.DATA_VENDA = "+ dataVenda);
         }
         
-        query.append(" order by id desc");
+        query.append(" order by ven.id desc");
         ResultSet rs = executeQuery(query.toString());
+        
         while(rs.next()){
-            retorno.add(popularVenda(rs,false));
+            Venda venda = new Venda();
+            Cliente cliente = new Cliente();
+            Usuario usuario = new Usuario();
+            venda.setId(rs.getInt("ID_VENDA"));
+            cliente.setId(rs.getInt("ID_CLIENTE"));
+            cliente.setNome(rs.getString("NOME_CLIENTE"));
+            venda.setCliente(cliente);
+            usuario.setId(rs.getInt("ID_USUARIO"));
+            usuario.setNome(rs.getString("NOME_USUARIO"));
+            venda.setVendedor(usuario);
+            venda.setDataVenda(rs.getTimestamp("DATA_VENDA"));
+            venda.setTotal(rs.getBigDecimal("TOTAL"));
+            retorno.add(venda);
         }
         rs.close();
         return retorno;

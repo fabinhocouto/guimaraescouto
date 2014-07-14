@@ -711,7 +711,7 @@ public class frmPDV extends javax.swing.JDialog{
         
         Venda venda = new Venda();
         venda.setId(new Integer(txtNumVenda.getText()));
-        venda.setDataVenda(new java.sql.Date(new java.util.Date().getTime()));
+        venda.setDataVenda(new java.sql.Timestamp(new java.util.Date().getTime()));
         venda.setTotal(calcularTotalVenda(itensVenda));
         venda.setItens(itensVenda);
         venda.setVendedor(atendente);
@@ -971,7 +971,7 @@ public class frmPDV extends javax.swing.JDialog{
              txtValorTotalVenda.setText("0,00");
              txtValorPago.setText("0,00");
              txtTroco.setText("0,00");
-             txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+             txtDataVenda.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()));
              tblItensVenda.getTableHeader().setFont(new Font("Arial", Font.BOLD,17));
              setaTamanhoColunasTabela(tblItensVenda);
              considerarEnterComoTab(txtCodCliente);
