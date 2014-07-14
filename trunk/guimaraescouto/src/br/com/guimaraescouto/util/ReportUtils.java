@@ -70,7 +70,7 @@ public class ReportUtils {
          * usando um datasource genérico.
          */
         JasperPrint print = JasperFillManager.fillReport(
-                inputStream, parametros, dataSource );
+                "F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio\\etiquetaPreco.jasper", parametros, dataSource );
  
         // abre o JasperPrint em um JFrame
         viewReportFrame( titulo, print );

@@ -352,7 +352,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario1ActionPerformed
         // TODO add your handling code here:
-        Path copy_from_2 = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
+        Path copy_from_2 = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(copy_from_2.toFile());
