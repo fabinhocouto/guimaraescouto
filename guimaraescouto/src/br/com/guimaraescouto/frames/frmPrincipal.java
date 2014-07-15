@@ -6,6 +6,7 @@
 
 package br.com.guimaraescouto.frames;
 
+import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.DecimalFormattedField;
 import br.com.guimaraescouto.util.JMoneyFieldValor;
@@ -16,6 +17,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -36,6 +38,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author Fábio
  */
 public class frmPrincipal extends javax.swing.JFrame {
+    
+    private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
     /**
      * Creates new form frmPrincipal
@@ -352,39 +356,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario1ActionPerformed
         // TODO add your handling code here:
-        Path copy_from_2 = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(copy_from_2.toFile());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
- 
-        Map parametros = new HashMap();
- 
-        // criando os dados que serão passados ao datasource
-        List dados = new ArrayList();
- 
-        for ( int i = 1; i <= 50; i++ ) {
-            Produto c = new Produto();
-            c.setId( i );
-            c.setDescricao( "Nome Cliente " + i );
-            //c.setSobrenome( "Sobrenome Cliente " + i );
-            dados.add( c );
-        }
- 
-        // criando o datasource com os dados criados
-        JRDataSource ds = new JRBeanCollectionDataSource( dados );
- 
-        try {
- 
-            // passando o datasource para o método de criação e exibição do relatório
-            ReportUtils.openReport( "Clientes - Bean Collection Data Source", inputStream, parametros,
-                    ds );
- 
-        } catch ( JRException exc ) {
-            exc.printStackTrace();
-        }
+        frmRelatorioEtiquetaPreco dialog = new frmRelatorioEtiquetaPreco(new javax.swing.JFrame(), true);
+        dialog.setVisible(true);
     }//GEN-LAST:event_btnUsuario1ActionPerformed
 
     private void btnUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario2ActionPerformed

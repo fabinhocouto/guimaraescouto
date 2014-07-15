@@ -84,6 +84,15 @@ public class ProdutoDAO extends GenericDAO{
         return retorno;
     }
     
+    public List<Produto> retornarProdutosNaoSecaoPorDescricao(String descricao) throws SQLException {
+        List<Produto> retorno = new LinkedList<Produto>();
+        ResultSet rs = executeQuery("Select * from public.produto where descricao like ? and secao=false order by descricao asc","%"+descricao+"%");
+        while(rs.next()){
+            retorno.add(popularProdutoInfo(rs));
+        }
+        return retorno;
+    }
+    
     public List<Produto> retornarProdutosPorDescricaoOuCodigoBarras(String descricao, String codigoBarras) throws SQLException {
         List<Produto> retorno = new LinkedList<Produto>();
         ResultSet rs = null;

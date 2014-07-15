@@ -7,9 +7,11 @@
 package br.com.guimaraescouto.util;
 
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Map;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -36,7 +38,7 @@ public class ReportUtils {
             String titulo,
             InputStream inputStream,
             Map parametros,
-            Connection conexao ) throws JRException {
+            Connection conexao, Frame frame ) throws JRException {
  
         /*
          * Cria um JasperPrint, que é a versão preenchida do relatório,
@@ -46,7 +48,7 @@ public class ReportUtils {
                 inputStream, parametros, conexao );
  
         // abre o JasperPrint em um JFrame
-        viewReportFrame( titulo, print );
+        viewReportFrame( titulo, print,frame );
  
     }
  
@@ -63,17 +65,16 @@ public class ReportUtils {
             String titulo,
             InputStream inputStream,
             Map parametros,
-            JRDataSource dataSource ) throws JRException {
+            JRDataSource dataSource, Frame frame ) throws JRException {
  
         /*
          * Cria um JasperPrint, que é a versão preenchida do relatório,
          * usando um datasource genérico.
          */
-        JasperPrint print = JasperFillManager.fillReport(
-                "F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio\\etiquetaPreco.jasper", parametros, dataSource );
+        JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, dataSource );
  
         // abre o JasperPrint em um JFrame
-        viewReportFrame( titulo, print );
+        viewReportFrame( titulo, print, frame );
  
     }
  
@@ -83,7 +84,7 @@ public class ReportUtils {
      * @param titulo Título do JFrame.
      * @param print JasperPrint do relatório.
      */
-    private static void viewReportFrame( String titulo, JasperPrint print ) {
+    private static void viewReportFrame( String titulo, JasperPrint print, Frame frame ) {
  
         /*
          * Cria um JRViewer para exibir o relatório.
@@ -92,22 +93,23 @@ public class ReportUtils {
         JRViewer viewer = new JRViewer( print );
  
         // cria o JFrame
-        JFrame frameRelatorio = new JFrame( titulo );
- 
+        JDialog jDialogRelatorio = new JDialog(frame,true);
+        
+        jDialogRelatorio.setTitle(titulo);
+        
         // adiciona o JRViewer no JFrame
-        frameRelatorio.add( viewer, BorderLayout.CENTER );
+        jDialogRelatorio.add( viewer, BorderLayout.CENTER );
  
         // configura o tamanho padrão do JFrame
-        frameRelatorio.setSize( 500, 500 );
- 
-        // maximiza o JFrame para ocupar a tela toda.
-        frameRelatorio.setExtendedState( JFrame.MAXIMIZED_BOTH );
+        jDialogRelatorio.setSize( 900, 500 );
  
         // configura a operação padrão quando o JFrame for fechado.
-        frameRelatorio.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
- 
+        jDialogRelatorio.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        jDialogRelatorio.setLocationRelativeTo(null);
+        
         // exibe o JFrame
-        frameRelatorio.setVisible( true );
+        jDialogRelatorio.setVisible( true );
  
     }
  
