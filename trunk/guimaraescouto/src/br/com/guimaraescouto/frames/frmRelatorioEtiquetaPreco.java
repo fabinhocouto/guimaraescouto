@@ -64,6 +64,7 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDescricaoProduto = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProdutosParaSelecionar = new javax.swing.JTable();
@@ -81,6 +82,14 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
 
         jLabel1.setText("Descrição Produto:");
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
+        jButton4.setText("Pesquisar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -88,8 +97,10 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +108,8 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -208,17 +220,17 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(876, 586));
+        setSize(new java.awt.Dimension(876, 610));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        //Path caminho = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
-        Path caminho = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
+        Path caminho = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
+        //Path caminho = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
         
         InputStream inputStream = null;
         Map parametros = new HashMap();
@@ -256,6 +268,10 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(tblProdutosSelecionados.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(this, "Selecione o produto a ser removido da lista.");
+            return;
+        }
         for (int cod : tblProdutosSelecionados.getSelectedRows()) {
              produtosSelecionados.remove(produtosSelecionados.get(cod));
         }
@@ -269,10 +285,26 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            produtosParaSelecionar = produtoDAO.retornarProdutosNaoSecaoPorDescricao(txtDescricaoProduto.getText());
+            MyTableModel tableModel = new MyTableModel(Produto.class, produtosParaSelecionar, tblProdutosParaSelecionar );
+            tblProdutosParaSelecionar.setModel(tableModel);
+            tblProdutosParaSelecionar.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
+            RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
+            tblProdutosParaSelecionar.setRowSorter(sorter);
+            setaTamanhoColunasTabela(tblProdutosParaSelecionar);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmRelatorioEtiquetaPreco.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
