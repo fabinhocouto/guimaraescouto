@@ -119,4 +119,12 @@ public class ProdutoDAO extends GenericDAO{
         return retorno;
     }
     
+    public List<Produto> retornarProdutosCodigoProprio() throws SQLException {
+        List<Produto> retorno = new LinkedList<Produto>();
+        ResultSet rs = executeQuery("select * from public.produto where char_length(codigo_barras) <= 1000 order by descricao");
+        while(rs.next()){
+            retorno.add(popularProdutoInfo(rs));
+        }
+        return retorno;
+    }
 }

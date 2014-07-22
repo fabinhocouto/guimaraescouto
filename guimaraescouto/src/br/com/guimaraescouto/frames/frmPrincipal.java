@@ -85,8 +85,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnUsuario1 = new javax.swing.JButton();
         btnUsuario2 = new javax.swing.JButton();
-        btnUsuario3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btnUsuario5 = new javax.swing.JButton();
+        btnUsuario6 = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -223,10 +225,10 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Outros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         btnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/relatorio.png"))); // NOI18N
-        btnUsuario1.setText("Relatório");
+        btnUsuario1.setText("Etiquetas Preços");
         btnUsuario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario1.addActionListener(new java.awt.event.ActionListener() {
@@ -235,23 +237,13 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lista.png"))); // NOI18N
-        btnUsuario2.setText("Lista CEASA");
+        btnUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/relatorio.png"))); // NOI18N
+        btnUsuario2.setText("Produtos Código Próprio");
         btnUsuario2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuario2ActionPerformed(evt);
-            }
-        });
-
-        btnUsuario3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backup.png"))); // NOI18N
-        btnUsuario3.setText("Backup");
-        btnUsuario3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnUsuario3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnUsuario3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuario3ActionPerformed(evt);
             }
         });
 
@@ -261,11 +253,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUsuario2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -273,13 +263,55 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Versão 1.1 07/14");
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Outros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        btnUsuario5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lista.png"))); // NOI18N
+        btnUsuario5.setText("Lista CEASA");
+        btnUsuario5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuario5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuario5ActionPerformed(evt);
+            }
+        });
+
+        btnUsuario6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backup.png"))); // NOI18N
+        btnUsuario6.setText("Backup");
+        btnUsuario6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuario6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuario6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUsuario6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUsuario6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,9 +321,10 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,12 +335,14 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(911, 639));
+        setSize(new java.awt.Dimension(911, 685));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -360,26 +395,35 @@ public class frmPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnUsuario1ActionPerformed
 
+    private void btnUsuario5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUsuario5ActionPerformed
+
+    private void btnUsuario6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUsuario6ActionPerformed
+
     private void btnUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnUsuario2ActionPerformed
-
-    private void btnUsuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario3ActionPerformed
-        // TODO add your handling code here:
-        try{
-            ProcessBuilder pb;
-            Process p;
-            GregorianCalendar calendar = new GregorianCalendar();  
-            pb = new ProcessBuilder("C:\\Program Files\\PostgreSQL\\9.3\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p", "5432","-U", "postgres", "-F", "c", "-b", "-v" ,"-f", 
-                    "D:\\Arquivos Fábio\\Desenvolvimento\\Backup_"+ calendar.get(GregorianCalendar.DAY_OF_MONTH)+ "_"+ calendar.get(GregorianCalendar.MONTH)+"_"+ calendar.get(GregorianCalendar.HOUR_OF_DAY)+"_"+ calendar.get(GregorianCalendar.MINUTE)+".sql", "guimaraescouto");
-            pb.environment().put("PGPASSWORD", "binza361616");
-            pb.redirectErrorStream(true);
-            p = pb.start();
-            JOptionPane.showMessageDialog(this, "Backup realizado com sucesso.","Backup",JOptionPane.INFORMATION_MESSAGE);
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Erro ao tentar realizar o backup.","Erro Backup",JOptionPane.ERROR_MESSAGE);
+        //Path caminho = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "listaProdutosCodigoProprio.jasper");
+        Path caminho = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "listaProdutosCodigoProprio.jasper");
+        
+        InputStream inputStream = null;
+        Map parametros = new HashMap();
+       
+        try {
+            JRDataSource ds = new JRBeanCollectionDataSource( produtoDAO.retornarProdutosCodigoProprio() );
+            inputStream = new FileInputStream(caminho.toFile());
+            ReportUtils.openReport( "Lista Produtos c/ Código Próprio", inputStream , parametros, ds, new javax.swing.JFrame() );
+ 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnUsuario3ActionPerformed
+    }//GEN-LAST:event_btnUsuario2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,7 +469,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnUsuario1;
     private javax.swing.JButton btnUsuario2;
-    private javax.swing.JButton btnUsuario3;
+    private javax.swing.JButton btnUsuario5;
+    private javax.swing.JButton btnUsuario6;
     private javax.swing.JButton btnVenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -435,5 +480,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

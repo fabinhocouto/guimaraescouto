@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listaProdutosCodigoProprio" language="groovy" columnCount="3" pageWidth="595" pageHeight="842" columnWidth="185" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c72b641-8df4-4822-9378-17f449db5648">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<subDataset name="dataset1" uuid="8b07c8c2-055f-4d96-a4c2-5aa78dd7a253"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="codigoBarras" class="java.lang.String">
+		<fieldDescription><![CDATA[codigoBarras]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="51" uuid="8a8bb7fe-34bd-40dc-b4b8-2dd0ca2a4227"/>
+			</rectangle>
+			<image>
+				<reportElement x="11" y="6" width="67" height="39" uuid="88d400ee-d68d-422e-9827-63b4eddd66e0"/>
+				<imageExpression><![CDATA["D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\Logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="149" y="12" width="278" height="20" uuid="cabfa227-f8f2-4301-97d5-1dba1fe7a7d2"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Produtos c/ Código Prórpio]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="28">
+			<rectangle>
+				<reportElement x="0" y="2" width="38" height="20" uuid="275714f8-725f-47f0-8beb-fac8ca71b6dd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="38" y="2" width="143" height="20" uuid="aeecb192-639f-4b68-b27f-2409e68ecf8d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="2" width="38" height="20" uuid="02fb36c4-492e-4da1-ac25-98f7b95e0bd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="2" width="143" height="20" uuid="01d9b3fc-def6-47bd-9d1d-cce2371e1183"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="38" height="20" uuid="18b9d149-7793-4cc3-8b20-377400bdac7c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="38" y="1" width="143" height="20" uuid="809e99a4-fc13-4fa0-b929-fbcf7891cd12"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="38" height="20" uuid="c038c6c5-da9a-4c1b-945c-0f2b4ce2d649"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoBarras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="0" width="143" height="20" uuid="1e2f8b6a-a5fd-4c11-86db-b615863cfae7"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
