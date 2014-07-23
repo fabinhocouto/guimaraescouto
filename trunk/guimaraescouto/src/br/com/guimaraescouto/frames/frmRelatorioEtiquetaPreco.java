@@ -229,20 +229,13 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Path caminho = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
-        //Path caminho = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "etiquetaPreco.jasper");
-        
-        InputStream inputStream = null;
+        InputStream inputStream = getClass().getResourceAsStream("/br/com/guimaraescouto/relatorio/etiquetaPreco.jasper");
         Map parametros = new HashMap();
        
         try {
             JRDataSource ds = new JRBeanCollectionDataSource( produtosSelecionados );
-            inputStream = new FileInputStream(caminho.toFile());
             ReportUtils.openReport( "Etiquetas de preço", inputStream , parametros, ds, new javax.swing.JFrame() );
- 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JRException ex) {
+        }  catch (JRException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed

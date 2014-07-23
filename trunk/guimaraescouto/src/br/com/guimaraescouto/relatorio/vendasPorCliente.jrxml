@@ -3,7 +3,10 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="IMAGEM_DIR" class="java.lang.String"/>
+	<parameter name="CLIENTE" class="java.lang.Object">
+		<property name="NOME" value=""/>
+	</parameter>
 	<field name="field1" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -15,7 +18,7 @@
 			</rectangle>
 			<image>
 				<reportElement x="28" y="5" width="115" height="54" uuid="ff5a83dd-6cac-4027-817a-01c87453b58b"/>
-				<imageExpression><![CDATA["D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\build\\classes\\Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="190" y="13" width="324" height="35" uuid="924066c0-0383-44f0-bbf7-c1463ce9d01b"/>

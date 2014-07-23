@@ -11,9 +11,11 @@ import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.util.DecimalFormattedField;
 import br.com.guimaraescouto.util.JMoneyFieldValor;
 import br.com.guimaraescouto.util.ReportUtils;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
@@ -85,6 +87,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnUsuario1 = new javax.swing.JButton();
         btnUsuario2 = new javax.swing.JButton();
+        btnUsuario3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnUsuario5 = new javax.swing.JButton();
@@ -227,7 +230,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        btnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/relatorio.png"))); // NOI18N
+        btnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cifraoSemFundo.png"))); // NOI18N
         btnUsuario1.setText("Etiquetas Preços");
         btnUsuario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -237,13 +240,23 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/relatorio.png"))); // NOI18N
-        btnUsuario2.setText("Produtos Código Próprio");
+        btnUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codBarras.png"))); // NOI18N
+        btnUsuario2.setText("Produtos Cód Próprio");
         btnUsuario2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuario2ActionPerformed(evt);
+            }
+        });
+
+        btnUsuario3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vendasPorCliente.png"))); // NOI18N
+        btnUsuario3.setText("Vendas por Cliente");
+        btnUsuario3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuario3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuario3ActionPerformed(evt);
             }
         });
 
@@ -256,6 +269,8 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUsuario2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUsuario3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -263,6 +278,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUsuario3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -272,7 +288,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Outros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
-        btnUsuario5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lista.png"))); // NOI18N
+        btnUsuario5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listaPequena.png"))); // NOI18N
         btnUsuario5.setText("Lista CEASA");
         btnUsuario5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -405,25 +421,28 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario2ActionPerformed
         // TODO add your handling code here:
-        //Path caminho = Paths.get("F:\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "listaProdutosCodigoProprio.jasper");
-        Path caminho = Paths.get("D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\br\\com\\guimaraescouto\\relatorio", "listaProdutosCodigoProprio.jasper");
-        
-        InputStream inputStream = null;
+        URL web = getClass().getResource("/Logo.png");
+                
+        InputStream inputStream = getClass().getResourceAsStream("/br/com/guimaraescouto/relatorio/listaProdutosCodigoProprio.jasper");
         Map parametros = new HashMap();
+        parametros.put("IMAGEM_DIR",web.toString());
        
         try {
             JRDataSource ds = new JRBeanCollectionDataSource( produtoDAO.retornarProdutosCodigoProprio() );
-            inputStream = new FileInputStream(caminho.toFile());
             ReportUtils.openReport( "Lista Produtos c/ Código Próprio", inputStream , parametros, ds, new javax.swing.JFrame() );
  
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUsuario2ActionPerformed
+
+    private void btnUsuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario3ActionPerformed
+        // TODO add your handling code here:
+        frmRelatorioVendasPorCliente dialog = new frmRelatorioVendasPorCliente(new javax.swing.JFrame(), true); 
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnUsuario3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,6 +488,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnUsuario1;
     private javax.swing.JButton btnUsuario2;
+    private javax.swing.JButton btnUsuario3;
     private javax.swing.JButton btnUsuario5;
     private javax.swing.JButton btnUsuario6;
     private javax.swing.JButton btnVenda;

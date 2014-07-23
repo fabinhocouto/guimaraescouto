@@ -5,6 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="dataset1" uuid="8b07c8c2-055f-4d96-a4c2-5aa78dd7a253"/>
+	<parameter name="IMAGEM_DIR" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -24,7 +25,7 @@
 			</rectangle>
 			<image>
 				<reportElement x="11" y="6" width="67" height="39" uuid="88d400ee-d68d-422e-9827-63b4eddd66e0"/>
-				<imageExpression><![CDATA["D:\\Arquivos Fábio\\Desenvolvimento\\guimaraescouto\\src\\Logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR}]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="149" y="12" width="278" height="20" uuid="cabfa227-f8f2-4301-97d5-1dba1fe7a7d2"/>
