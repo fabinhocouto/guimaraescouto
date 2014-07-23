@@ -298,6 +298,8 @@
                   <Component id="btnUsuario1" min="-2" pref="113" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnUsuario2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnUsuario3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -307,6 +309,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnUsuario3" min="-2" pref="101" max="-2" attributes="0"/>
                       <Component id="btnUsuario2" min="-2" pref="101" max="-2" attributes="0"/>
                       <Component id="btnUsuario1" min="-2" pref="101" max="-2" attributes="0"/>
                   </Group>
@@ -319,7 +322,7 @@
         <Component class="javax.swing.JButton" name="btnUsuario1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/relatorio.png"/>
+              <Image iconType="3" name="/cifraoSemFundo.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Etiquetas Pre&#xe7;os"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -332,14 +335,27 @@
         <Component class="javax.swing.JButton" name="btnUsuario2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/relatorio.png"/>
+              <Image iconType="3" name="/codBarras.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Produtos C&#xf3;digo Pr&#xf3;prio"/>
+            <Property name="text" type="java.lang.String" value="Produtos C&#xf3;d Pr&#xf3;prio"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario2ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnUsuario3">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/vendasPorCliente.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Vendas por Cliente"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario3ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -392,7 +408,7 @@
         <Component class="javax.swing.JButton" name="btnUsuario5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lista.png"/>
+              <Image iconType="3" name="/listaPequena.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Lista CEASA"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
