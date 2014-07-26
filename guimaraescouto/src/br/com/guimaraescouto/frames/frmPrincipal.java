@@ -317,7 +317,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnUsuario5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnUsuario6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(674, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,6 +417,19 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario6ActionPerformed
         // TODO add your handling code here:
+         try{
+            ProcessBuilder pb;
+            Process p;
+            GregorianCalendar calendar = new GregorianCalendar();  
+            pb = new ProcessBuilder("C:\\Arquivos de programas\\PostgreSQL\\9.3\\bin\\pg_dump.exe ", "-i", "-h", "localhost", "-p", "5432","-U", "postgres", "-F", "c", "-b", "-v" ,"-f", 
+                    "E:\\Backup_"+ calendar.get(GregorianCalendar.DAY_OF_MONTH)+ "_"+ calendar.get(GregorianCalendar.MONTH)+"_"+ calendar.get(GregorianCalendar.HOUR_OF_DAY)+"_"+ calendar.get(GregorianCalendar.MINUTE)+".sql", "guimaraescouto");
+            pb.environment().put("PGPASSWORD", "binza361616");
+            pb.redirectErrorStream(true);
+            p = pb.start();
+            JOptionPane.showMessageDialog(this, "Backup realizado com sucesso.","Backup",JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Erro ao tentar realizar o backup.","Erro Backup",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnUsuario6ActionPerformed
 
     private void btnUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario2ActionPerformed
@@ -440,8 +453,8 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnUsuario3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario3ActionPerformed
         // TODO add your handling code here:
-        frmRelatorioVendasPorCliente dialog = new frmRelatorioVendasPorCliente(new javax.swing.JFrame(), true); 
-        dialog.setVisible(true);
+        //frmRelatorioVendasPorCliente dialog = new frmRelatorioVendasPorCliente(new javax.swing.JFrame(), true); 
+        //dialog.setVisible(true);
     }//GEN-LAST:event_btnUsuario3ActionPerformed
 
     /**
