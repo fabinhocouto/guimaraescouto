@@ -994,7 +994,7 @@ public class frmPDV extends javax.swing.JDialog{
         TableColumnModel modeloDaColuna = tblItensVenda.getColumnModel();
         DefaultTableCellRenderer rendererCentro = new DefaultTableCellRenderer();
         rendererCentro.setHorizontalAlignment(SwingConstants.CENTER); 
-        modeloDaColuna.getColumn(0).setMaxWidth(48); 
+        modeloDaColuna.getColumn(0).setMaxWidth(54); 
         modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
         modeloDaColuna.getColumn(1).setMaxWidth(2000); 
         modeloDaColuna.getColumn(2).setMaxWidth(200); 
