@@ -721,10 +721,17 @@ public class frmPDV extends javax.swing.JDialog{
         venda.setCliente(cliente);
          try {
              vendaDAO.adicionarVenda(venda, true);
-             setVisible(false);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);
              Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+         int result = JOptionPane.showConfirmDialog(this, "Deseja imprimir o cupom?","ImprimirCupom",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
+         if(result == 2){
+            setVisible(false);
+         }else{
+             frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true, venda);
+             frmImpressao.setVisible(true);
          }
          
          if(cliente.getSaldo().compareTo(BigDecimal.ZERO) > 0){
