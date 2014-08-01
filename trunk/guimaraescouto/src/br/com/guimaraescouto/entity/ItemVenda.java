@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.entity;
 
 import br.com.guimaraescouto.util.SwingColumn;
@@ -25,7 +25,7 @@ public class ItemVenda implements java.io.Serializable, Comparable<ItemVenda>{
     @SwingColumn(description="QUANTIDADE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private int quantidade;
     private Venda venda;
-    @SwingColumn(description="VALOR UNIT√ÅRIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description="VALOR UNIT¡RIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal precoUnitario;
     @SwingColumn(description="TOTAL",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private BigDecimal total;

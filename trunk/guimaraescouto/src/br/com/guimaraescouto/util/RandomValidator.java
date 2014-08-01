@@ -5,7 +5,7 @@
  */
 
 package br.com.guimaraescouto.util;
-
+ 
 /**
  *
  * @author Fábio

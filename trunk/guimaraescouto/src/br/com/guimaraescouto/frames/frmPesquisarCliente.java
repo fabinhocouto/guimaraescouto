@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.util.MyTableModel;
@@ -115,7 +115,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
 
             },
             new String [] {
-                "TÃ­tulo 1"
+                "Título 1"
             }
         ));
         tblCliente.addKeyListener(new java.awt.event.KeyAdapter() {

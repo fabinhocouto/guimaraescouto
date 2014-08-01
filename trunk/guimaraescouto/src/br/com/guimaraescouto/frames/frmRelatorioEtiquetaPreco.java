@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ProdutoDAO;
@@ -76,11 +76,11 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Etiqueta PreÃ§o");
+        setTitle("Etiqueta Preço");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Campos p/ Pesquisa"));
 
-        jLabel1.setText("DescriÃ§Ã£o Produto:");
+        jLabel1.setText("Descrição Produto:");
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.png"))); // NOI18N
         jButton4.setText("Pesquisar");
@@ -165,7 +165,7 @@ public class frmRelatorioEtiquetaPreco extends javax.swing.JDialog {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
         );
 
-        jButton3.setText("Gerar RelatÃ³rio");
+        jButton3.setText("Gerar Relatório");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);

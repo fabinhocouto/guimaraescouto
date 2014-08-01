@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ProdutoDAO;
@@ -78,11 +78,11 @@ public class frmRelatorioVendasPorCliente extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Campos p/ Pesquisa"));
 
-        jLabel1.setText("CÃ³d Cliente:");
+        jLabel1.setText("Cód Cliente:");
 
         jLabel2.setText("Data Venda:");
 
-        jLabel3.setText("atÃ©");
+        jLabel3.setText("até");
 
         txtDataFim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +150,7 @@ public class frmRelatorioVendasPorCliente extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        btnGerarRelatorio.setText("Gerar RelatÃ³rio");
+        btnGerarRelatorio.setText("Gerar Relatório");
         btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarRelatorioActionPerformed(evt);

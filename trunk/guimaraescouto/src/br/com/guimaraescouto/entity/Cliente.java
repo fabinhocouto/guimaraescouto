@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.entity;
 
 import br.com.guimaraescouto.util.SwingColumn;
 import java.math.BigDecimal;
 import java.util.Objects;
 import javax.swing.table.DefaultTableCellRenderer;
-
+ 
 /**
  *
  * @author FÃ¡bio
  */
 public class Cliente implements java.io.Serializable{
     
-    @SwingColumn(description = "CÃ“DIGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "CÓDIGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
     @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String nome;
-    @SwingColumn(description = "ENDEREÃ‡O",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "ENDEREÇO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String endereco;
     @SwingColumn(description = "TELEFONE",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String telefone;

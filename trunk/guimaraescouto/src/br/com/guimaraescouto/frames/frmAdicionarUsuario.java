@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.UsuarioDAO;
@@ -56,18 +56,18 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Adicionar Novo Usu√°rio");
+        setTitle("Adicionar Novo Usu·rio");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Usu√°rio");
+        jLabel2.setText("Usu·rio");
 
         jLabel3.setText("Senha");
 
-        jLabel4.setText("Confirma√ß√£o da Senha");
+        jLabel4.setText("ConfirmaÁ„o da Senha");
 
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.daruma.jna.DUAL;
@@ -21,6 +21,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,6 +47,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
    
     private Venda venda;
+    private final DecimalFormat df = new DecimalFormat( "#,##0.00" );
     /**
      * Creates new form frmRelatorioEtiquetaPreco
      */
@@ -73,13 +75,13 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Vendas Por Cliente");
+        setTitle("Cupom resumido / completo");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Impress√£o de Cupom"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo Impress„o de Cupom"));
 
-        rdoImpressaoCompleta.setText("Impress√£o Completa");
+        rdoImpressaoCompleta.setText("Impress„o Completa");
 
-        rdoImpressaoResumida.setText("Impress√£o Resumida");
+        rdoImpressaoResumida.setText("Impress„o Resumida");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,7 +104,7 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnImprimir.setText("Gerar Relat√≥rio");
+        btnImprimir.setText("Imprimir");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
@@ -122,11 +124,11 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnImprimir)
-                .addGap(48, 48, 48)
+                .addGap(60, 60, 60)
                 .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(73, 73, 73))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,40 +152,69 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
         //Verificado status da impressora
         int statusImpressora = DUAL.rStatusImpressora();
         if(statusImpressora == 1){
-            String textoImpressao = "";
-            //Cabecalho
-            String teste = "<e><ce>SUPERMERCADO</ce></e><l></l>"+
-            "<e><ce>GUIMAR√ÉES E COUTO</ce></e><l></l>"+
-            "<i><ce>Rua Fl√°vio Can√ßado Filho, 215</ce></i><l></l>"+
-            "<i><ce>Bom Despacho - MG</ce></i><l></l>"+
-            "<i><ce>TEL:(37)3522-2144</ce></i><l></l>"+
-            "<l></l><i><ce>CUPOM N√ÉO FISCAL</ce></i><l></l>"+
-            "<tc>_</tc>"+
-            " <l></l>N√∫m Venda:<b>"+venda.getId()+"</b><l></l>"+
-            "Cliente:<b>"+venda.getCliente().getId()+"-"+venda.getCliente().getNome()+"</b><l></l>"+
-            "Data:"+new SimpleDateFormat("dd/MM/yyyy HH:mm").format(venda.getDataVenda())+"<l></l>"+      
-            "Vendedor:"+venda.getVendedor().getNome()+"<l></l>"+ 
-            "<tc>_</tc>"+
-            "Descri√ß√£o<tb>Qtd<tb>Valor Uni<tb>Total<l></l>"+
-            "<tc>_</tc>";
-            for (ItemVenda itemVenda : venda.getItens()) {
-                String descricao = "";
-                if(itemVenda.getProduto().getDescricao().length()>20){
-                    descricao = itemVenda.getProduto().getDescricao().substring(0,19);
+            char[] pszRetornar = new char[]{};
+            int statusTampa = DUAL.rConsultaStatusImpressora("6", "1", pszRetornar);
+            if(1 == 1){
+                int statusPapel = DUAL.rConsultaStatusImpressora("4", "1", pszRetornar);
+                if(0 == 0){
+                    int statusOperacional = DUAL.rConsultaStatusImpressora("2", "1", pszRetornar);
+                    if(0 == 0){
+                       int statusAtual = DUAL.rConsultaStatusImpressora("1", "1", pszRetornar);
+                        if(0 == 0){
+                            //Cabecalho
+                            DUAL.iImprimirTexto("<e><ce>SUPERMERCADO</ce></e><l></l>"+
+                            "<e><ce>GUIMAR√ES E COUTO</ce></e><l></l>"+
+                            "<i><ce>CNPJ:11.782.132/0001-39</ce></i><l></l>"+
+                            "<i><ce>Rua Fl·vio CanÁado Filho, 215</ce></i><l></l>"+
+                            "<i><ce>Bom Despacho - MG</ce></i><l></l>"+
+                            "<i><ce>TEL:(37)3522-2144</ce></i><l></l>"+
+                            "<l></l><i><ce>CUPOM N√O FISCAL</ce></i><l></l>"+
+                            "<tc>_</tc>"+
+                            " <l></l>N˙m Venda:<b>"+venda.getId()+"</b><l></l>"+
+                            "Cliente..:<b>"+venda.getCliente().getId()+"-"+venda.getCliente().getNome()+"</b><l></l>"+
+                            "Data.....:"+new SimpleDateFormat("dd/MM/yyyy HH:mm").format(venda.getDataVenda())+"<l></l>"+      
+                            "Vendedor.:"+venda.getVendedor().getNome()+"<l></l>"+ 
+                            "<tc>_</tc>",0);
+                            DUAL.iImprimirTexto("<b>DescriÁ„o<tb>Qtd<tb>PreÁo<tb>Total</b>",0);
+                            if(rdoImpressaoCompleta.isSelected()){
+                                for (ItemVenda itemVenda : venda.getItens()) {
+                                    String descricao = "";
+                                    if(itemVenda.getProduto().getDescricao().length()>26){
+                                        descricao = itemVenda.getProduto().getDescricao().substring(0,26);
+                                    }else{
+                                        descricao = itemVenda.getProduto().getDescricao();
+                                    }
+                                    DUAL.iImprimirTexto(descricao+"<tb>" + itemVenda.getQuantidade()+"<tb>"+df.format(itemVenda.getPrecoUnitario())+"<tb>"+df.format(itemVenda.getTotal())+"",0);
+                                }
+                            }else{
+                                DUAL.iImprimirTexto("COMPRAS<tb>1<tb>"+df.format(venda.getTotal())+"<tb>"+df.format(venda.getTotal())+"",0);
+                            }
+                            
+                            //Rodape
+                            DUAL.iImprimirTexto("<ad>____________</ad>",0);
+                            DUAL.iImprimirTexto("<b><e>Total R$<ad>"+df.format(venda.getTotal())+"</ad></e></b>",0);
+                            DUAL.iImprimirTexto("<sl>2</sl>",0);
+                            DUAL.iImprimirTexto("<ce>_________________________________</ce>",0);
+                            DUAL.iImprimirTexto("<ce>Assinatura</ce>",0);
+                            DUAL.iImprimirTexto("<ce>Obrigado pela preferÍncia. Volte sempre.</ce>",0);
+                            DUAL.iImprimirTexto("<sl>3</sl>",0);
+                            DUAL.iImprimirTexto("<gui></gui>",0);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Impressora em uso.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Impressora fora de operaÁ„o.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
+                    }
                 }else{
-                    descricao = itemVenda.getProduto().getDescricao().substring(0, itemVenda.getProduto().getDescricao().length());
+                    JOptionPane.showMessageDialog(this, "Impressora sem papel.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
                 }
-                teste +=descricao+"<tb>" + itemVenda.getQuantidade()+"<tb>"+itemVenda.getProduto().getPreco()+"<tb>"+itemVenda.getTotal()+"<l></l>";
+            }else{
+                JOptionPane.showMessageDialog(this, "Impressora com a tampa aberta.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
             }
-            teste += "<tc>_</tc>"+
-            "Assinatura"+
-            "<sl>3</sl>"+
-            "<gui></gui>";  
-            DUAL.iImprimirTexto(teste,0);
-            
         }else{
             JOptionPane.showMessageDialog(this, "Impressora delisgada.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
         }
+        setVisible(false);
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

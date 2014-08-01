@@ -5,7 +5,7 @@
  *
  */
 package swingtest.table;
-
+ 
 import java.awt.Color;
 import java.awt.Component;
 import java.net.URL;
