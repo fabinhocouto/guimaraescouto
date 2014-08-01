@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
@@ -145,7 +145,7 @@ public class frmAlterarVenda extends javax.swing.JDialog{
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("C√≥d Cliente:");
+        jLabel1.setText("CÛd Cliente:");
 
         txtCodCliente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -219,7 +219,7 @@ public class frmAlterarVenda extends javax.swing.JDialog{
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("N√∫m. Venda:");
+        jLabel5.setText("N˙m. Venda:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -270,10 +270,10 @@ public class frmAlterarVenda extends javax.swing.JDialog{
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Itens da Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel8.setText("C√≥digo Barras");
+        jLabel8.setText("CÛdigo Barras");
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel10.setText("Valor Unit√°rio");
+        jLabel10.setText("Valor Unit·rio");
 
         txtCodBarras.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCodBarras.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -293,7 +293,7 @@ public class frmAlterarVenda extends javax.swing.JDialog{
                 {null, null, null, null, null}
             },
             new String [] {
-                "ITEM", "PRODUTO", "QUANTIDADE", "VALOR UNIT√ÅRIO", "TOTAL"
+                "ITEM", "PRODUTO", "QUANTIDADE", "VALOR UNIT¡RIO", "TOTAL"
             }
         ));
         tblItensVenda.setFocusable(false);

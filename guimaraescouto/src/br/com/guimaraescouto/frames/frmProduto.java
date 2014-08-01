@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.util.MyTableModel;
@@ -70,7 +70,7 @@ public class frmProduto extends javax.swing.JDialog {
         setTitle("Cadastro de Produtos");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("AÃ§Ãµes"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
         jButton1.setText("Adicionar");
@@ -146,7 +146,7 @@ public class frmProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "TÃ­tulo 1", "TÃ­tulo 2", "TÃ­tulo 3", "TÃ­tulo 4"
+                "Título 1", "Título 2", "Título 3", "Título 4"
             }
         ) {
             Class[] types = new Class [] {
@@ -164,7 +164,7 @@ public class frmProduto extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Campos p/ Pesquisa"));
 
-        jLabel1.setText("CÃ³d Barras:");
+        jLabel1.setText("Cód Barras:");
 
         txtCodigoBarras.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -172,7 +172,7 @@ public class frmProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("DescriÃ§Ã£o:");
+        jLabel2.setText("Descrição:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

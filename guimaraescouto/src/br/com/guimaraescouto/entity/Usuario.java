@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.entity;
 
 import br.com.guimaraescouto.util.SwingColumn;
@@ -16,11 +16,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class Usuario implements java.io.Serializable {
     
-    @SwingColumn(description = "C√ìDIGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "C”DIGO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private Integer id;
     @SwingColumn(description = "NOME",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String nome;
-    @SwingColumn(description = "USU√ÅRIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "USU¡RIO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String usuario;
     private String senha;
 

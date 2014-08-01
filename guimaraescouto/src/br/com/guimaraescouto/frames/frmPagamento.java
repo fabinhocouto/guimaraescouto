@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
@@ -97,7 +97,7 @@ public class frmPagamento extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setText("CÃ³d. Cliente:");
+        jLabel1.setText("Cód. Cliente:");
 
         txtCodCliente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -279,7 +279,7 @@ public class frmPagamento extends javax.swing.JDialog {
         });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel7.setText("CrÃ©dito");
+        jLabel7.setText("Crédito");
 
         txtCredito.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtCredito.setBorder(null);

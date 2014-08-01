@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ProdutoDAO;
@@ -69,7 +69,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("DescriÃ§Ã£o:");
+        jLabel1.setText("Descrição:");
 
         txtDescricaoProduto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -122,7 +122,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "TÃ­tulo 1"
+                "Título 1"
             }
         ));
         tblProduto.addKeyListener(new java.awt.event.KeyAdapter() {

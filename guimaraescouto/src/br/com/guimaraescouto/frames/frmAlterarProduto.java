@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ProdutoDAO;
@@ -68,11 +68,11 @@ public class frmAlterarProduto extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setText("CÃ³d Barras");
+        jLabel1.setText("Cód Barras");
 
-        jLabel2.setText("DescriÃ§Ã£o");
+        jLabel2.setText("Descrição");
 
-        jLabel3.setText("PreÃ§o R$");
+        jLabel3.setText("Preço R$");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +94,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setText("De SeÃ§Ã£o?");
+        jLabel4.setText("De Seção?");
 
         checkSecao.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -165,7 +165,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

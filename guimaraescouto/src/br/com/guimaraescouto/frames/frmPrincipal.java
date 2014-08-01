@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
+import br.com.daruma.jna.DUAL;
 import br.com.guimaraescouto.dao.ProdutoDAO;
+import br.com.guimaraescouto.entity.Cliente;
+import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Produto;
+import br.com.guimaraescouto.entity.Usuario;
+import br.com.guimaraescouto.entity.Venda;
 import br.com.guimaraescouto.util.DecimalFormattedField;
 import br.com.guimaraescouto.util.JMoneyFieldValor;
 import br.com.guimaraescouto.util.ReportUtils;
@@ -15,11 +20,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -40,6 +47,18 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author Fábio
  */
 public class frmPrincipal extends javax.swing.JFrame {
+    
+    static{        
+        try{            
+           
+            //System.load("C:\\DarumaFramework_DLL\\DarumaFrameWork.dll");
+            System.load("C:\\DarumaFramework_DLL64\\DarumaFrameWork.dll");
+            System.out.println("Biblioteca carregada!!!");
+
+        } catch(Exception e) {
+           e.printStackTrace();
+        }
+    }
     
     private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
@@ -102,12 +121,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenu6.setText("jMenu6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Supermercado Guimarães e Couto");
+        setTitle("Supermercado Guimar�es e Couto");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Cadastro/Alteração/Exclusão", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Cadastro/Altera��o/Exclus�o", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         btnUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aesthetica_5022_user.png"))); // NOI18N
-        btnUsuario.setText("Usuário");
+        btnUsuario.setText("Usu�rio");
         btnUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -228,10 +247,10 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relatórios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Relat�rios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         btnUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cifraoSemFundo.png"))); // NOI18N
-        btnUsuario1.setText("Etiquetas Preços");
+        btnUsuario1.setText("Etiquetas Pre�os");
         btnUsuario1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario1.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +260,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         btnUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/codBarras.png"))); // NOI18N
-        btnUsuario2.setText("Produtos Cód Próprio");
+        btnUsuario2.setText("Produtos C�d Pr�prio");
         btnUsuario2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUsuario2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnUsuario2.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +303,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Versão 1.1 07/14");
+        jLabel1.setText("Vers�o 1.1 07/14");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Outros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
@@ -455,6 +474,42 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         //frmRelatorioVendasPorCliente dialog = new frmRelatorioVendasPorCliente(new javax.swing.JFrame(), true); 
         //dialog.setVisible(true);
+        Venda venda = new Venda();
+        venda.setId(1);
+        //venda.setDataVenda(Timestamp.valueOf("12/12/2000"));
+        venda.setTotal(BigDecimal.ZERO);
+        Usuario vendedor = new Usuario();
+        vendedor.setNome("FABINHO");
+        venda.setVendedor(vendedor);
+        venda.setDataVenda(new java.sql.Timestamp(new java.util.Date().getTime()));
+        Cliente cliente = new Cliente();
+        cliente.setId(1);
+        cliente.setNome("DUDU");
+        venda.setCliente(cliente);
+        List<ItemVenda> itensVenda = new ArrayList<ItemVenda>();
+        for (int i = 1; i <3; i++) {
+            ItemVenda item = new ItemVenda();
+            item.setId(i);
+            item.setPrecoUnitario(new BigDecimal(.29));
+            item.setQuantidade(i);
+            Produto produto = new Produto();
+            produto.setDescricao("SHAMPOO SEDA CERAMIDAS SE");
+            produto.setPreco(new BigDecimal(33.80));
+            item.setProduto(produto);
+            itensVenda.add(item);
+        }
+        ItemVenda item = new ItemVenda();
+            item.setPrecoUnitario(new BigDecimal(1233.00));
+            item.setQuantidade(1);
+            item.setTotal(BigDecimal.ZERO);
+            Produto produto = new Produto();
+            produto.setDescricao("ARROZ CAMIL 5KG");
+            produto.setPreco(new BigDecimal(1590.99));
+            item.setProduto(produto);
+            itensVenda.add(item);
+        venda.setItens(itensVenda);
+        frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true,venda);
+             frmImpressao.setVisible(true);
     }//GEN-LAST:event_btnUsuario3ActionPerformed
 
     /**

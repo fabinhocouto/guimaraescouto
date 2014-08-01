@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.entity;
 
 import br.com.guimaraescouto.util.SwingColumn;
@@ -20,13 +20,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class Produto implements java.io.Serializable{
     
     private Integer id;
-    @SwingColumn(description = "CÃ“D BARRAS",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "CÓD BARRAS",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String codigoBarras;
-    @SwingColumn(description = "DESCRIÃ‡ÃƒO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "DESCRIÇÃO",renderer = DefaultTableCellRenderer.class, colorOfBackgound = "")
     private String descricao;
-    @SwingColumn(description = "PREÃ‡O",renderer = MyCurrencyCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "PREÇO",renderer = MyCurrencyCellRenderer.class, colorOfBackgound = "")
     private BigDecimal preco;
-    @SwingColumn(description = "SEÃ‡ÃƒO",renderer = MyBooleanCellRenderer.class, colorOfBackgound = "")
+    @SwingColumn(description = "SEÇÃO",renderer = MyBooleanCellRenderer.class, colorOfBackgound = "")
     private Boolean secao;
     
     public Produto(){

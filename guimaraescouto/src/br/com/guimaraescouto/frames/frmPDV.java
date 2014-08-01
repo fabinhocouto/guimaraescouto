@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
@@ -141,7 +141,7 @@ public class frmPDV extends javax.swing.JDialog{
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("CÃ³d Cliente:");
+        jLabel1.setText("Cód Cliente:");
 
         txtCodCliente.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -215,7 +215,7 @@ public class frmPDV extends javax.swing.JDialog{
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("NÃºm. Venda:");
+        jLabel5.setText("Núm. Venda:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -266,10 +266,10 @@ public class frmPDV extends javax.swing.JDialog{
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Itens da Venda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 24))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel8.setText("CÃ³digo Barras");
+        jLabel8.setText("Código Barras");
 
         jLabel10.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel10.setText("Valor UnitÃ¡rio");
+        jLabel10.setText("Valor Unitário");
 
         txtCodBarras.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCodBarras.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -289,7 +289,7 @@ public class frmPDV extends javax.swing.JDialog{
                 {null, null, null, null, null}
             },
             new String [] {
-                "ITEM", "PRODUTO", "QUANTIDADE", "VALOR UNITÃRIO", "TOTAL"
+                "ITEM", "PRODUTO", "QUANTIDADE", "VALOR UNITÁRIO", "TOTAL"
             }
         ));
         tblItensVenda.setFocusable(false);
@@ -725,14 +725,15 @@ public class frmPDV extends javax.swing.JDialog{
              JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);
              Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
          }
-         
-         int result = JOptionPane.showConfirmDialog(this, "Deseja imprimir o cupom?","ImprimirCupom",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
-         if(result == 2){
+         Object[] options = {"   Sim   ", "   Não   "};
+         int result = JOptionPane.showOptionDialog(this, "Deseja imprimir o cupom?","ImprimirCupom",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
+         if(result == 1){
             setVisible(false);
          }else{
              frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true, venda);
              frmImpressao.setVisible(true);
          }
+         setVisible(false);
          
          if(cliente.getSaldo().compareTo(BigDecimal.ZERO) > 0){
              //Implementar aqui

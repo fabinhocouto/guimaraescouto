@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+  
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.ClienteDAO;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmAlterarCliente extends javax.swing.JDialog {
 
@@ -69,7 +69,7 @@ public class frmAlterarCliente extends javax.swing.JDialog {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("EndereÃ§o");
+        jLabel2.setText("Endereço");
 
         jLabel3.setText("Telefone");
 

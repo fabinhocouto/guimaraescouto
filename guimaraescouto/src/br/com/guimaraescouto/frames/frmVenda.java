@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 package br.com.guimaraescouto.frames;
 
 import br.com.guimaraescouto.dao.VendaDAO;
@@ -68,7 +68,7 @@ public class frmVenda extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Venda");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("AÃ§Ãµes"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edit.jpg"))); // NOI18N
         jButton2.setText("Alterar");
@@ -155,9 +155,9 @@ public class frmVenda extends javax.swing.JDialog {
 
         jLabel3.setText("Data Venda:");
 
-        jLabel2.setText("CÃ³d Cliente:");
+        jLabel2.setText("Cód Cliente:");
 
-        jLabel1.setText("CÃ³d Venda:");
+        jLabel1.setText("Cód Venda:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
