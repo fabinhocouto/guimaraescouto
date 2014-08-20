@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class Venda implements java.io.Serializable  {
     

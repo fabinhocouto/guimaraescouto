@@ -21,18 +21,18 @@ import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *
- * @author F√°bio Couto
+ * @author F·bio Couto
  */
 public class ReportUtils {
  
     /**
-     * Abre um relat√≥rio usando uma conex√£o como datasource.
+     * Abre um relatÛrio usando uma conex„o como datasource.
      *
-     * @param titulo T√≠tulo usado na janela do relat√≥rio.
-     * @param inputStream InputStream que cont√©m o relat√≥rio.
-     * @param parametros Par√¢metros utilizados pelo relat√≥rio.
-     * @param conexao Conex√£o utilizada para a execu√ß√£o da query.
-     * @throws JRException Caso ocorra algum problema na execu√ß√£o do relat√≥rio
+     * @param titulo T√≠tulo usado na janela do relatÛrio.
+     * @param inputStream InputStream que contÈm o relatÛrio.
+     * @param parametros Par√¢metros utilizados pelo relatÛrio.
+     * @param conexao Conex„o utilizada para a execuÁ„o da query.
+     * @throws JRException Caso ocorra algum problema na execuÁ„o do relatÛrio
      */
     public static void openReport(
             String titulo,
@@ -41,8 +41,8 @@ public class ReportUtils {
             Connection conexao, Frame frame ) throws JRException {
  
         /*
-         * Cria um JasperPrint, que √© a vers√£o preenchida do relat√≥rio,
-         * usando uma conex√£o.
+         * Cria um JasperPrint, que È a vers„o preenchida do relatÛrio,
+         * usando uma conex„o.
          */
         JasperPrint print = JasperFillManager.fillReport(
                 inputStream, parametros, conexao );
@@ -53,13 +53,13 @@ public class ReportUtils {
     }
  
     /**
-     * Abre um relat√≥rio usando um datasource gen√©rico.
+     * Abre um relatÛrio usando um datasource genÈrico.
      *
-     * @param titulo T√≠tulo usado na janela do relat√≥rio.
-     * @param inputStream InputStream que cont√©m o relat√≥rio.
-     * @param parametros Par√¢metros utilizados pelo relat√≥rio.
-     * @param dataSource Datasource a ser utilizado pelo relat√≥rio.
-     * @throws JRException Caso ocorra algum problema na execu√ß√£o do relat√≥rio
+     * @param titulo T√≠tulo usado na janela do relatÛrio.
+     * @param inputStream InputStream que contÈm o relatÛrio.
+     * @param parametros Par√¢metros utilizados pelo relatÛrio.
+     * @param dataSource Datasource a ser utilizado pelo relatÛrio.
+     * @throws JRException Caso ocorra algum problema na execuÁ„o do relatÛrio
      */
     public static void openReport(
             String titulo,
@@ -68,8 +68,8 @@ public class ReportUtils {
             JRDataSource dataSource, Frame frame ) throws JRException {
  
         /*
-         * Cria um JasperPrint, que √© a vers√£o preenchida do relat√≥rio,
-         * usando um datasource gen√©rico.
+         * Cria um JasperPrint, que È a vers„o preenchida do relatÛrio,
+         * usando um datasource genÈrico.
          */
         JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, dataSource );
  
@@ -79,16 +79,16 @@ public class ReportUtils {
     }
  
     /**
-     * Cria um JFrame para exibir o relat√≥rio representado pelo JasperPrint.
+     * Cria um JFrame para exibir o relatÛrio representado pelo JasperPrint.
      *
      * @param titulo T√≠tulo do JFrame.
-     * @param print JasperPrint do relat√≥rio.
+     * @param print JasperPrint do relatÛrio.
      */
     private static void viewReportFrame( String titulo, JasperPrint print, Frame frame ) {
  
         /*
-         * Cria um JRViewer para exibir o relat√≥rio.
-         * Um JRViewer √© uma JPanel.
+         * Cria um JRViewer para exibir o relatÛrio.
+         * Um JRViewer È uma JPanel.
          */
         JRViewer viewer = new JRViewer( print );
  
@@ -100,10 +100,10 @@ public class ReportUtils {
         // adiciona o JRViewer no JFrame
         jDialogRelatorio.add( viewer, BorderLayout.CENTER );
  
-        // configura o tamanho padr√£o do JFrame
+        // configura o tamanho padr„o do JFrame
         jDialogRelatorio.setSize( 900, 500 );
  
-        // configura a opera√ß√£o padr√£o quando o JFrame for fechado.
+        // configura a operaÁ„o padr„o quando o JFrame for fechado.
         jDialogRelatorio.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         jDialogRelatorio.setLocationRelativeTo(null);

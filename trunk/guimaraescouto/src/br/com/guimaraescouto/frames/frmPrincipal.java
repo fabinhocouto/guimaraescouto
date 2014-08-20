@@ -44,7 +44,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmPrincipal extends javax.swing.JFrame {
     
@@ -52,7 +52,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         try{            
            
             //System.load("C:\\DarumaFramework_DLL\\DarumaFrameWork.dll");
-            System.load("C:\\DarumaFramework_DLL64\\DarumaFrameWork.dll");
+            //System.load("C:\\DarumaFramework_DLL64\\DarumaFrameWork.dll");
             System.out.println("Biblioteca carregada!!!");
 
         } catch(Exception e) {
@@ -461,7 +461,7 @@ public class frmPrincipal extends javax.swing.JFrame {
        
         try {
             JRDataSource ds = new JRBeanCollectionDataSource( produtoDAO.retornarProdutosCodigoProprio() );
-            ReportUtils.openReport( "Lista Produtos c/ CÃ³digo PrÃ³prio", inputStream , parametros, ds, new javax.swing.JFrame() );
+            ReportUtils.openReport( "Lista Produtos c/ Código Próprio", inputStream , parametros, ds, new javax.swing.JFrame() );
  
         } catch (JRException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);

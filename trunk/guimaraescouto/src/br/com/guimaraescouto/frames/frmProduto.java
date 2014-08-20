@@ -27,7 +27,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmProduto extends javax.swing.JDialog {
 

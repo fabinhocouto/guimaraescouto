@@ -13,7 +13,7 @@ import javax.swing.text.PlainDocument;
 
 /**
  *
- * @author F√°bio
+ * @author F·bio
  */
 public class FixedLengthDocument extends DocumentFilter {  
     private int iMaxLength;  
@@ -25,7 +25,7 @@ public class FixedLengthDocument extends DocumentFilter {
       
     @Override  
     public void insertString(FilterBypass fb, int offset, String str, AttributeSet attr) throws BadLocationException {  
-        // M√©todo n√£o utilizado, mas sua implementa√ß√£o √© obrigat√≥ria  
+        // MÈtodo n„o utilizado, mas sua implementaÁ„o È obrigatÛria  
     }  
   
     @Override  
@@ -35,10 +35,10 @@ public class FixedLengthDocument extends DocumentFilter {
         // Aceita qualquer n√∫mero de caracteres  
         if (iMaxLength <= 0) {                     
             if(length == 0)  
-                // Se n√£o houver sele√ß√£o no campo, insere a string  
+                // Se n„o houver seleÁ„o no campo, insere a string  
                 fb.insertString(offset, str, attr);  
             else  
-                // Caso tenha sele√ß√£o, substitui o trecho selecionado pela string  
+                // Caso tenha seleÁ„o, substitui o trecho selecionado pela string  
                 fb.replace(offset, length, str, attr);  
               
             return;    
@@ -49,24 +49,24 @@ public class FixedLengthDocument extends DocumentFilter {
         // Se o comprimento final for menor, aceita str  
         if (ilen <= iMaxLength) {  
             if(length == 0)  
-                // Se n√£o houver sele√ß√£o no campo, insere a string  
+                // Se n„o houver seleÁ„o no campo, insere a string  
                 fb.insertString(offset, str, attr);  
             else  
-                // Caso tenha sele√ß√£o, substitui o trecho selecionado pela string  
+                // Caso tenha seleÁ„o, substitui o trecho selecionado pela string  
                 fb.replace(offset, length, str, attr);  
         } else {  
-            // Se o comprimento for igual ao m√°ximo, n√£o faz nada  
+            // Se o comprimento for igual ao m·ximo, n„o faz nada  
             if (fb.getDocument().getLength() == iMaxLength)  
                 return;  
               
-            // Se ainda resta espa√ßo na String, pega os caracteres aceitos  
+            // Se ainda resta espaÁo na String, pega os caracteres aceitos  
             String newStr = str.substring(0, (iMaxLength - fb.getDocument().getLength()));    
               
             if(length == 0)  
-                // Se n√£o houver sele√ß√£o no campo, insere a string  
+                // Se n„o houver seleÁ„o no campo, insere a string  
                 fb.insertString(offset, newStr, attr);  
             else  
-                // Caso tenha sele√ß√£o, substitui o trecho selecionado pela string  
+                // Caso tenha seleÁ„o, substitui o trecho selecionado pela string  
                 fb.replace(offset, length, newStr, attr);  
         }  
     }  

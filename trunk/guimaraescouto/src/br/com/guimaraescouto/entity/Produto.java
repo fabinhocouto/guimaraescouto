@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class Produto implements java.io.Serializable{
     

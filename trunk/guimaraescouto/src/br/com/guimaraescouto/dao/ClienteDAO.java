@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class ClienteDAO extends GenericDAO {
     

@@ -30,7 +30,7 @@ public class MyTableModel extends DefaultTableModel {
     private final JTable tableToControl;
 
     /**
-     * Construtor padr√£o
+     * Construtor padr„o
      *
      * @author Dyego Souza do Carmo
      * @version 1.0, 

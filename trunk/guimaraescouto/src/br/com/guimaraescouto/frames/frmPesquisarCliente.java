@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmPesquisarCliente extends javax.swing.JDialog {
 
@@ -78,6 +78,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
             }
         });
 
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar_new.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.setFocusable(false);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +126,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblCliente);
 
+        btnSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecionar.png"))); // NOI18N
         btnSelecionar.setText("Selecionar");
         btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +134,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

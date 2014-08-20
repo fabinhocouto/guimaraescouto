@@ -113,6 +113,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnPesquisar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/pesquisar_new.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pesquisar"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
@@ -157,6 +160,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnSelecionar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/selecionar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Selecionar"/>
       </Properties>
       <Events>
@@ -165,6 +171,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/cancelar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>

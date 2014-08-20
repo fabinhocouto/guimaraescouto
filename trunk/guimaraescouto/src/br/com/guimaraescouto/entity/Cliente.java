@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class Cliente implements java.io.Serializable{
     

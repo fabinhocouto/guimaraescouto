@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class Pagamento implements java.io.Serializable{
     

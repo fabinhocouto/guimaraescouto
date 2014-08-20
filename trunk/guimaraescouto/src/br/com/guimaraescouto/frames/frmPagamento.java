@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author F√°bio Couto
+ * @author F·bio Couto
  */
 public class frmPagamento extends javax.swing.JDialog {
     
@@ -410,13 +410,13 @@ public class frmPagamento extends javax.swing.JDialog {
                 txtDeve.setText(df.format(totalDebito));
                 
              }else{
-                txtNomeCliente.setText("Cliente n√£o encontrado.");
+                txtNomeCliente.setText("Cliente n„o encontrado.");
                 txtCodCliente.requestFocus();
                 
              }
              
          } catch (Exception ex) {
-             txtNomeCliente.setText("Cliente n√£o encontrado.");
+             txtNomeCliente.setText("Cliente n„o encontrado.");
              txtCodCliente.requestFocus();
          }
     }//GEN-LAST:event_txtCodClienteFocusLost
@@ -456,13 +456,13 @@ public class frmPagamento extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if (txtCodAtendente.getText() == null) {
-            JOptionPane.showMessageDialog(this, "Atendente √© obrigat√≥rio.");
+            JOptionPane.showMessageDialog(this, "Atendente È obrigatÛrio.");
             txtCodAtendente.requestFocus();
             return;
         }
         
         if (atendente.getId() == null) {
-            JOptionPane.showMessageDialog(this, "Atendente n√£o encontrado.");
+            JOptionPane.showMessageDialog(this, "Atendente n„o encontrado.");
             txtCodAtendente.requestFocus();
             return;
         }
