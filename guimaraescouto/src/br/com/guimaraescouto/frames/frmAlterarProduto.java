@@ -20,7 +20,7 @@ import javax.swing.text.AbstractDocument;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmAlterarProduto extends javax.swing.JDialog {
 
@@ -74,6 +74,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
 
         jLabel3.setText("Preço R$");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salvar.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +82,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,20 +127,20 @@ public class frmAlterarProduto extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(239, 239, 239)
-                                .addComponent(jButton1)
-                                .addGap(20, 20, 20)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checkSecao)))
+                                .addComponent(checkSecao))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(208, 208, 208)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -191,13 +193,13 @@ public class frmAlterarProduto extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if ("".equals(txtDescricao.getText().trim())) {
-            JOptionPane.showMessageDialog(this, "Favor adicionar a descriÃ§Ã£o");
+            JOptionPane.showMessageDialog(this, "Favor adicionar a descrição");
             txtDescricao.requestFocus();
             return;
         }
         
         if (!checkSecao.isSelected() && "".equals(txtPreco.getText().trim())) {
-            JOptionPane.showMessageDialog(this, "Favor adicionar o preÃ§o");
+            JOptionPane.showMessageDialog(this, "Favor adicionar o preço");
             txtPreco.requestFocus();
             return;
         }
@@ -206,7 +208,7 @@ public class frmAlterarProduto extends javax.swing.JDialog {
             try {
             Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
             if(produto.getId() != null){
-                JOptionPane.showMessageDialog(this, "JÃ¡ existe um produto cadastrado com este cÃ³digo de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
                 txtDescricao.requestFocus();
                 return;
             }

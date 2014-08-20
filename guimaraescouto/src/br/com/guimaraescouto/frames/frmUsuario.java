@@ -19,7 +19,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmUsuario extends javax.swing.JDialog {
 
@@ -53,7 +53,7 @@ public class frmUsuario extends javax.swing.JDialog {
         tblUsuario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de UsuÃ¡rios do Sistema");
+        setTitle("Cadastro de Usuários do Sistema");
         setResizable(false);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -163,7 +163,7 @@ public class frmUsuario extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if(tblUsuario.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Selecione o usuÃ¡rio a ser atualizado");
+            JOptionPane.showMessageDialog(this, "Selecione o usuário a ser atualizado");
             return;
         }
         frmAlterarUsuario dialog = new frmAlterarUsuario(new javax.swing.JFrame(), true, usuarioDAO,usuarios.get(tblUsuario.getSelectedRow()),this);
@@ -173,17 +173,17 @@ public class frmUsuario extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if(tblUsuario.getSelectedRow() == -1){
-            JOptionPane.showMessageDialog(this, "Selecione o usuÃ¡rio a ser removido");
+            JOptionPane.showMessageDialog(this, "Selecione o usuário a ser removido");
             return;
         }
-        int result = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover?","Remove o usuÃ¡rio selecionado",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja remover?","Remove o usuário selecionado",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(result == 0){
             try {
                 for (int i = 0; i < tblUsuario.getSelectedRows().length; i++) {
                     usuarioDAO.removerUsuario(usuarios.get(tblUsuario.getSelectedRows()[i]).getId());  
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao tentar remover o usuÃ¡rio","Remover UsuÃ¡rio",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao tentar remover o usuário. Existe venda com este usuário.","Remover Usuário",JOptionPane.ERROR_MESSAGE);
             }
         }
         loadInitialData();        
@@ -250,7 +250,7 @@ public class frmUsuario extends javax.swing.JDialog {
             tblUsuario.setRowSorter(sorter);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("Erro carregando UsuÃ¡rio");
+            System.err.println("Erro carregando Usuário");
         }
     }
 }

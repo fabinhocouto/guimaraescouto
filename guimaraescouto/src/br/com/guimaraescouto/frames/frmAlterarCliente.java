@@ -73,6 +73,7 @@ public class frmAlterarCliente extends javax.swing.JDialog {
 
         jLabel3.setText("Telefone");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salvar.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,6 +81,7 @@ public class frmAlterarCliente extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,9 +111,9 @@ public class frmAlterarCliente extends javax.swing.JDialog {
                         .addGap(28, 28, 28)
                         .addComponent(txtNome))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
+                        .addGap(211, 211, 211)
                         .addComponent(jButton1)
-                        .addGap(20, 20, 20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())

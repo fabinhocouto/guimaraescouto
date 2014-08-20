@@ -13,52 +13,35 @@ import br.com.guimaraescouto.dao.UsuarioDAO;
 import br.com.guimaraescouto.dao.VendaDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.ItemVenda;
-import br.com.guimaraescouto.entity.Pagamento;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.entity.Usuario;
 import br.com.guimaraescouto.entity.Venda;
 import static br.com.guimaraescouto.util.ConsideraEnterTab.considerarEnterComoTab;
 import br.com.guimaraescouto.util.JMoneyFieldValor;
-import br.com.guimaraescouto.util.MyCurrencyCellRenderer;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import br.com.guimaraescouto.util.MyTableModel;
-import java.awt.AWTKeyStroke;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-import static javax.swing.SwingConstants.CENTER;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import sun.text.resources.FormatData;
 
 /**
  *
- * @author F√°bio
+ * @author F·bio
  */
 public class frmPDV extends javax.swing.JDialog{
     
@@ -75,7 +58,7 @@ public class frmPDV extends javax.swing.JDialog{
      private Integer quantidade;
      private final DecimalFormat df = new DecimalFormat( "#,##0.00" );
      private boolean flagFinalizar = false;
-     
+          
     /**
      * Creates new form frmVenda
      */
@@ -172,7 +155,8 @@ public class frmPDV extends javax.swing.JDialog{
         txtNomeCliente.setBorder(null);
         txtNomeCliente.setEnabled(false);
 
-        btnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
+        btnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar_new.png"))); // NOI18N
+        btnPesquisarCliente.setText("Pesquisar");
         btnPesquisarCliente.setAlignmentX(0.5F);
         btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,8 +174,8 @@ public class frmPDV extends javax.swing.JDialog{
                 .addGap(20, 20, 20)
                 .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149)
+                .addComponent(btnPesquisarCliente)
+                .addGap(78, 78, 78)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,10 +185,10 @@ public class frmPDV extends javax.swing.JDialog{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
@@ -296,6 +280,7 @@ public class frmPDV extends javax.swing.JDialog{
         tblItensVenda.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tblItensVenda);
 
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salvar.png"))); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,7 +298,8 @@ public class frmPDV extends javax.swing.JDialog{
         txtValorTotalVenda.setDisabledTextColor(new java.awt.Color(255, 51, 51));
         txtValorTotalVenda.setEnabled(false);
 
-        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar.gif"))); // NOI18N
+        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar_new.png"))); // NOI18N
+        btnPesquisarProduto.setText("Pesquisar");
         btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarProdutoActionPerformed(evt);
@@ -347,6 +333,7 @@ public class frmPDV extends javax.swing.JDialog{
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,6 +341,7 @@ public class frmPDV extends javax.swing.JDialog{
             }
         });
 
+        btnExcluirItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deletar.png"))); // NOI18N
         btnExcluirItem.setText("Excluir Item");
         btnExcluirItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,13 +392,13 @@ public class frmPDV extends javax.swing.JDialog{
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel8))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtCodBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel8)))
-                        .addGap(171, 171, 171)
+                                .addComponent(btnPesquisarProduto)))
+                        .addGap(101, 101, 101)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -527,7 +515,7 @@ public class frmPDV extends javax.swing.JDialog{
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(1252, 765));
+        setSize(new java.awt.Dimension(1252, 758));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -565,13 +553,13 @@ public class frmPDV extends javax.swing.JDialog{
                 txtNomeCliente.setText(cliente.getNome());
                 txtCodBarras.requestFocus();
              }else{
-                txtNomeCliente.setText("Cliente n√£o encontrado.");
+                txtNomeCliente.setText("Cliente n„o encontrado.");
                 txtCodCliente.requestFocus();
                 
              }
              
          } catch (Exception ex) {
-             txtNomeCliente.setText("Cliente n√£o encontrado.");
+             txtNomeCliente.setText("Cliente n„o encontrado.");
              txtCodCliente.requestFocus();
          }
     }//GEN-LAST:event_txtCodClienteFocusLost
@@ -588,7 +576,7 @@ public class frmPDV extends javax.swing.JDialog{
                      }
                      produto = produtoDAO.retornaProdutoPorCodBarras(split[1]);
                      if(produto.getId() == null){
-                         int result = JOptionPane.showConfirmDialog(this, "Produto n√£o encontrado. Deseja adicionar?","Produto n√£o encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
+                         int result = JOptionPane.showConfirmDialog(this, "Produto n„o encontrado. Deseja adicionar?","Produto n„o encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                          if(result == 0){
                              frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,null,txtCodBarras.getText());
                              dialog.setVisible(true);
@@ -620,7 +608,7 @@ public class frmPDV extends javax.swing.JDialog{
                      txtCodBarras.setText(txtCodBarras.getText().toUpperCase().replace("P", ""));
                      produto = produtoDAO.retornaProdutoPorCodBarras(txtCodBarras.getText());
                      if(produto.getId() == null){
-                         int result = JOptionPane.showConfirmDialog(this, "Produto n√£o encontrado. Deseja adicionar?","Produto n√£o encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
+                         int result = JOptionPane.showConfirmDialog(this, "Produto n„o encontrado. Deseja adicionar?","Produto n„o encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                          if(result == 0){
                              frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,null,txtCodBarras.getText() );
                              dialog.setVisible(true);
@@ -639,7 +627,7 @@ public class frmPDV extends javax.swing.JDialog{
                  // TODO add your handling code here:
                  produto = produtoDAO.retornaProdutoPorCodBarras(txtCodBarras.getText());
                  if(produto.getId() == null){
-                    int result = JOptionPane.showConfirmDialog(this, "Produto n√£o encontrado. Deseja adicionar?","Produto n√£o encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
+                    int result = JOptionPane.showConfirmDialog(this, "Produto n„o encontrado. Deseja adicionar?","Produto n„o encontrado",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
                     if(result == 0){
                         frmAdicionarProduto dialog = new frmAdicionarProduto(new javax.swing.JFrame(), true, produtoDAO,null,this,null,txtCodBarras.getText() );
                         dialog.setVisible(true);
@@ -698,13 +686,13 @@ public class frmPDV extends javax.swing.JDialog{
         }
         
         if (txtAtendente.getText() == null) {
-            JOptionPane.showMessageDialog(this, "Atendente √© obrigat√≥rio.");
+            JOptionPane.showMessageDialog(this, "Atendente È obrigatÛrio.");
             txtAtendente.requestFocus();
             return;
         }
         
         if (atendente.getId() == null) {
-            JOptionPane.showMessageDialog(this, "Atendente n√£o encontrado.");
+            JOptionPane.showMessageDialog(this, "Atendente È obrigatÛrio.");
             txtAtendente.requestFocus();
             return;
         }
@@ -719,20 +707,16 @@ public class frmPDV extends javax.swing.JDialog{
             itemVenda.setVenda(venda);
         }
         venda.setCliente(cliente);
+        
          try {
              vendaDAO.adicionarVenda(venda, true);
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(this, "Erro ao tentar salvar a venda.","Erro",JOptionPane.ERROR_MESSAGE);
              Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
          }
-         Object[] options = {"   Sim   ", "   N„o   "};
-         int result = JOptionPane.showOptionDialog(this, "Deseja imprimir o cupom?","ImprimirCupom",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[1]);
-         if(result == 1){
-            setVisible(false);
-         }else{
-             frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true, venda);
-             frmImpressao.setVisible(true);
-         }
+         frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true, venda);
+         frmImpressao.setVisible(true);
+         
          setVisible(false);
          
          if(cliente.getSaldo().compareTo(BigDecimal.ZERO) > 0){
@@ -850,7 +834,7 @@ public class frmPDV extends javax.swing.JDialog{
            txtValorUnitario.setText(null);
            txtCodBarras.requestFocus();    
         }else{
-            JOptionPane.showMessageDialog(this, "Favor adicionar o valor unit√°rio.");
+            JOptionPane.showMessageDialog(this, "Favor adicionar o valor unit·rio.");
             txtValorUnitario.requestFocus();
             return;
         }
@@ -867,7 +851,7 @@ public class frmPDV extends javax.swing.JDialog{
             try {
                 atendente = atendenteDAO.retornaUsuario(new Integer(txtAtendente.getText()));
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Erro ao tentar retornar o usu√°rio.","Erro",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro ao tentar retornar o usu·rio.","Erro",JOptionPane.ERROR_MESSAGE);
                 Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -994,7 +978,7 @@ public class frmPDV extends javax.swing.JDialog{
              setSize(screenSize);
              setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
          } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(this, "Erro ao tentar recuperar c√≥digo da venda.","Erro",JOptionPane.ERROR_MESSAGE);
+             JOptionPane.showMessageDialog(this, "Erro ao tentar recuperar cÛdigo da venda.","Erro",JOptionPane.ERROR_MESSAGE);
              Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
          }
     }

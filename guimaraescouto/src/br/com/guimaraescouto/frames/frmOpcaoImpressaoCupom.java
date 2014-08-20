@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
- * @author FÃ¡bio Couto
+ * @author Fábio Couto
  */
 public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
    
@@ -104,6 +105,7 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imprimir.png"))); // NOI18N
         btnImprimir.setText("Imprimir");
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +113,7 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,9 +129,9 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnImprimir)
-                .addGap(60, 60, 60)
+                .addGap(75, 75, 75)
                 .addComponent(btnCancelar)
-                .addGap(73, 73, 73))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,18 +151,22 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
 
         //Verificar porta velocidade
-        DUAL.eBuscarPortaVelocidade();
+        //DUAL.eBuscarPortaVelocidade();
+        //int rertorno = DUAL.iReinicializar();
+        int retorno = DUAL.eBuscarPortaVelocidade();
+        
         //Verificado status da impressora
-        int statusImpressora = DUAL.rStatusImpressora();
-        if(statusImpressora == 1){
+        //int statusImpressora = DUAL.rStatusImpressora();
+        DUAL.regPortaComunicacao("192.168.1.10:2000");
+        if(1 == 1){
             char[] pszRetornar = new char[]{};
-            int statusTampa = DUAL.rConsultaStatusImpressora("6", "1", pszRetornar);
+            //int statusTampa = DUAL.rConsultaStatusImpressora("6", "1", pszRetornar);
             if(1 == 1){
-                int statusPapel = DUAL.rConsultaStatusImpressora("4", "1", pszRetornar);
+                //int statusPapel = DUAL.rConsultaStatusImpressora("4", "1", pszRetornar);
                 if(0 == 0){
-                    int statusOperacional = DUAL.rConsultaStatusImpressora("2", "1", pszRetornar);
+                    //int statusOperacional = DUAL.rConsultaStatusImpressora("2", "1", pszRetornar);
                     if(0 == 0){
-                       int statusAtual = DUAL.rConsultaStatusImpressora("1", "1", pszRetornar);
+                       //int statusAtual = DUAL.rConsultaStatusImpressora("1", "0", pszRetornar);
                         if(0 == 0){
                             //Cabecalho
                             DUAL.iImprimirTexto("<e><ce>SUPERMERCADO</ce></e><l></l>"+
@@ -177,7 +184,10 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
                             "<tc>_</tc>",0);
                             DUAL.iImprimirTexto("<b>Descrição<tb>Qtd<tb>Preço<tb>Total</b>",0);
                             if(rdoImpressaoCompleta.isSelected()){
-                                for (ItemVenda itemVenda : venda.getItens()) {
+                                List<ItemVenda> itens = new ArrayList<ItemVenda>();
+                                itens.addAll(venda.getItens());
+                                Collections.reverse(itens);
+                                for (ItemVenda itemVenda : itens) {
                                     String descricao = "";
                                     if(itemVenda.getProduto().getDescricao().length()>26){
                                         descricao = itemVenda.getProduto().getDescricao().substring(0,26);
@@ -191,13 +201,13 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
                             }
                             
                             //Rodape
-                            DUAL.iImprimirTexto("<ad>____________</ad>",0);
-                            DUAL.iImprimirTexto("<b><e>Total R$<ad>"+df.format(venda.getTotal())+"</ad></e></b>",0);
-                            DUAL.iImprimirTexto("<sl>2</sl>",0);
-                            DUAL.iImprimirTexto("<ce>_________________________________</ce>",0);
-                            DUAL.iImprimirTexto("<ce>Assinatura</ce>",0);
-                            DUAL.iImprimirTexto("<ce>Obrigado pela preferência. Volte sempre.</ce>",0);
-                            DUAL.iImprimirTexto("<sl>3</sl>",0);
+                            DUAL.iImprimirTexto("<ad>____________</ad><l></l>"+
+                            "<b><e>Total R$<ad>"+df.format(venda.getTotal())+"</ad></e></b>"+
+                            "<sl>2</sl>"+
+                            "<ce>_________________________________</ce><l></l>"+
+                            "<ce>Assinatura</ce><l></l>"+
+                            "<ce>Obrigado pela preferência. Volte sempre.</ce>"+
+                            "<sl>3</sl>",0);
                             DUAL.iImprimirTexto("<gui></gui>",0);
                         }else{
                             JOptionPane.showMessageDialog(this, "Impressora em uso.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
@@ -211,10 +221,11 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(this, "Impressora com a tampa aberta.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
             }
+            setVisible(false);
         }else{
             JOptionPane.showMessageDialog(this, "Impressora delisgada.","Erro imprimir",JOptionPane.ERROR_MESSAGE);
         }
-        setVisible(false);
+        
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

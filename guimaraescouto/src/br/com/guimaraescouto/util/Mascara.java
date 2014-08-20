@@ -12,7 +12,7 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class Mascara {
     

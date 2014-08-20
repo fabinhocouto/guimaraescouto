@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class Fornecedor implements java.io.Serializable{
     

@@ -24,7 +24,7 @@ public class MyCurrencyCellRenderer extends DefaultTableCellRenderer {
 
     
     /**
-     * Construtor padr√£o
+     * Construtor padr„o
      *
      * @author Dyego Souza do Carmo
      * @version 1.0, 

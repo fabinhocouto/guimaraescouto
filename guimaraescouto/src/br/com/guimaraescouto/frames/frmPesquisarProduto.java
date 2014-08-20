@@ -25,7 +25,7 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmPesquisarProduto extends javax.swing.JDialog {
 
@@ -85,6 +85,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
             }
         });
 
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar_new.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.setFocusable(false);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +133,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblProduto);
 
+        btnSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selecionar.png"))); // NOI18N
         btnSelecionar.setText("Selecionar");
         btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +141,7 @@ public class frmPesquisarProduto extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

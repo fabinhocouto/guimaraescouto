@@ -27,7 +27,7 @@ public class MyImageCellRenderer extends DefaultTableCellRenderer {
     private Border borderToSee;
 
     /**
-     * Construtor padr√£o
+     * Construtor padr„o
      *
      * @author Dyego Souza do Carmo
      * @version 1.0, 

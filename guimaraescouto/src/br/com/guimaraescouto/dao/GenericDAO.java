@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public abstract class GenericDAO {
     

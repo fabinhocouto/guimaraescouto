@@ -24,7 +24,7 @@ public class MyGenericCellRenderer extends DefaultTableCellRenderer {
 
     
     /**
-     * Construtor padr√£o
+     * Construtor padr„o
      *
      * @author Dyego Souza do Carmo
      * @version 1.0, 
@@ -41,7 +41,7 @@ public class MyGenericCellRenderer extends DefaultTableCellRenderer {
         } else if (value != null
                 && value instanceof Boolean) {
             Boolean valor = (Boolean) value;
-            super.setValue(true == valor?"Sim":"N√£o");
+            super.setValue(true == valor?"Sim":"N„o");
         } else if(value != null
                 && value instanceof Date){
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

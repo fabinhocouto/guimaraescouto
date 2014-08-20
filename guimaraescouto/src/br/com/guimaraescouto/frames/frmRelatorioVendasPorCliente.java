@@ -36,7 +36,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
- * @author FÃ¡bio Couto
+ * @author Fábio Couto
  */
 public class frmRelatorioVendasPorCliente extends javax.swing.JDialog {
     
@@ -189,7 +189,7 @@ public class frmRelatorioVendasPorCliente extends javax.swing.JDialog {
        
         try {
             JRDataSource ds = new JRBeanCollectionDataSource( produtosSelecionados );
-            ReportUtils.openReport( "Etiquetas de preÃ§o", inputStream , parametros, ds, new javax.swing.JFrame() );
+            ReportUtils.openReport( "Etiquetas de preço", inputStream , parametros, ds, new javax.swing.JFrame() );
         }  catch (JRException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

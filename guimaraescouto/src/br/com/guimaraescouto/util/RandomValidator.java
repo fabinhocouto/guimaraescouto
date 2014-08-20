@@ -8,7 +8,7 @@ package br.com.guimaraescouto.util;
  
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 import javax.swing.text.AttributeSet;  
 import javax.swing.text.BadLocationException;  
@@ -19,32 +19,32 @@ import javax.swing.text.BadLocationException;
 */  
 public class RandomValidator extends FixedLengthDocument {  
     /** 
-     * Determina quais caracteres especiais serÃ£o permitidos 
+     * Determina quais caracteres especiais serão permitidos 
      */  
     private char[] specialCharactersAllowed;  
       
     /** 
-     * Determina se qualquer caracter especial poderÃ¡ ser digitado 
+     * Determina se qualquer caracter especial poderá ser digitado 
      */  
     private boolean allSpecialCharacterAllowed;  
       
     /**  
-     * Determina se nÃºmeros serÃ£o permitidos 
+     * Determina se nÃºmeros serão permitidos 
      */  
     private boolean intAllowed;  
       
     /** 
-     * Determina se letras serÃ£o permitidos 
+     * Determina se letras serão permitidos 
      */  
     private boolean lettersAllowed;  
       
     /** 
-     * Determina se farÃ¡ validaÃ§Ã£o de ponto flutuante 
+     * Determina se fará validação de ponto flutuante 
      */  
     private boolean floatValidation;  
       
     /** 
-     * Verifica se jÃ¡ existe ponto na string 
+     * Verifica se já existe ponto na string 
      */  
     private boolean point;  
       
@@ -59,7 +59,7 @@ public class RandomValidator extends FixedLengthDocument {
       
     @Override  
     public void insertString(FilterBypass fb, int offset, String str, AttributeSet attr) throws BadLocationException {  
-        // MÃ©todo nÃ£o utilizado, mas sua implementaÃ§Ã£o Ã© obrigatÃ³ria  
+        // Método não utilizado, mas sua implementação é obrigatória  
     }  
   
     @Override  
@@ -69,7 +69,7 @@ public class RandomValidator extends FixedLengthDocument {
           
         // Se for validar ponto flutuante  
         if (floatValidation) {  
-            // Caso tenha seleÃ§Ã£o, verifica se hÃ¡ ponto na seleÃ§Ã£o, se houver, ele serÃ¡ apagado e um novo ponto pode ser digitado  
+            // Caso tenha seleção, verifica se há ponto na seleção, se houver, ele será apagado e um novo ponto pode ser digitado  
             if(length > 0)  
                 for(int i=0;i<length;i++) {  
                     c = fb.getDocument().getText(offset, length).charAt(i);  
@@ -79,7 +79,7 @@ public class RandomValidator extends FixedLengthDocument {
                         break;  
                     }  
                 }  
-            // Se nÃ£o houver seleÃ§Ã£o, verifica se hÃ¡ ponto na string inteira  
+            // Se não houver seleção, verifica se há ponto na string inteira  
             else  
                 for(int i=0;i<fb.getDocument().getLength();i++) {  
                     c = fb.getDocument().getText(0, fb.getDocument().getLength()).charAt(i);  
@@ -101,21 +101,21 @@ public class RandomValidator extends FixedLengthDocument {
             // Armazena o caracter  
             c = str.charAt(i);  
               
-            // Se o caracter for numÃ©rico e nÃ£o for permitido nÃºmeros  
+            // Se o caracter for numérico e não for permitido nÃºmeros  
             if(Character.isDigit(c) && !intAllowed) {  
                 n = 0;  
                 isDigit = true;    
             } else if(Character.isDigit(c))  
                 isDigit = true;  
               
-            // Se o caracter for letra e nÃ£o for permitido letras  
+            // Se o caracter for letra e não for permitido letras  
             if((Character.getNumericValue(c) >= 10 && Character.getNumericValue(c) <= 35) && (!lettersAllowed || floatValidation)) {  
                 n = 0;  
                 isLetter = true;  
             } else if(Character.getNumericValue(c) >= 10 && Character.getNumericValue(c) <= 35)  
                 isLetter = true;  
               
-            // VerificaÃ§Ã£o de caracteres especiais  
+            // Verificação de caracteres especiais  
             if (!allSpecialCharacterAllowed && specialCharactersAllowed.length > 0 && !isLetter && !isDigit)  
                 for(int k=0;k<specialCharactersAllowed.length;k++)  
                     if(c != specialCharactersAllowed[k])  
@@ -131,10 +131,10 @@ public class RandomValidator extends FixedLengthDocument {
               
             // Se estiver validando ponto flutuante  
             if (floatValidation) {              
-                // Se for um ponto e jÃ¡ ouver um ponto na string  
+                // Se for um ponto e já ouver um ponto na string  
                 if ((c == '.') & point)  
                     n = 0;  
-                // Se for um ponto e nÃ£o houver ponto na string  
+                // Se for um ponto e não houver ponto na string  
                 else if (c == '.') {  
                     n = 1;  
                     point = true;  
@@ -142,7 +142,7 @@ public class RandomValidator extends FixedLengthDocument {
             }  
         }  
           
-        // Se n nÃ£o for igual a zero, todos os caracteres sÃ£o permitidos  
+        // Se n não for igual a zero, todos os caracteres são permitidos  
         if(n != 0)  
             super.replace(fb, offset, length, str, attr);  
     }  

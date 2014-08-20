@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class PagamentoDAO extends GenericDAO{
     

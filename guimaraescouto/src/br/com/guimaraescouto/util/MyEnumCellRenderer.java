@@ -20,7 +20,7 @@ public class MyEnumCellRenderer extends DefaultTableCellRenderer {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Construtor padr√£o
+     * Construtor padr„o
      *
      * @author Dyego Souza do Carmo
      * @version 1.0, 

@@ -14,7 +14,7 @@ import java.math.RoundingMode;
 
 /**
  *
- * @author FÃ¡bio Couto
+ * @author Fábio Couto
  */
 public class DecimalFormattedField extends JFormattedTextField {  
   
@@ -29,17 +29,17 @@ public class DecimalFormattedField extends JFormattedTextField {
     /**Valor inserido no campo*/  
     private double dValue = 0.0;  
       
-    /**Ultimo valor vÃ¡lido*/  
+    /**Ultimo valor válido*/  
     private String oldValue = "0.00";  
       
-    /**String que serÃ¡ exibida em caso de valor invÃ¡lido ou fora do formato*/  
-    public static final String ERRO = "Valor invÃ¡lido";  
+    /**String que será exibida em caso de valor inválido ou fora do formato*/  
+    public static final String ERRO = "Valor inválido";  
       
   
     /** 
      * Cria um novo objeto DecimalFormattedField, com o formato especificado 
      *  
-     * @param formato Uma String que serÃ¡ o formato (pattern) do DecimalFormat a ser utilizado 
+     * @param formato Uma String que será o formato (pattern) do DecimalFormat a ser utilizado 
      */  
     public DecimalFormattedField(String formato) {  
         super();  
@@ -68,7 +68,7 @@ public class DecimalFormattedField extends JFormattedTextField {
     }  
   
     /** 
-     * Cria as aÃ§Ãµes de focus para setar e verificar os valores digitados 
+     * Cria as açãµes de focus para setar e verificar os valores digitados 
      */  
     private void applyActions() {  
   
@@ -95,7 +95,7 @@ public class DecimalFormattedField extends JFormattedTextField {
   
     }  
   
-    /**Verifica se o valor digitado Ã© vÃ¡lido, e insere os novos valores*/  
+    /**Verifica se o valor digitado é válido, e insere os novos valores*/  
     public void thisFocusLost(FocusEvent evt) {  
         String valor = getText().replace(',', '.');  
         if (!valor.equals("") && !valor.trim().isEmpty()) {  
@@ -115,7 +115,7 @@ public class DecimalFormattedField extends JFormattedTextField {
         try {  
             dValue = arredondar(Double.parseDouble(value));              
         } catch (Exception e) {  
-            /**Aqui o valor Ã© invÃ¡lido, entÃ£o coloca novamente o valor antigo*/  
+            /**Aqui o valor é inválido, então coloca novamente o valor antigo*/  
             value = oldValue;  
         }  
         showValue(value);  
@@ -132,14 +132,14 @@ public class DecimalFormattedField extends JFormattedTextField {
     }  
   
     /** 
-     * Mostra o valor formatado no padrÃ£o do DecimalFormat 
+     * Mostra o valor formatado no padrão do DecimalFormat 
      * @param s valor informado no campo 
      */  
     public void showValue(String s) {  
         try {  
             super.setText(df.format(new java.math.BigDecimal(s)));  
         } catch (Exception e) {  
-            /**Valor invÃ¡lido, exibe mensagem de erro*/  
+            /**Valor inválido, exibe mensagem de erro*/  
             error();  
             dValue = Double.NaN;  
         }  
@@ -179,7 +179,7 @@ public class DecimalFormattedField extends JFormattedTextField {
         this.thisFocusLost(null);  
     }  
   
-    /**Arredondamento para corrigir possÃ­veis diferenÃ§as em decimal do valor exibido com o valor retornado*/  
+    /**Arredondamento para corrigir possÃ­veis diferenças em decimal do valor exibido com o valor retornado*/  
     public double arredondar(double d) {  
         if (d > 0) {  
             return (Math.ceil((d * 100.0))) / 100.0;  

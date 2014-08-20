@@ -23,7 +23,7 @@ import javax.swing.text.AbstractDocument;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmAdicionarProduto extends javax.swing.JDialog {
 
@@ -79,6 +79,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
 
         jLabel3.setText("Preço R$");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salvar.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +87,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,31 +129,33 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescricao)
-                            .addComponent(txtCodigoBarras)))
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(13, 13, 13)
-                        .addComponent(checkSecao)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(239, 239, 239)
+                                .addGap(206, 206, 206)
                                 .addComponent(jButton1)
-                                .addGap(20, 20, 20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(13, 13, 13)
+                                        .addComponent(checkSecao)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +176,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -202,18 +206,18 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if ("".equals(txtCodigoBarras.getText().trim())) {
-            JOptionPane.showMessageDialog(this, "Favor adicionar o cÃ³digo de barras");
+            JOptionPane.showMessageDialog(this, "Favor adicionar o código de barras");
             txtCodigoBarras.requestFocus();
             return;
         }
         if ("".equals(txtDescricao.getText().trim())) {
-            JOptionPane.showMessageDialog(this, "Favor adicionar a descriÃ§Ã£o");
+            JOptionPane.showMessageDialog(this, "Favor adicionar a descrição");
             txtDescricao.requestFocus();
             return;
         }
         
         if (!checkSecao.isSelected() && "".equals(txtPreco.getText().trim())) {
-            JOptionPane.showMessageDialog(this, "Favor adicionar o preÃ§o");
+            JOptionPane.showMessageDialog(this, "Favor adicionar o preço");
             txtPreco.requestFocus();
             return;
         }
@@ -221,7 +225,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
         try {
             Produto produto = produtoDAO.retornaProdutoPorCodBarras(txtCodigoBarras.getText());
             if(produto.getId() != null){
-                JOptionPane.showMessageDialog(this, "JÃ¡ existe um produto cadastrado com este cÃ³digo de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
                 txtCodigoBarras.requestFocus();
                 return;
             }
@@ -295,7 +299,7 @@ public class frmAdicionarProduto extends javax.swing.JDialog {
                     txtPreco.setText(String.valueOf(produto.getPreco()));
                 }
                 checkSecao.setSelected(produto.getSecao());
-                JOptionPane.showMessageDialog(this, "JÃ¡ existe um produto cadastrado com este cÃ³digo de barras","Erro",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Já existe um produto cadastrado com este código de barras","Erro",JOptionPane.ERROR_MESSAGE);
                 txtDescricao.requestFocus();
                 return;
             }else{

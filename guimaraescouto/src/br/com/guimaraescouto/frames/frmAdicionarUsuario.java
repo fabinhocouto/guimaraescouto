@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author FÃ¡bio
+ * @author Fábio
  */
 public class frmAdicionarUsuario extends javax.swing.JDialog {
 
@@ -75,6 +75,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salvar.png"))); // NOI18N
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +83,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,11 +97,11 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNome))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
@@ -117,7 +119,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtSenhaConfirmacao, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +180,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
         }
         
         if ("".equals(txtUsuario.getText().trim())) {
-            JOptionPane.showMessageDialog(this, "Favor adicionar o usuÃ¡rio");
+            JOptionPane.showMessageDialog(this, "Favor adicionar o usuário");
             txtUsuario.requestFocus();
             return;
         }
@@ -190,11 +192,11 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
         }
         
         if(!txtSenha.getText().equals(txtSenhaConfirmacao.getText())){
-            JOptionPane.showMessageDialog(this, "Senha diferente da Senha de ConfirmaÃ§Ã£o","AtenÃ§Ã£o",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Senha diferente da Senha de Confirmação","Atenção",JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        int result = JOptionPane.showConfirmDialog(this, "Deseja adicionar o usuÃ¡rio?","Adicionar UsuÃ¡rio",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(this, "Deseja adicionar o usuário?","Adicionar Usuário",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(result == 2){
             return;
         }
@@ -207,7 +209,7 @@ public class frmAdicionarUsuario extends javax.swing.JDialog {
             usuarioDAO.adicionarUsuario(usuario);
         } catch (SQLException ex) {
             System.err.println("Erro" + ex);
-            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar usuÃ¡rio.","Erro",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao tentar adicionar usuário.","Erro",JOptionPane.ERROR_MESSAGE);
             return;
         }
         control.loadInitialData();
