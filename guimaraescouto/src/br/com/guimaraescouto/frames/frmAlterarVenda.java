@@ -207,13 +207,14 @@ public class frmAlterarVenda extends javax.swing.JDialog{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(2, 2, 2)
-                            .addComponent(btnPesquisarCliente)))
+                            .addComponent(btnPesquisarCliente))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
                 .addContainerGap())
         );
@@ -695,28 +696,33 @@ public class frmAlterarVenda extends javax.swing.JDialog{
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
+        btnSalvar.setEnabled(false);
         if (cliente == null
                 || cliente.getId() == null) {
             JOptionPane.showMessageDialog(this, "Favor adicionar o cliente");
             txtCodCliente.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         if (itensVenda == null
                 || itensVenda.size() < 1) {
             JOptionPane.showMessageDialog(this, "Favor adicionar pelo menos um item.");
             txtCodBarras.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         
         if (txtAtendente.getText() == null) {
             JOptionPane.showMessageDialog(this, "Atendente é obrigatório.");
             txtAtendente.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         
         if (atendente.getId() == null) {
             JOptionPane.showMessageDialog(this, "Atendente não encontrado.");
             txtAtendente.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         

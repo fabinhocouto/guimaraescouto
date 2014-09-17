@@ -51,7 +51,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     static{        
         try{            
            
-            //System.load("C:\\DarumaFramework_DLL\\DarumaFrameWork.dll");
+            System.load("C:\\DarumaFramework_DLL\\DarumaFrameWork.dll");
             //System.load("C:\\DarumaFramework_DLL64\\DarumaFrameWork.dll");
             System.out.println("Biblioteca carregada!!!");
 
@@ -303,7 +303,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Versão 1.1 07/14");
+        jLabel1.setText("Versão 2.0 08/14");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Outros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
@@ -508,8 +508,8 @@ public class frmPrincipal extends javax.swing.JFrame {
             item.setProduto(produto);
             itensVenda.add(item);
         venda.setItens(itensVenda);
-        frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true,venda);
-             frmImpressao.setVisible(true);
+      //  frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true,venda);
+      //       frmImpressao.setVisible(true);
     }//GEN-LAST:event_btnUsuario3ActionPerformed
 
     /**
