@@ -672,31 +672,36 @@ public class frmPDV extends javax.swing.JDialog{
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
+        btnSalvar.setEnabled(false);
         if (cliente == null
                 || cliente.getId() == null) {
             JOptionPane.showMessageDialog(this, "Favor adicionar o cliente");
             txtCodCliente.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         if (itensVenda == null
                 || itensVenda.size() < 1) {
             JOptionPane.showMessageDialog(this, "Favor adicionar pelo menos um item.");
             txtCodBarras.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         
         if (txtAtendente.getText() == null) {
             JOptionPane.showMessageDialog(this, "Atendente é obrigatório.");
             txtAtendente.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
         
         if (atendente.getId() == null) {
             JOptionPane.showMessageDialog(this, "Atendente é obrigatório.");
             txtAtendente.requestFocus();
+            btnSalvar.setEnabled(true);
             return;
         }
-        
+       
         Venda venda = new Venda();
         venda.setId(new Integer(txtNumVenda.getText()));
         venda.setDataVenda(new java.sql.Timestamp(new java.util.Date().getTime()));

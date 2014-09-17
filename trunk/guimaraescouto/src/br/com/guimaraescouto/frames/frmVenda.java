@@ -370,7 +370,7 @@ public class frmVenda extends javax.swing.JDialog {
         modeloDaColuna.getColumn(0).setMaxWidth(90); 
         modeloDaColuna.getColumn(0).setCellRenderer(rendererCentro);
         modeloDaColuna.getColumn(1).setMaxWidth(500); 
-        modeloDaColuna.getColumn(2).setMaxWidth(90); 
+        modeloDaColuna.getColumn(2).setMaxWidth(100); 
         modeloDaColuna.getColumn(3).setMaxWidth(100); 
         modeloDaColuna.getColumn(4).setMaxWidth(200);
     }
