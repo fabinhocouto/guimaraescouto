@@ -9,6 +9,7 @@ package br.com.guimaraescouto.frames;
 import br.com.guimaraescouto.dao.VendaDAO;
 import br.com.guimaraescouto.entity.Cliente;
 import br.com.guimaraescouto.entity.Venda;
+import br.com.guimaraescouto.util.Mascara;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import br.com.guimaraescouto.util.MyTableModel;
 import java.sql.SQLException;
@@ -63,7 +64,10 @@ public class frmVenda extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtDataVenda = new javax.swing.JTextField();
+        txtData = new javax.swing.JFormattedTextField();
+        btnPesquisarCliente = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtNomeCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Venda");
@@ -159,6 +163,22 @@ public class frmVenda extends javax.swing.JDialog {
 
         jLabel1.setText("Cód Venda:");
 
+        btnPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pesquisar_new.png"))); // NOI18N
+        btnPesquisarCliente.setText("Pesquisar");
+        btnPesquisarCliente.setAlignmentX(0.5F);
+        btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel4.setText("Nome:");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        txtNomeCliente.setBorder(null);
+        txtNomeCliente.setEnabled(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -173,7 +193,13 @@ public class frmVenda extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtCodCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
                     .addComponent(txtCodVenda)
-                    .addComponent(txtDataVenda))
+                    .addComponent(txtData))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPesquisarCliente)
+                .addGap(60, 60, 60)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -184,13 +210,18 @@ public class frmVenda extends javax.swing.JDialog {
                     .addComponent(jLabel1)
                     .addComponent(txtCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -212,7 +243,7 @@ public class frmVenda extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -271,7 +302,7 @@ public class frmVenda extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            vendas = vendaDAO.retornarCemUltimasVendas(txtCodVenda.getText(),txtCodCliente.getText(),txtDataVenda.getText());
+            vendas = vendaDAO.retornarCemUltimasVendas(txtCodVenda.getText(),txtCodCliente.getText(),txtData.getText());
             MyTableModel tableModel = new MyTableModel(Venda.class, vendas, tblVenda );
             tblVenda.setModel(tableModel);
             tblVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
@@ -288,6 +319,16 @@ public class frmVenda extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodVendaActionPerformed
 
+    private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
+        // TODO add your handling code here:
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, null, null, this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarClienteActionPerformed
+
+    public void refreshCliente(String id, String nome) {
+         txtCodCliente.setText(id);
+         txtNomeCliente.setText(nome);
+    }
     /**
      * @param args the command line arguments
      */
@@ -331,6 +372,7 @@ public class frmVenda extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -338,6 +380,7 @@ public class frmVenda extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -345,19 +388,21 @@ public class frmVenda extends javax.swing.JDialog {
     private javax.swing.JTable tblVenda;
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtCodVenda;
-    private javax.swing.JTextField txtDataVenda;
+    private javax.swing.JFormattedTextField txtData;
+    private javax.swing.JTextField txtNomeCliente;
     // End of variables declaration//GEN-END:variables
 
     public void loadInitialData() {
         try {
-            vendas = vendaDAO.retornarCemUltimasVendas(txtCodVenda.getText(),txtCodCliente.getText(),txtDataVenda.getText());
+            vendas = vendaDAO.retornarCemUltimasVendas(txtCodVenda.getText(),txtCodCliente.getText(),txtData.getText());
             MyTableModel tableModel = new MyTableModel(Venda.class, vendas, tblVenda );
             tblVenda.setModel(tableModel);
             tblVenda.setDefaultRenderer(Object.class, new MyGenericCellRenderer());
             RowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>(tableModel);
             tblVenda.setRowSorter(sorter);
             setaTamanhoColunasTabela(tblVenda);
-        } catch (SQLException ex) {
+            Mascara.mascaraData(txtData);
+        } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println("Erro carregando Vendas");
         }

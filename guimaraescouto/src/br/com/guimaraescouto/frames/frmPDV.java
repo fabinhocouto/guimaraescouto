@@ -525,14 +525,19 @@ public class frmPDV extends javax.swing.JDialog{
 
     private void btnPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarClienteActionPerformed
         // TODO add your handling code here:
-        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null, null);
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null, null, null);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
 
     public void refreshCliente(String id, String nome) {
-        txtCodCliente.setText(id);
-        txtNomeCliente.setText(nome);
-        txtCodBarras.requestFocus();
+         try {
+             txtCodCliente.setText(id);
+             txtNomeCliente.setText(nome);
+             cliente = clienteDAO.retornaClientePorId(new Integer(txtCodCliente.getText()));
+             txtCodBarras.requestFocus();
+         } catch (SQLException ex) {
+             Logger.getLogger(frmPDV.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     
     public void refreshProduto(String codigoBarras) {
@@ -804,7 +809,7 @@ public class frmPDV extends javax.swing.JDialog{
     private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F1){
-            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null, null);
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, this, null, null, null);
             dialog.setVisible(true);
         }else if(evt.getKeyCode() == KeyEvent.VK_F3){
             flagFinalizar = true;

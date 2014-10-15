@@ -423,7 +423,7 @@ public class frmPagamento extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, this, null);
+        frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, this, null,null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -508,7 +508,7 @@ public class frmPagamento extends javax.swing.JDialog {
     private void txtCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodClienteKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() == KeyEvent.VK_F1){
-            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, this, null);
+            frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null, this, null, null);
             dialog.setVisible(true);
         }
     }//GEN-LAST:event_txtCodClienteKeyPressed

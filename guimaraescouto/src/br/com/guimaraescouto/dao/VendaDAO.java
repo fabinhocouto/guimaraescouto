@@ -200,7 +200,7 @@ public class VendaDAO extends GenericDAO{
             query.append(" and VEN.ID_CLIENTE = "+ codCliente);
         }
         if(!"".equals(dataVenda)){
-            //query.append(" and VEN.DATA_VENDA = "+ dataVenda);
+            query.append(" and TO_CHAR(VEN.DATA_VENDA,'dd/MM/yyyy') = '"+ dataVenda+"'");
         }
         
         query.append(" order by ven.id desc");

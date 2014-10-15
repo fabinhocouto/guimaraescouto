@@ -51,7 +51,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     static{        
         try{            
            
-            System.load("C:\\DarumaFramework_DLL\\DarumaFrameWork.dll");
+            //System.load("C:\\DarumaFramework_DLL\\DarumaFrameWork.dll");
             //System.load("C:\\DarumaFramework_DLL64\\DarumaFrameWork.dll");
             System.out.println("Biblioteca carregada!!!");
 
