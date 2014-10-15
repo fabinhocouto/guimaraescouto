@@ -28,14 +28,16 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
     private List<Cliente> clientes;
     private frmPDV pdvForm;
     private frmPagamento pagamentoForm;
-    private frmAlterarVenda vendaForm;
+    private frmAlterarVenda alterarVendaForm;
+    private frmVenda vendaForm;
     /**
      * Creates new form frmCliente
      */
-    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmPDV pdvForm, frmPagamento pagamentoForm, frmAlterarVenda vendaForm) {
+    public frmPesquisarCliente(java.awt.Frame parent, boolean modal, frmPDV pdvForm, frmPagamento pagamentoForm, frmAlterarVenda alterarVendaForm, frmVenda vendaForm) {
         super(parent, modal);
         this.pdvForm = pdvForm;
         this.pagamentoForm = pagamentoForm;
+        this.alterarVendaForm = alterarVendaForm;
         this.vendaForm = vendaForm;
         initComponents();
         loadInitialData();
@@ -249,7 +251,7 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null,null,null);
+                frmPesquisarCliente dialog = new frmPesquisarCliente(new javax.swing.JFrame(), true, null,null,null,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -288,6 +290,8 @@ public class frmPesquisarCliente extends javax.swing.JDialog {
             pdvForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
         }else if(pagamentoForm != null){
             pagamentoForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
+        }else if(alterarVendaForm != null){
+            alterarVendaForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
         }else if(vendaForm != null){
             vendaForm.refreshCliente(clienteSelecionado.getId().toString(), clienteSelecionado.getNome());
         }

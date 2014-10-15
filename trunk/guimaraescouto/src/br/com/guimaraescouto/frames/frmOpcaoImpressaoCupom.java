@@ -11,6 +11,7 @@ import br.com.guimaraescouto.dao.ProdutoDAO;
 import br.com.guimaraescouto.entity.ItemVenda;
 import br.com.guimaraescouto.entity.Produto;
 import br.com.guimaraescouto.entity.Venda;
+import br.com.guimaraescouto.util.ConsideraEnterTab;
 import br.com.guimaraescouto.util.MyGenericCellRenderer;
 import br.com.guimaraescouto.util.MyTableModel;
 import br.com.guimaraescouto.util.ReportUtils;
@@ -256,6 +257,9 @@ public class frmOpcaoImpressaoCupom extends javax.swing.JDialog {
         rdoGrupo.add(rdoImpressaoResumida);
         rdoGrupo.add(rdoImpressaoCompletaEResumida);
         rdoImpressaoCompleta.setSelected(true);
+        ConsideraEnterTab.considerarEnterComoTab(rdoImpressaoCompleta);
+        ConsideraEnterTab.considerarEnterComoTab(rdoImpressaoResumida);
+        ConsideraEnterTab.considerarEnterComoTab(rdoImpressaoCompletaEResumida);
     }
  
 }

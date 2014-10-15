@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listaProdutosCodigoProprio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c72b641-8df4-4822-9378-17f449db5648">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="339"/>
+	<property name="ireport.y" value="48"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<subDataset name="dataset1" uuid="8b07c8c2-055f-4d96-a4c2-5aa78dd7a253"/>
+	<parameter name="IMAGEM_DIR" class="java.lang.String"/>
+	<parameter name="DATA_VENDA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="51" uuid="8a8bb7fe-34bd-40dc-b4b8-2dd0ca2a4227"/>
+			</rectangle>
+			<image>
+				<reportElement x="11" y="6" width="67" height="39" uuid="88d400ee-d68d-422e-9827-63b4eddd66e0"/>
+				<imageExpression><![CDATA[$P{IMAGEM_DIR}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="149" y="12" width="340" height="33" uuid="cabfa227-f8f2-4301-97d5-1dba1fe7a7d2"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="28">
+			<staticText>
+				<reportElement x="0" y="8" width="100" height="20" uuid="254999ef-a18b-4ce8-b8e9-a15a786c2ea0"/>
+				<text><![CDATA[Cód Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="8" width="100" height="20" uuid="c18da714-69e9-4d34-9ec2-6952f3f1aee8"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="8" width="100" height="20" uuid="c576708f-0734-42ee-b22f-550f4a577e1f"/>
+				<text><![CDATA[Data Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="8" width="100" height="20" uuid="4853e97b-5812-4a32-9c95-0d6593a07e8c"/>
+				<text><![CDATA[Total Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="8" width="100" height="20" uuid="66026930-9b60-4e05-a602-a1ae968e846f"/>
+				<text><![CDATA[Atendente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+</jasperReport>
