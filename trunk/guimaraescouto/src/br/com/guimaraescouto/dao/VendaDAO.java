@@ -185,7 +185,7 @@ public class VendaDAO extends GenericDAO{
         return retorno;
     }
     
-    public List<Venda> retornarCemUltimasVendas(String codVenda, String codCliente, String dataVenda) throws SQLException {
+    public List<Venda> retornarCemUltimasVendas(String codVenda, String codCliente, String dataVendaInicio, String dataVendaFim) throws SQLException {
         List<Venda> retorno = new LinkedList<Venda>();
         StringBuffer query = new StringBuffer();
         query.append("select VEN.ID AS ID_VENDA, ven.data_venda AS DATA_VENDA, ven.total AS TOTAL, cli.id AS ID_CLIENTE, cli.nome AS NOME_CLIENTE, usu.id AS ID_USUARIO, usu.nome AS NOME_USUARIO ");
@@ -199,8 +199,11 @@ public class VendaDAO extends GenericDAO{
         if(!"".equals(codCliente)){
             query.append(" and VEN.ID_CLIENTE = "+ codCliente);
         }
-        if(!"".equals(dataVenda)){
-            query.append(" and TO_CHAR(VEN.DATA_VENDA,'dd/MM/yyyy') = '"+ dataVenda+"'");
+        if(!"".equals(dataVendaInicio) && !dataVendaInicio.equals("__/__/____")){
+            query.append(" and TO_CHAR(VEN.DATA_VENDA,'dd/MM/yyyy') >= '"+ dataVendaInicio+"'");
+        }
+        if(!"".equals(dataVendaFim) && !dataVendaFim.equals("__/__/____")){
+            query.append(" and TO_CHAR(VEN.DATA_VENDA,'dd/MM/yyyy') <= '"+ dataVendaFim+"'");
         }
         
         query.append(" order by ven.id desc");
