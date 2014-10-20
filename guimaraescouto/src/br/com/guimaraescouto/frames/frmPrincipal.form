@@ -295,12 +295,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnUsuario1" min="-2" pref="113" max="-2" attributes="0"/>
+                  <Component id="btnEtiquetaPrecos" min="-2" pref="113" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnUsuario2" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnProdCodProprio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnUsuario3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnVendasCliente" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="489" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -309,9 +309,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnUsuario3" min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="btnUsuario2" min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="btnUsuario1" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btnVendasCliente" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btnProdCodProprio" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btnEtiquetaPrecos" min="-2" pref="101" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -319,7 +319,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnUsuario1">
+        <Component class="javax.swing.JButton" name="btnEtiquetaPrecos">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/cifraoSemFundo.png"/>
@@ -329,10 +329,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEtiquetaPrecosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnUsuario2">
+        <Component class="javax.swing.JButton" name="btnProdCodProprio">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/codBarras.png"/>
@@ -342,10 +342,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProdCodProprioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnUsuario3">
+        <Component class="javax.swing.JButton" name="btnVendasCliente">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/vendasPorCliente.png"/>
@@ -355,7 +355,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVendasClienteActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -384,9 +384,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnUsuario5" min="-2" pref="97" max="-2" attributes="0"/>
+                  <Component id="btnListaCeasa" min="-2" pref="97" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnUsuario6" min="-2" pref="97" max="-2" attributes="0"/>
+                  <Component id="btnBackup" min="-2" pref="97" max="-2" attributes="0"/>
                   <EmptySpace pref="674" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -396,8 +396,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnUsuario6" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="btnUsuario5" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btnBackup" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btnListaCeasa" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -405,7 +405,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnUsuario5">
+        <Component class="javax.swing.JButton" name="btnListaCeasa">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/listaPequena.png"/>
@@ -415,10 +415,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListaCeasaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnUsuario6">
+        <Component class="javax.swing.JButton" name="btnBackup">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/backup.png"/>
@@ -428,7 +428,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuario6ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackupActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

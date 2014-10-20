@@ -91,7 +91,8 @@ public class ReportUtils {
          * Um JRViewer é uma JPanel.
          */
         JRViewer viewer = new JRViewer( print );
- 
+        float tamanhoZoom = (float) 0.50;
+        viewer.setZoomRatio(tamanhoZoom);
         // cria o JFrame
         JDialog jDialogRelatorio = new JDialog(frame,true);
         
@@ -101,7 +102,7 @@ public class ReportUtils {
         jDialogRelatorio.add( viewer, BorderLayout.CENTER );
  
         // configura o tamanho padrão do JFrame
-        jDialogRelatorio.setSize( 900, 500 );
+        jDialogRelatorio.setSize( 1100, 700 );
  
         // configura a operação padrão quando o JFrame for fechado.
         jDialogRelatorio.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
