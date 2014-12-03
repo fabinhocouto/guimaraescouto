@@ -199,11 +199,10 @@ public class VendaDAO extends GenericDAO{
         if(!"".equals(codCliente)){
             query.append(" and VEN.ID_CLIENTE = "+ codCliente);
         }
-        if(!"".equals(dataVendaInicio) && !dataVendaInicio.equals("__/__/____")){
-            query.append(" and TO_CHAR(VEN.DATA_VENDA,'dd/MM/yyyy') >= '"+ dataVendaInicio+"'");
-        }
-        if(!"".equals(dataVendaFim) && !dataVendaFim.equals("__/__/____")){
-            query.append(" and TO_CHAR(VEN.DATA_VENDA,'dd/MM/yyyy') <= '"+ dataVendaFim+"'");
+        if(!"".equals(dataVendaInicio) && !dataVendaInicio.equals("__/__/____")
+                && !"".equals(dataVendaFim) && !dataVendaFim.equals("__/__/____")){
+            query.append(" and VEN.DATA_VENDA BETWEEN to_TIMESTAMP('"+  dataVendaInicio+" 00:00:00','DD/MM/YYYY HH24:MI:SS' )::timestamp  ");
+            query.append(" and to_TIMESTAMP('"+ dataVendaFim+"23:59:59','DD/MM/YYYY HH24:MI:SS' )::timestamp ");
         }
         
         query.append(" order by ven.id desc");
