@@ -97,7 +97,7 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton1" alignment="0" pref="53" max="32767" attributes="0"/>
+                          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -154,7 +154,7 @@
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/pesquisar.png"/>
+                  <Image iconType="3" name="/relatoriopq (2).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
               </Properties>
@@ -206,9 +206,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtCodCliente" pref="59" max="32767" attributes="0"/>
-                          <Component id="txtCodVenda" max="32767" attributes="0"/>
-                          <Component id="txtDataInicio" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDataInicio" pref="68" max="32767" attributes="0"/>
+                          <Component id="txtCodCliente" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCodVenda" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -221,7 +221,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtNomeCliente" min="-2" pref="428" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtDataFim" min="-2" pref="61" max="-2" attributes="0"/>
+                          <Component id="txtDataFim" min="-2" pref="68" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>

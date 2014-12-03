@@ -107,13 +107,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnProduto = new javax.swing.JButton();
         btnFornecedor = new javax.swing.JButton();
         btnVenda = new javax.swing.JButton();
-        btnPagamento = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnPDV = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnEtiquetaPrecos = new javax.swing.JButton();
         btnProdCodProprio = new javax.swing.JButton();
-        btnVendasCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnListaCeasa = new javax.swing.JButton();
@@ -182,16 +180,6 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pagamento.png"))); // NOI18N
-        btnPagamento.setText("Pagamento");
-        btnPagamento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPagamento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPagamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagamentoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -207,16 +195,13 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -276,16 +261,6 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnVendasCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vendasPorCliente.png"))); // NOI18N
-        btnVendasCliente.setText("Vendas por Cliente");
-        btnVendasCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVendasCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnVendasCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVendasClienteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -295,16 +270,13 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEtiquetaPrecos, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProdCodProprio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVendasCliente)
-                .addContainerGap(489, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVendasCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProdCodProprio, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEtiquetaPrecos, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -419,12 +391,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_btnUsuarioActionPerformed
 
-    private void btnPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagamentoActionPerformed
-        // TODO add your handling code here:
-        //frmPagamento dialog = new frmPagamento(new javax.swing.JFrame(), true);
-        //dialog.setVisible(true);
-    }//GEN-LAST:event_btnPagamentoActionPerformed
-
     private void btnPDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDVActionPerformed
         // TODO add your handling code here:
         frmPDV dialog = new frmPDV(new javax.swing.JFrame(), true);
@@ -500,48 +466,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnProdCodProprioActionPerformed
 
-    private void btnVendasClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasClienteActionPerformed
-        // TODO add your handling code here:
-        //frmRelatorioVendasPorCliente dialog = new frmRelatorioVendasPorCliente(new javax.swing.JFrame(), true); 
-        //dialog.setVisible(true);
-        Venda venda = new Venda();
-        venda.setId(1);
-        //venda.setDataVenda(Timestamp.valueOf("12/12/2000"));
-        venda.setTotal(BigDecimal.ZERO);
-        Usuario vendedor = new Usuario();
-        vendedor.setNome("FABINHO");
-        venda.setVendedor(vendedor);
-        venda.setDataVenda(new java.sql.Timestamp(new java.util.Date().getTime()));
-        Cliente cliente = new Cliente();
-        cliente.setId(1);
-        cliente.setNome("DUDU");
-        venda.setCliente(cliente);
-        List<ItemVenda> itensVenda = new ArrayList<ItemVenda>();
-        for (int i = 1; i <3; i++) {
-            ItemVenda item = new ItemVenda();
-            item.setId(i);
-            item.setPrecoUnitario(new BigDecimal(.29));
-            item.setQuantidade(i);
-            Produto produto = new Produto();
-            produto.setDescricao("SHAMPOO SEDA CERAMIDAS SE");
-            produto.setPreco(new BigDecimal(33.80));
-            item.setProduto(produto);
-            itensVenda.add(item);
-        }
-        ItemVenda item = new ItemVenda();
-            item.setPrecoUnitario(new BigDecimal(1233.00));
-            item.setQuantidade(1);
-            item.setTotal(BigDecimal.ZERO);
-            Produto produto = new Produto();
-            produto.setDescricao("ARROZ CAMIL 5KG");
-            produto.setPreco(new BigDecimal(1590.99));
-            item.setProduto(produto);
-            itensVenda.add(item);
-        venda.setItens(itensVenda);
-      //  frmOpcaoImpressaoCupom frmImpressao = new frmOpcaoImpressaoCupom(new javax.swing.JFrame(), true,venda);
-      //       frmImpressao.setVisible(true);
-    }//GEN-LAST:event_btnVendasClienteActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -584,12 +508,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnFornecedor;
     private javax.swing.JButton btnListaCeasa;
     private javax.swing.JButton btnPDV;
-    private javax.swing.JButton btnPagamento;
     private javax.swing.JButton btnProdCodProprio;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnVenda;
-    private javax.swing.JButton btnVendasCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
