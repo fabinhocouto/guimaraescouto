@@ -26,8 +26,8 @@ public abstract class GenericDAO {
     public Connection getConnection(){
         try{
             Class.forName("org.postgresql.Driver");
-            //cx = DriverManager.getConnection("jdbc:postgresql://192.168.1.1:5432/guimaraescouto","postgres","binza361616");
-            cx = DriverManager.getConnection("jdbc:postgresql://localhost:5432/guimaraescouto","postgres","binza361616");
+            cx = DriverManager.getConnection("jdbc:postgresql://192.168.1.1:5432/guimaraescouto","postgres","binza361616");
+            //cx = DriverManager.getConnection("jdbc:postgresql://localhost:5432/guimaraescouto","postgres","binza361616");
             return cx;
         }catch(Exception ex){
             Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
